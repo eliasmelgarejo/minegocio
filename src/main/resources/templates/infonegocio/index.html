@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<script src="/js/jquery.js"></script>
+		<script src="/js/bootstrap.js"></script>
+		<title>Info del Negocio</title>
+	</head>
+  <body>
+    <div class="container">
+      <h1>Listado de Info Negocio</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contacto</th>
+            <th>E-mail</th>
+            <th>Logo</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ② -->
+          <tr th:each="lista:${lista}" th:object="${item}">
+            <!-- ③ -->
+            <td th:text="*{id}"></td>
+            <td th:text="*{contacto}"></td>
+            <td th:text="*{email}"></td>
+            <td th:text="*{logo}"></td>
+            <td th:text="*{nombre}"></td>
+            <td th:text="*{telefono}"></td>
+            <!-- ④ -->
+            <td><a class="btn btn-default btn-xs" th:href="@{/infonegocio/{id}(id=*{id})}">Ver</a></td>
+            <td><a class="btn btn-default btn-xs" th:href="@{/infonegocio/{id}/edit(id=*{id})}">Editar</a></td>
+            <td>
+              <!-- ⑤ -->
+              <form th:action="@{/infonegocio/{id}(id=*{id})}" th:method="delete">
+                <input class="btn btn-default btn-xs" type="submit" value="Borrar" />
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="btn btn-default" href="/infonegocio/new">Nuevo</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+package com.minegocio.base.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.minegocio.base.domain.InfoNegocio;
+import com.minegocio.base.service.InfoNegocioService;
+
+@Controller
+@RequestMapping("/infonegocio")
+public class InfoNegocioController {
+
+	@Autowired
+	private InfoNegocioService service;
+	
+	@GetMapping
+	private String index(Model model) {
+		List<InfoNegocio> lista = service.findAll();
+		model.addAttribute("infoNegocios", lista);
+		return "/infonegocio/index";
+	}
+	
+	 @GetMapping("new")
+	    public String newInfoNegocio(Model model) {
+	        return "infonegocio/new";
+	    }
+
+	    @GetMapping("{id}/edit")
+	    public String edit(@PathVariable Long id, Model model) { // 
+	        InfoNegocio info = service.findById(id);
+	        model.addAttribute("info", info);
+	        return "infonegocio/edit";
+	    }
+
+	    @GetMapping("{id}")
+	    public String show(@PathVariable Long id, Model model) {
+	    	InfoNegocio info = service.findById(id);
+	        model.addAttribute("info", info);
+	        return "infonegocio/show";
+	    }
+
+	    @PostMapping
+	    public String create(@ModelAttribute InfoNegocio info) { // ⑥
+	        service.save(info);
+	        return "redirect:/infonegocio"; // ⑦
+	    }
+
+	    @PutMapping("{id}")
+	    public String update(@PathVariable Long id, @ModelAttribute InfoNegocio info) {
+	        info.setId(id);
+	        service.save(info);
+	        return "redirect:/infonegocio";
+	    }
+
+	    @DeleteMapping("{id}")
+	    public String destroy(@PathVariable Long id) {
+	        service.delete(id);
+	        return "redirect:/infonegocio";
+	    }
+}
