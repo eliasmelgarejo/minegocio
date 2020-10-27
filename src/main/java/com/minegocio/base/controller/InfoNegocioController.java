@@ -17,7 +17,7 @@ import com.minegocio.base.domain.InfoNegocio;
 import com.minegocio.base.service.InfoNegocioService;
 
 @Controller
-@RequestMapping("/infonegocio")
+@RequestMapping("/base/infonegocio")
 public class InfoNegocioController {
 
 	@Autowired
@@ -27,44 +27,44 @@ public class InfoNegocioController {
 	private String index(Model model) {
 		List<InfoNegocio> lista = service.findAll();
 		model.addAttribute("infoNegocios", lista);
-		return "/infonegocio/index";
+		return "/base/infonegocio/index";
 	}
 	
 	 @GetMapping("new")
 	    public String newInfoNegocio(Model model) {
-	        return "infonegocio/new";
+	        return "base/infonegocio/new";
 	    }
 
 	    @GetMapping("{id}/edit")
 	    public String edit(@PathVariable Long id, Model model) { // 
 	        InfoNegocio info = service.findById(id);
 	        model.addAttribute("info", info);
-	        return "infonegocio/edit";
+	        return "base/infonegocio/edit";
 	    }
 
 	    @GetMapping("{id}")
 	    public String show(@PathVariable Long id, Model model) {
 	    	InfoNegocio info = service.findById(id);
 	        model.addAttribute("info", info);
-	        return "infonegocio/show";
+	        return "base/infonegocio/show";
 	    }
 
 	    @PostMapping
 	    public String create(@ModelAttribute InfoNegocio info) { // ⑥
 	        service.save(info);
-	        return "redirect:/infonegocio"; // ⑦
+	        return "redirect:/base/infonegocio"; // ⑦
 	    }
 
 	    @PutMapping("{id}")
 	    public String update(@PathVariable Long id, @ModelAttribute InfoNegocio info) {
 	        info.setId(id);
 	        service.save(info);
-	        return "redirect:/infonegocio";
+	        return "redirect:/base/infonegocio";
 	    }
 
 	    @DeleteMapping("{id}")
 	    public String destroy(@PathVariable Long id) {
 	        service.delete(id);
-	        return "redirect:/infonegocio";
+	        return "redirect:/base/infonegocio";
 	    }
 }

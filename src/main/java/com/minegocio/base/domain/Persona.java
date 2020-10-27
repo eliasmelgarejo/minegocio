@@ -1,10 +1,17 @@
 package com.minegocio.base.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -13,14 +20,20 @@ import com.minegocio.base.enums.TipoDocumento;
 
 
 @Entity
-@Table(name="persona")
-public class Persona extends BaseEntity {
+@Table
+@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+public class Persona extends BaseEntity {	
 	
 	@Enumerated(EnumType.STRING)
 	private TipoDocumento tipoDocumento;
 	@NotNull
 	@Column(unique=true)
 	private String documento;
+	@Null
+	@Temporal(TemporalType.DATE)
+	private Date fechaNac;
+	@Enumerated(EnumType.STRING)
+	private EstadoCivil estadoCivil;
 	@NotNull
 	private String nombres;
 	@NotNull
@@ -29,12 +42,10 @@ public class Persona extends BaseEntity {
 	private String direccion;
 	@Null
 	private String telefono;
-	@Enumerated(EnumType.STRING)
-	private EstadoCivil estadoCivil;
-	private boolean esEmpleado;
-	private boolean esCliente;
-	private boolean esProveedor;
-	
+	@ManyToOne
+	private Ciudad ciudad;
+	@ManyToOne
+	private Barrio barrio;
 	
 	public TipoDocumento getTipoDocumento() {
 		return tipoDocumento;
@@ -47,6 +58,12 @@ public class Persona extends BaseEntity {
 	}
 	public void setDocumento(String documento) {
 		this.documento = documento;
+	}
+	public Date getFechaNac() {
+		return fechaNac;
+	}
+	public void setFechaNac(Date fechaNac) {
+		this.fechaNac = fechaNac;
 	}
 	public String getNombres() {
 		return nombres;
@@ -78,23 +95,17 @@ public class Persona extends BaseEntity {
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-	public boolean isEsEmpleado() {
-		return esEmpleado;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
-	public void setEsEmpleado(boolean esEmpleado) {
-		this.esEmpleado = esEmpleado;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
-	public boolean isEsCliente() {
-		return esCliente;
+	public Barrio getBarrio() {
+		return barrio;
 	}
-	public void setEsCliente(boolean esCliente) {
-		this.esCliente = esCliente;
-	}
-	public boolean isEsProveedor() {
-		return esProveedor;
-	}
-	public void setEsProveedor(boolean esProveedor) {
-		this.esProveedor = esProveedor;
+	public void setBarrio(Barrio barrio) {
+		this.barrio = barrio;
 	}
 	
 }

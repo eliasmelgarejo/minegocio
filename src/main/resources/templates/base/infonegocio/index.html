@@ -32,18 +32,18 @@
             <td th:text="*{nombre}"></td>
             <td th:text="*{telefono}"></td>
             <!-- ④ -->
-            <td><a class="btn btn-default btn-xs" th:href="@{/infonegocio/{id}(id=*{id})}">Ver</a></td>
-            <td><a class="btn btn-default btn-xs" th:href="@{/infonegocio/{id}/edit(id=*{id})}">Editar</a></td>
+            <td><a class="btn btn-default btn-xs" th:href="@{/base/infonegocio/{id}(id=*{id})}">Ver</a></td>
+            <td><a class="btn btn-default btn-xs" th:href="@{/base/infonegocio/{id}/edit(id=*{id})}">Editar</a></td>
             <td>
               <!-- ⑤ -->
-              <form th:action="@{/infonegocio/{id}(id=*{id})}" th:method="delete">
+              <form th:action="@{/base/infonegocio/{id}(id=*{id})}" th:method="delete">
                 <input class="btn btn-default btn-xs" type="submit" value="Borrar" />
               </form>
             </td>
           </tr>
         </tbody>
       </table>
-      <a class="btn btn-default" href="/infonegocio/new">Nuevo</a>
+      <a class="btn btn-default" href="/base/infonegocio/new">Nuevo</a>
     </div>
   </body>
 </html>
