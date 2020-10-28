@@ -1,8 +1,10 @@
 package com.minegocio.base.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-public class Sucursal {
+@Entity
+public class Sucursal extends BaseEntity {
 
 	private String direccion;
 	@ManyToOne

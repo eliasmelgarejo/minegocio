@@ -31,7 +31,7 @@ public class InfoNegocioController {
 	}
 	
 	 @GetMapping("new")
-	    public String newInfoNegocio(Model model) {
+	    public String create(Model model) {
 	        return "base/infonegocio/new";
 	    }
 

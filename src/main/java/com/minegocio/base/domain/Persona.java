@@ -21,7 +21,7 @@ import com.minegocio.base.enums.TipoDocumento;
 
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+@Inheritance( strategy = InheritanceType.JOINED )
 public class Persona extends BaseEntity {	
 	
 	@Enumerated(EnumType.STRING)

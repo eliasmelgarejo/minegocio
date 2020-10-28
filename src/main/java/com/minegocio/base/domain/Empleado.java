@@ -1,8 +1,10 @@
 package com.minegocio.base.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(referencedColumnName = "id")
 public class Empleado extends Persona{
 
 	private String codigo;
