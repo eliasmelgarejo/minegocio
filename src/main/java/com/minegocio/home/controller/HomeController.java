@@ -22,4 +22,9 @@ public class HomeController {
 	private String template() {
 		return "/template";
 	}
+	
+	@GetMapping("/dashboard")
+	private String dashboard() {
+		return "/dashboard";
+	}
 }

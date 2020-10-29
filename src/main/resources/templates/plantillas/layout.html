@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<!-- Material Kit CSS -->
+		<link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+		<link href="fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+		<!-- js -->
+		<script src="/js/jquery.js"></script>
+		<script src="/js/bootstrap.js"></script>
+
+		<title>Mi Negocio</title>
+	</head>
+	<body>
+		<section th:fragment="section" class="wrapper">
+		
+			<div th:fragment="sidebar" class="sidebar" data-color="danger"  data-background-color="white">
+				<div class="logo">
+					<a href="/" class="simple-text logo-mini"> 
+						<i class="fas fa-home">
+							HOME
+						</i>
+					</a>
+				</div>
+				<div class="sidebar-wrapper">
+					<ul class="nav">
+						<li class="nav-item active  ">
+							<a class="nav-link" href="/home">
+								<i class="material-icons">Dashboard</i>
+								<br></br>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div th:fragment="main-panel"  class="main-panel">
+				
+				<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-primary">
+					<a class="navbar-brand" href="/template"><i class="fa fa-home"></i>Template</a>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav">
+							<li class="nav-item active"><a class="nav-link" href="/">Home
+									<span class="sr-only">(current)</span>
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="/base">Base</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="/compras">Compras</a>
+							</li>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#"
+								id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> Ventas </a>
+								<div class="dropdown-menu"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="#">Action</a> <a
+										class="dropdown-item" href="#">Another action</a> <a
+										class="dropdown-item" href="#">Something else here</a>
+								</div></li>
+						</ul>
+	
+						<ul
+							class="navbar-nav collapse navbar-collapse justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="javascript:;">
+									<i class="material-icons"></i> Accounts
+							</a></li>
+						</ul>
+	
+					</div>
+				</nav>
+				
+				<div th:fragment="details">
+				
+				</div>
+				
+				<footer th:footer="footer" class="footer fixed-bottom">
+					<div class="container-fluid">
+						<div class="copyright float-right">
+							&copy;
+							<script>
+								document.write(new Date().getFullYear())
+							</script>
+							, made with <i class="material-icons">favorite</i> by <a
+								href="https://www.creative-tim.com" target="_blank">Ideas
+								Pymes</a> Soporte TI.
+						</div>
+					</div>
+					<!-- your footer here -->
+				</footer>
+				
+			</div>			
+			
+		</section>
+	</body>
+</html>
