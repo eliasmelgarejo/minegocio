@@ -6,10 +6,17 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.minegocio.core.BaseEntity;
+
 
 @Entity
 public class Moneda extends BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@ManyToOne
 	@NotNull
 	private Pais pais;

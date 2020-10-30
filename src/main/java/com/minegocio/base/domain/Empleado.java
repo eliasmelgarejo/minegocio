@@ -7,6 +7,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 public class Empleado extends Persona{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String codigo;
 	private boolean esCajero;
 	

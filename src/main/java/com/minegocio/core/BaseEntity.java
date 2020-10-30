@@ -1,5 +1,7 @@
-package com.minegocio.base.domain;
+package com.minegocio.core;
 
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

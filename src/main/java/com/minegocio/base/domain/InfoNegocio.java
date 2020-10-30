@@ -5,10 +5,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.minegocio.core.BaseEntity;
+
 @Entity
 @Table(name="infonegocio")
 public class InfoNegocio extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@NotNull
 	private String nombre;
 	@Null

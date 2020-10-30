@@ -17,12 +17,18 @@ import javax.validation.constraints.Null;
 
 import com.minegocio.base.enums.EstadoCivil;
 import com.minegocio.base.enums.TipoDocumento;
+import com.minegocio.core.BaseEntity;
 
 
 @Entity
 @Table
 @Inheritance( strategy = InheritanceType.JOINED )
 public class Persona extends BaseEntity {	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoDocumento tipoDocumento;

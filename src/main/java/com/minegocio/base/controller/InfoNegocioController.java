@@ -22,49 +22,49 @@ public class InfoNegocioController {
 
 	@Autowired
 	private InfoNegocioService service;
-	
+
 	@GetMapping
-	private String index(Model model) {
+	public String index(Model model) {
 		List<InfoNegocio> lista = service.findAll();
 		model.addAttribute("infoNegocios", lista);
 		return "/base/infonegocio/index";
 	}
-	
-	 @GetMapping("new")
-	    public String create(Model model) {
-	        return "base/infonegocio/new";
-	    }
 
-	    @GetMapping("{id}/edit")
-	    public String edit(@PathVariable Long id, Model model) { // 
-	        InfoNegocio info = service.findById(id);
-	        model.addAttribute("info", info);
-	        return "base/infonegocio/edit";
-	    }
+	@GetMapping("new")
+	public String create(Model model) {
+		return "base/infonegocio/new";
+	}
 
-	    @GetMapping("{id}")
-	    public String show(@PathVariable Long id, Model model) {
-	    	InfoNegocio info = service.findById(id);
-	        model.addAttribute("info", info);
-	        return "base/infonegocio/show";
-	    }
+	@GetMapping("{id}/edit")
+	public String edit(@PathVariable Long id, Model model) { //
+		InfoNegocio info = service.findById(id);
+		model.addAttribute("info", info);
+		return "base/infonegocio/edit";
+	}
 
-	    @PostMapping
-	    public String create(@ModelAttribute InfoNegocio info) { // ⑥
-	        service.save(info);
-	        return "redirect:/base/infonegocio"; // ⑦
-	    }
+	@GetMapping("{id}")
+	public String show(@PathVariable Long id, Model model) {
+		InfoNegocio info = service.findById(id);
+		model.addAttribute("info", info);
+		return "base/infonegocio/show";
+	}
 
-	    @PutMapping("{id}")
-	    public String update(@PathVariable Long id, @ModelAttribute InfoNegocio info) {
-	        info.setId(id);
-	        service.save(info);
-	        return "redirect:/base/infonegocio";
-	    }
+	@PostMapping
+	public String create(@ModelAttribute InfoNegocio info) { // ⑥
+		service.save(info);
+		return "redirect:/base/infonegocio"; // ⑦
+	}
 
-	    @DeleteMapping("{id}")
-	    public String destroy(@PathVariable Long id) {
-	        service.delete(id);
-	        return "redirect:/base/infonegocio";
-	    }
+	@PutMapping("{id}")
+	public String update(@PathVariable Long id, @ModelAttribute InfoNegocio info) {
+		info.setId(id);
+		service.save(info);
+		return "redirect:/base/infonegocio";
+	}
+
+	@DeleteMapping("{id}")
+	public String destroy(@PathVariable Long id) {
+		service.delete(id);
+		return "redirect:/base/infonegocio";
+	}
 }

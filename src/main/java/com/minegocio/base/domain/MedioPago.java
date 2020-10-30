@@ -5,10 +5,16 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import com.minegocio.base.enums.TipoMedioPago;
+import com.minegocio.core.BaseEntity;
 
 @Entity
 public class MedioPago extends BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	@Enumerated(EnumType.STRING)
 	private TipoMedioPago tipoMedioPago;

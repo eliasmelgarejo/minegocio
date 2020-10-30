@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/base")
 public class BaseController {
-	
+
 	@GetMapping
-	private String home() {
+	public String home() {
 		return "/base/home";
-	}
+	}	
+		
 }
