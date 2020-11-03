@@ -73,7 +73,20 @@ public class HomeController {
 	
 	@GetMapping("/inventario")
 	private String inventario(Model model) {
-		model.addAttribute("modulo", "INVENTARIO");
+		List<MenuDTO> menus = new ArrayList<>();
+		
+		MenuDTO marca = new MenuDTO();
+		marca.menu="MARCAS";
+		marca.URL="/base/marcas";
+		menus.add(marca);
+		
+		MenuDTO categoria = new MenuDTO();
+		categoria.menu="CATEGORIAS";
+		categoria.URL="/base/categorias";
+		menus.add(categoria);
+				
+		model.addAttribute("modulo", " INVENTARIO");
+		model.addAttribute("menus",menus);
 		return "/inventario/home";
 	}
 	
