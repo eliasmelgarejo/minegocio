@@ -8,4 +8,5 @@ import com.minegocio.base.domain.Pais;
 @Repository
 public interface PaisRepository extends JpaRepository<Pais, Long>{
 
+
 }

@@ -43,4 +43,16 @@ public class CiudadServiceImpl implements CiudadService {
 		return repo.findByDepartamento(departamento);
 	}
 
+	@Override
+	public Object convertToDto(Ciudad t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ciudad convertToEntity(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -36,6 +36,18 @@ public class InfoNegocioServiceImpl implements InfoNegocioService{
 	public List<InfoNegocio> findAll() {
 		return repo.findAll();
 	}
+
+	@Override
+	public Object convertToDto(InfoNegocio t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InfoNegocio convertToEntity(Object o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

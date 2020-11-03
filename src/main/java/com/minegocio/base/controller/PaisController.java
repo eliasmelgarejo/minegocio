@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
+import com.minegocio.base.service.dto.PaisDto;
 
 @Controller
 @RequestMapping("/base/pais")
@@ -26,7 +27,7 @@ public class PaisController {
 	@GetMapping
 	public String index(Model model) {
 		List<Pais> lista = service.findAll();
-		model.addAttribute("paises", lista);
+		model.addAttribute("lista", lista);
 		return "/base/pais/index";
 	}
 
@@ -50,21 +51,22 @@ public class PaisController {
 	}
 
 	@PostMapping
-	public String create(@ModelAttribute Pais pais) { // ⑥
-		service.save(pais);
+	public String create(@ModelAttribute PaisDto dto) { // ⑥
+		//service.save(pais);
+		service.create(service.convertToEntity(dto));
 		return "redirect:/base/pais"; // ⑦
 	}
 
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
+	public String update(@PathVariable Long id, @ModelAttribute PaisDto pais) {
 		pais.setId(id);
-		service.save(pais);
+		service.update(service.convertToEntity(pais));
 		return "redirect:/base/pais";
 	}
 
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
-		service.delete(id);
+		service.deleteById(id);
 		return "redirect:/base/pais";
 	}
 }

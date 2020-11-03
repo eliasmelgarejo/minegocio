@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 public interface IController {
 	
-	@GetMapping
-	public String home();
 	@GetMapping()
 	public String index(Model model);
 	@GetMapping("new")
