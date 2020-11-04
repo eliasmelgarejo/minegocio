@@ -1,5 +1,6 @@
 package com.minegocio.base.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,58 +16,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
-import com.minegocio.base.service.dto.PaisDto;
+import com.minegocio.config.ConfigModulosMenus;
 
 @Controller
-@RequestMapping("/base/pais")
+@RequestMapping("/base/paises")
 public class PaisController {
 
 	@Autowired
 	PaisService service;
-
+	
 	@GetMapping
 	public String index(Model model) {
 		List<Pais> lista = service.findAll();
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_listado","Listado de Paises");
 		model.addAttribute("lista", lista);
-		return "/base/pais/index";
+		return "/base/paises/index";
 	}
-
+	
 	@GetMapping("new")
 	public String create(Model model) {
-		return "base/pais/new";
+		return "base/paises/new";
 	}
 
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model) { //
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
-		return "base/pais/edit";
+		return "base/paises/edit";
 	}
 
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
-		return "base/pais/show";
+		return "base/paises/show";
 	}
 
 	@PostMapping
-	public String create(@ModelAttribute PaisDto dto) { // ⑥
-		//service.save(pais);
-		service.create(service.convertToEntity(dto));
-		return "redirect:/base/pais"; // ⑦
+	public String create(@ModelAttribute Pais pais) { // ⑥
+		service.save(pais);
+		return "redirect:/base/paises"; // ⑦
 	}
 
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute PaisDto pais) {
+	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
 		pais.setId(id);
-		service.update(service.convertToEntity(pais));
-		return "redirect:/base/pais";
+		service.save(pais);
+		return "redirect:/base/paises";
 	}
 
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/base/pais";
+		service.delete(id);
+		return "redirect:/base/paises";
 	}
 }

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>home tesoreria</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/layout :: head">
 </head>
+<meta charset="utf-8">
 <body>
-home tesoreria
+	<div th:insert="plantillas/layout :: sidebar"></div>
+	<div th:insert="plantillas/layout :: main-panel (modulo=${modulo})"></div>
+	<div th:insert="plantillas/layout :: footer"></div>
 </body>
+
 </html>
