@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.minegocio.base.domain.InfoNegocio;
 import com.minegocio.base.service.InfoNegocioService;
+import com.minegocio.config.ConfigModulosMenus;
 
 @Controller
 @RequestMapping("/base/infonegocio")
@@ -26,6 +27,9 @@ public class InfoNegocioController {
 	@GetMapping
 	public String index(Model model) {
 		List<InfoNegocio> lista = service.findAll();
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_listado","Listado de Negocios");
 		model.addAttribute("infoNegocios", lista);
 		return "/base/infonegocio/index";
 	}
