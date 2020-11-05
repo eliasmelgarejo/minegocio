@@ -12,5 +12,6 @@ import com.minegocio.base.domain.Pais;
 public interface MonedaRepository extends JpaRepository<Moneda, Long> {
 	
 	List<Moneda> findByPais(Pais pais);	
+	List<Moneda> findByBaseTrue();
 	List<Moneda> findByBaseTrueAndPais(Pais pais);
 }

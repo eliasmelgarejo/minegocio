@@ -11,4 +11,5 @@ public interface MonedaService extends IReadService<Moneda>,IWriteService<Moneda
 	
 	List<Moneda> findByPais(Pais pais);
 	List<Moneda> findByBaseTrue();
+	List<Moneda> findByBaseTrueAndPais(Pais pais);
 }

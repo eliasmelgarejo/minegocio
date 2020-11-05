@@ -2,63 +2,83 @@ package com.minegocio.base.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.minegocio.base.domain.Departamento;
 import com.minegocio.base.service.DepartamentoService;
+import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
 
 @Controller
-@RequestMapping("/base/departamento")
+@RequestMapping("/base/departamentos")
 public class DepartamentoController implements IController{
 
+	@Autowired
 	private DepartamentoService service;
 	
 	@Override
 	@GetMapping
 	public String index(Model model) {
 		List<Departamento> lista = service.findAll();
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_listado","Listado de Departamentos");
 		model.addAttribute("lista", lista);
-		return "/base/departamento/index";
+		return "/base/departamentos/index";
 	}
 
 	@Override
 	@GetMapping("new")
 	public String create(Model model) {
-		return "base/departamento/new";
+		return "base/departamentos/new";
+	}
+	
+	@Override
+	@PostMapping
+	public String create(@ModelAttribute Object departamento) { // ⑥
+		service.save((Departamento)departamento);
+		return "redirect:/base/departamentos"; // ⑦
 	}
 
 	@Override
-	public String create(Object entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping("{id}/edit")
+	public String edit(@PathVariable Long id, Model model) { //
+		Departamento departamento = service.findById(id);
+		model.addAttribute("departamento", departamento);
+		return "base/departamentos/edit";
 	}
 
 	@Override
-	public String edit(Long id, Model model) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping("{id}")
+	public String show(@PathVariable Long id, Model model) {
+		Departamento departamento = service.findById(id);
+		model.addAttribute("departamento", departamento);
+		return "base/departamentos/show";
+	}
+	
+	@Override
+	@PutMapping("{id}")
+	public String update(@PathVariable Long id, @ModelAttribute Object departamento) {
+		((Departamento) departamento).setId(id);
+		service.save((Departamento)departamento);
+		return "redirect:/base/departamentos";
 	}
 
 	@Override
-	public String show(Long id, Model model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@DeleteMapping("{id}")
+	public String destroy(@PathVariable Long id) {
+		service.delete(id);
+		return "redirect:/base/departamentos";
+	}	
 
-	@Override
-	public String update(Long id, Object entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String destroy(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

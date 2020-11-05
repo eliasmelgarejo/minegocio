@@ -1,11 +1,8 @@
-package com.minegocio.base.domain;
+package com.minegocio.base.service.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
+import com.minegocio.core.BaseDto;
 
-@Entity
-@PrimaryKeyJoinColumn(referencedColumnName = "id")
-public class Empleado extends Persona{
+public class EmpleadoDto extends BaseDto {
 
 	/**
 	 * 
@@ -14,7 +11,7 @@ public class Empleado extends Persona{
 	
 	private String codigo;
 	private boolean cajero;
-	
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -24,9 +21,8 @@ public class Empleado extends Persona{
 	public boolean isCajero() {
 		return cajero;
 	}
-	public void setCajero(boolean esCajero) {
-		this.cajero = esCajero;
+	public void setCajero(boolean cajero) {
+		this.cajero = cajero;
 	}
-	
-	
+
 }

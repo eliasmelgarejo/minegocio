@@ -1,6 +1,5 @@
 package com.minegocio.base.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,62 +13,72 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.minegocio.base.domain.Pais;
-import com.minegocio.base.service.PaisService;
+import com.minegocio.base.domain.Ciudad;
+import com.minegocio.base.service.CiudadService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
-@RequestMapping("/base/paises")
-public class PaisController {
+@RequestMapping("/base/ciudades")
+public class CiudadController implements IController{
 
 	@Autowired
-	private PaisService service;
+	private CiudadService service;
 	
+	@Override
 	@GetMapping
 	public String index(Model model) {
-		List<Pais> lista = service.findAll();
+		List<Ciudad> lista = service.findAll();
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de Paises");
+		model.addAttribute("titulo_listado","Listado de Ciudades");
 		model.addAttribute("lista", lista);
-		return "/base/paises/index";
+		return "/base/ciudades/index";
 	}
-	
+
+	@Override
 	@GetMapping("new")
 	public String create(Model model) {
-		return "base/paises/new";
+		return "base/ciudades/new";
+	}
+	
+	@Override
+	@PostMapping
+	public String create(@ModelAttribute Object ciudad) { // ⑥
+		service.save((Ciudad)ciudad);
+		return "redirect:/base/ciudades"; // ⑦
 	}
 
+	@Override
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model) { //
-		Pais pais = service.findById(id);
-		model.addAttribute("pais", pais);
-		return "base/paises/edit";
+		Ciudad ciudad = service.findById(id);
+		model.addAttribute("ciudad", ciudad);
+		return "base/ciudades/edit";
 	}
 
+	@Override
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
-		Pais pais = service.findById(id);
-		model.addAttribute("pais", pais);
-		return "base/paises/show";
+		Ciudad ciudad = service.findById(id);
+		model.addAttribute("ciudad", ciudad);
+		return "base/ciudades/show";
 	}
-
-	@PostMapping
-	public String create(@ModelAttribute Pais pais) { // ⑥
-		service.save(pais);
-		return "redirect:/base/paises"; // ⑦
-	}
-
+	
+	@Override
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
-		pais.setId(id);
-		service.save(pais);
-		return "redirect:/base/paises";
+	public String update(@PathVariable Long id, @ModelAttribute Object ciudad) {
+		((Ciudad) ciudad).setId(id);
+		service.save((Ciudad)ciudad);
+		return "redirect:/base/ciudades";
 	}
 
+	@Override
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
 		service.delete(id);
-		return "redirect:/base/paises";
-	}
+		return "redirect:/base/ciudades";
+	}	
+
+
 }

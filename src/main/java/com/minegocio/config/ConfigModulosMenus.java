@@ -18,6 +18,8 @@ public class ConfigModulosMenus {
 		dto.menus.add(new MenuDTO("Departamentos","/base/departamentos",null,"base.departamentos"));
 		dto.menus.add(new MenuDTO("Ciudades","/base/ciudades",null,"base.ciudades"));
 		dto.menus.add(new MenuDTO("Barrios","/base/barrios",null,"base.barrios"));
+		dto.menus.add(new MenuDTO("Monedas","/base/monedas",null,"base.monedas"));
+		dto.menus.add(new MenuDTO("Medios de Pago","/base/mediospago",null,"base.mediospago"));
 		
 		return dto;
 	}
