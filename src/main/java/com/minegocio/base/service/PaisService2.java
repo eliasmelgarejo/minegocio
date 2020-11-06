@@ -2,7 +2,7 @@ package com.minegocio.base.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.repository.PaisRepository;
@@ -31,9 +31,9 @@ public class PaisService2 extends AbstractService<Pais>{
 	}
 
 	@Override
-	protected PagingAndSortingRepository<Pais, Long> getRepo() {
+	protected JpaRepository<Pais, Long> getRepo() {
 		// TODO Auto-generated method stub
-		return null;
+		return repo;
 	}
 	
 	
