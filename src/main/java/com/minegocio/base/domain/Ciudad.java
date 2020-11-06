@@ -1,6 +1,7 @@
 package com.minegocio.base.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import com.minegocio.core.BaseEntity;
@@ -14,7 +15,7 @@ public class Ciudad extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	
 	private String nombre;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Departamento departamento;
 
 	public String getNombre() {

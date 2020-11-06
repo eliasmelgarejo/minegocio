@@ -29,7 +29,7 @@ public interface IOperations<T extends Serializable> {
     
     // wrapper dto/entity
     
-    Object convertToDto(T t);
+    BaseDto convertToDto(T t);
     
-    T convertToEntity(Object o);
+    T convertToEntity(BaseDto dto);
 }
