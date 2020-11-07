@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ public class PaisServiceImpl implements PaisService{
 
 	@Autowired
 	private PaisRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Pais findById(Long id) {
@@ -30,7 +34,7 @@ public class PaisServiceImpl implements PaisService{
 
 	@Override
 	public Pais save(Pais entity) {
-		return (repo.save(entity));
+		return (repo.saveAndFlush(entity));
 	}
 
 	@Override

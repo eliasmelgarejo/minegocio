@@ -7,6 +7,6 @@ public interface IReadService<T> {
 	T findById(Long id);
 	List<T> findAll();
 	// 	wrapper dto/entity
-    Object convertToDto(T t);
-    T convertToEntity(Object o);
+    Object convertToDto(T entity);
+    T convertToEntity(Object dto);
 }

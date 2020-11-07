@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import com.minegocio.base.domain.MedioPago;
 import com.minegocio.base.enums.TipoMedioPago;
 import com.minegocio.base.repository.MedioPagoRepository;
 import com.minegocio.base.service.MedioPagoService;
+import com.minegocio.base.service.dto.MedioPagoDto;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class MedioPagoServiceImpl implements MedioPagoService{
 
 	@Autowired
 	private MedioPagoRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public MedioPago findById(Long id) {
@@ -40,15 +45,15 @@ public class MedioPagoServiceImpl implements MedioPagoService{
 	}
 
 	@Override
-	public Object convertToDto(MedioPago t) {
-		
-		return null;
+	public MedioPagoDto convertToDto(MedioPago entity) {
+		MedioPagoDto dto = modelMapper.map(entity, MedioPagoDto.class);
+		return dto;
 	}
 	
 	@Override
-	public MedioPago convertToEntity(Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public MedioPago convertToEntity(Object dto) {
+		MedioPago entity = modelMapper.map((MedioPagoDto)dto, MedioPago.class);
+		return entity;
 	}
 
 	@Override

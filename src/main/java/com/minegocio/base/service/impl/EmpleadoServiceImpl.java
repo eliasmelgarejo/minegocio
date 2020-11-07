@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.minegocio.base.domain.Empleado;
 import com.minegocio.base.repository.EmpleadoRepository;
 import com.minegocio.base.service.EmpleadoService;
+import com.minegocio.base.service.dto.EmpleadoDto;
 
 @Service
 @Transactional
@@ -16,6 +18,9 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
 	@Autowired
 	private EmpleadoRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Empleado findById(Long id) {
@@ -39,15 +44,15 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public Object convertToDto(Empleado t) {
-		
-		return null;
+	public EmpleadoDto convertToDto(Empleado entity) {
+		EmpleadoDto dto = modelMapper.map(entity, EmpleadoDto.class);
+		return dto;
 	}
 	
 	@Override
-	public Empleado convertToEntity(Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public Empleado convertToEntity(Object dto) {
+		Empleado entity = modelMapper.map((EmpleadoDto)dto, Empleado.class);
+		return entity;
 	}
 
 	@Override

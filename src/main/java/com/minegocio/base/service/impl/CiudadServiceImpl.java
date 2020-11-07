@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.domain.Departamento;
 import com.minegocio.base.repository.CiudadRepository;
 import com.minegocio.base.service.CiudadService;
+import com.minegocio.base.service.dto.CiudadDto;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class CiudadServiceImpl implements CiudadService {
 
 	@Autowired
 	private CiudadRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 	
 	@Override
 	public Ciudad findById(Long id) {
@@ -44,15 +49,15 @@ public class CiudadServiceImpl implements CiudadService {
 	}
 
 	@Override
-	public Object convertToDto(Ciudad t) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object convertToDto(Ciudad entidad) {
+		CiudadDto dto = modelMapper.map(entidad, CiudadDto.class);
+		return dto;
 	}
 
 	@Override
-	public Ciudad convertToEntity(Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public Ciudad convertToEntity(Object dto) {
+		Ciudad entidad = modelMapper.map((CiudadDto)dto, Ciudad.class);
+		return entidad;
 	}
 
 }

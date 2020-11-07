@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import com.minegocio.base.domain.Moneda;
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.repository.MonedaRepository;
 import com.minegocio.base.service.MonedaService;
+import com.minegocio.base.service.dto.MonedaDto;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class MonedaServiceImpl implements MonedaService{
 
 	@Autowired
 	private MonedaRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Moneda findById(Long id) {
@@ -40,9 +45,9 @@ public class MonedaServiceImpl implements MonedaService{
 	}
 
 	@Override
-	public Object convertToDto(Moneda t) {
-		
-		return null;
+	public MonedaDto convertToDto(Moneda entity) {
+		MonedaDto dto = modelMapper.map(entity,MonedaDto.class);
+		return dto;
 	}
 	
 	@Override

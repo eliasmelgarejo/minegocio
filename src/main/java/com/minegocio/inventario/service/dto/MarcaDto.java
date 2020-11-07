@@ -1,4 +1,4 @@
-package com.minegocio.invetario.service.dto;
+package com.minegocio.inventario.service.dto;
 
 import com.minegocio.core.BaseDto;
 

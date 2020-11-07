@@ -17,4 +17,5 @@ public class MiNegocioApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+	
 }

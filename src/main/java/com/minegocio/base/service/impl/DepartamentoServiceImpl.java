@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import com.minegocio.base.domain.Departamento;
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.repository.DepartamentoRepository;
 import com.minegocio.base.service.DepartamentoService;
+import com.minegocio.base.service.dto.DepartamentoDto;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 
 	@Autowired
 	private DepartamentoRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Departamento findById(Long id) {
@@ -45,17 +50,16 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 	}
 
 	@Override
-	public Object convertToDto(Departamento t) {
-		
-		return null;
-	}
-	
-	@Override
-	public Departamento convertToEntity(Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public DepartamentoDto convertToDto(Departamento entity) {
+		DepartamentoDto dto = modelMapper.map(entity, DepartamentoDto.class);
+		return dto;
 	}
 
-			
+	@Override
+	public Departamento convertToEntity(Object dto) {
+		Departamento entity = modelMapper.map((DepartamentoDto)dto, Departamento.class);
+		return entity;
+	}
+
 	
 }

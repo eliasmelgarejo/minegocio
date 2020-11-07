@@ -2,6 +2,7 @@ package com.minegocio.base.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ public class SucursalServiceImpl implements SucursalService{
 
 	@Autowired
 	private SucursalRepository repo;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Sucursal findById(Long id) {
