@@ -2,8 +2,13 @@ package com.minegocio.base.controller;
 
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
@@ -26,13 +33,32 @@ public class PaisController {
 	private PaisService service;
 	
 	@GetMapping
-	public String index(Model model) {
-		List<Pais> lista = service.findAll();
+	public String index(
+			Model model,
+			@RequestParam("page") Optional<Integer> page, 
+		    @RequestParam("size") Optional<Integer> size) {
+		
+		int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        Page<Pais> paisPage = service.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        
+        model.addAttribute("paisPage",paisPage);
+        
+        int totalPages = paisPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                .boxed()
+                .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        
+//		List<Pais> lista = service.findAll();
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_listado","Listado de Paises");
-		model.addAttribute("lista", lista);
-		return "/base/paises/index";
+//		model.addAttribute("lista", lista);
+		
+		return "base/paises/index";
 	}
 	
 	@GetMapping("new")

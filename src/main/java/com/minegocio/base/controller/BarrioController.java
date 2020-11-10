@@ -39,7 +39,7 @@ public class BarrioController implements IController{
 	@Override
 	@GetMapping("new")
 	public String create(Model model) {
-		return "base/barrios/new";
+		return "/base/barrios/new";
 	}
 	
 	@Override

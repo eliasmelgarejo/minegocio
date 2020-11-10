@@ -6,26 +6,66 @@
 <body>
 	<div th:replace="plantillas/plantilla_listado :: sidebar"></div>
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
-	
-	
+
 	<div class="main-panel" style="padding:10px;">
-		
-		<!-- Content header -->
-		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-		<!-- Content body -->
-		<table class="border">
-			<thead>
-				<tr><td>titulo1</td><td>titulo2</td><td>titulo3</td></tr>
-			</thead>
-			<tbody>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-			</tbody>
-		</table>
+		 <div class="container">
+		 	<div class="container-fluid">
+		 		<div class="row">
+		 			<div class="col-md-12">
+		 				<div class="card">
+		 					<div class="card-header card-header-info" style="background-color:#00BCD4;">
+		                  		<h4 class="card-title" th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></h4>
+<!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
+		                	</div>
+		                	<div class="card-body">
+			                	<div class="table-responsive">
+			                		<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+										<thead class="text-info">
+											<th>ID</th>
+					                        <th>Nombre</th>
+					                        <th>Gentilicio</th>
+					                        <th>Activo</th>
+					                        <th>Acciones</th>
+										</thead>
+										<tbody>
+											<tr th:each="p, iStat : ${paisPage.content}"
+												th:style="${iStat.odd}? 'font-weight: bold;'"
+                								th:alt-title="${iStat.even}? 'even' : 'odd'">
+					                          <td th:text="${p.id}"></td>
+					                          <td th:text="${p.nombre}"></td>
+					                          <td th:text="${p.gentilicio}"></td>
+					                          <td th:text="${p.activo}"></td>
+					                          <td>
+					                          	<button id="btnVer" class="btn-info">Ver</button>
+					                          	<button id="btnEditar" class="btn-success">Editar</button>
+					                          	<button id="btnBorrar" class="btn-danger">Borrar</button>
+					                          </td>
+					                        </tr>
+										</tbody>
+									</table>
+									<div class="container">
+										<ul class="pagination" >
+									
+										    <li th:if="${paisPage.totalPages > 0}" class="pagination"
+												th:each="pageNumber : ${pageNumbers}">
+										    	<a th:href="@{/base/paises/ (size=${paisPage.size}, page=${pageNumber})}"
+										        th:text=${pageNumber}
+										        th:class="${pageNumber==paisPage.number + 1} ? active"></a>
+										    </li>
+									        
+										</ul>	
+									</div>						
+			                	</div>
+		                	</div>
+		                	
+		 				</div>
+		 			</div>
+		 		</div>
+		 	</div>
+		 </div>
 	</div>
+<!-- 		<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 	
-	<footer th:replace="plantillas/plantilla_listado :: footer"></footer>
 </body>
 
 </html>
