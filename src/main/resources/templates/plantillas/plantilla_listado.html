@@ -9,13 +9,11 @@
 		<link href="../../assets/css/material-dashboard.css" rel="stylesheet" />
 		<link href="../../assets/demo/demo.css" rel="stylesheet" />
 		
-		<link href="../../css/bootstrapp.min.css" rel="stylesheet" />
-		
 		<link href="../../fontawesome/css/all.css" rel="stylesheet"> 
 		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	    
 	    <!--     Fonts and icons     -->
-	    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	    <link rel="stylesheet" type="text/css" href="../../material-design-icons/iconfont/material-icons.css"/>
 		<!-- js -->
 		<script src="../../js/jquery.js"></script>
 		<script src="../../js/bootstrap.js"></script>
@@ -48,7 +46,7 @@
 					</li>
 					<li class="nav-item ">
 						<a class="nav-link" href="/inventario">
-							<i class="material-icons">article</i>
+							<i class="material-icons">assignment</i>
 							<p>Inventario</p>
 						</a>
 					</li>
@@ -97,7 +95,7 @@
 		</div>
 		
 		<div th:fragment="titulo-listado (titulo_listado)">
-			<h3 th:text="${titulo_listado}"> </h3>
+			<h3 style="color: white !important;" th:text="${titulo_listado}"> </h3>
 		</div>
 		
 		<footer th:fragment="footer" th:footer="footer" class="footer fixed-bottom">

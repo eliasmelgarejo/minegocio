@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Pais;
@@ -35,11 +34,11 @@ public class PaisController {
 	@GetMapping
 	public String index(
 			Model model,
-			@RequestParam("page") Optional<Integer> page, 
-		    @RequestParam("size") Optional<Integer> size) {
+			@RequestParam(defaultValue="1") int page, 
+		    @RequestParam(defaultValue="10") int size) {
 		
-		int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+		int currentPage = page;
+        int pageSize = size;
         Page<Pais> paisPage = service.findPaginated(PageRequest.of(currentPage - 1, pageSize));
         
         model.addAttribute("paisPage",paisPage);
@@ -63,31 +62,44 @@ public class PaisController {
 	
 	@GetMapping("new")
 	public String create(Model model) {
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_cuerpo","Crear País");
 		return "base/paises/new";
 	}
+	
+	@PostMapping("create")
+	public String create(@ModelAttribute Pais pais) { // ⑥
+		pais.setActivo(true);
+		pais.setNombre(pais.getNombre().toUpperCase());
+		pais.setGentilicio(pais.getGentilicio().toUpperCase());
+		service.save(pais);
+		return "redirect:/base/paises"; // ⑦
+	}
 
-	@GetMapping("{id}/edit")
+	@GetMapping("{id}")
+	public String show(@PathVariable Long id, Model model) {
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_cuerpo","Datos de País");
+		Pais pais = service.findById(id);
+		model.addAttribute("pais", pais);
+		return "base/paises/show";
+	}
+	
+	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) { //
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_cuerpo","Actualizar País");
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
 		return "base/paises/edit";
 	}
 
-	@GetMapping("{id}")
-	public String show(@PathVariable Long id, Model model) {
-		Pais pais = service.findById(id);
-		model.addAttribute("pais", pais);
-		return "base/paises/show";
-	}
-
-	@PostMapping
-	public String create(@ModelAttribute Pais pais) { // ⑥
-		service.save(pais);
-		return "redirect:/base/paises"; // ⑦
-	}
-
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
+		System.out.println("Controller"+PaisController.class.getName());
 		pais.setId(id);
 		service.save(pais);
 		return "redirect:/base/paises";
