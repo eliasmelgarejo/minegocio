@@ -2,7 +2,6 @@ package com.minegocio.base.controller;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
+import com.minegocio.base.service.dto.PaisDto;
 import com.minegocio.config.ConfigModulosMenus;
 
 @Controller
@@ -35,11 +35,11 @@ public class PaisController {
 	public String index(
 			Model model,
 			@RequestParam(defaultValue="1") int page, 
-		    @RequestParam(defaultValue="10") int size) {
+		    @RequestParam(defaultValue="15") int size) {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Pais> paisPage = service.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        Page<PaisDto> paisPage = service.findPaginated(PageRequest.of(currentPage - 1, pageSize));
         
         model.addAttribute("paisPage",paisPage);
         
@@ -69,7 +69,7 @@ public class PaisController {
 	}
 	
 	@PostMapping("create")
-	public String create(@ModelAttribute Pais pais) { // ⑥
+	public String create(@ModelAttribute PaisDto pais) { // ⑥
 		pais.setActivo(true);
 		pais.setNombre(pais.getNombre().toUpperCase());
 		pais.setGentilicio(pais.getGentilicio().toUpperCase());
@@ -82,7 +82,7 @@ public class PaisController {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Datos de País");
-		Pais pais = service.findById(id);
+		PaisDto pais = service.findById(id);
 		model.addAttribute("pais", pais);
 		return "base/paises/show";
 	}
@@ -92,15 +92,16 @@ public class PaisController {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar País");
-		Pais pais = service.findById(id);
+		PaisDto pais = service.findById(id);
 		model.addAttribute("pais", pais);
+		System.out.println("##### Entro en edit Pais...");
 		return "base/paises/edit";
 	}
 
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
+	public String update(@ModelAttribute PaisDto pais) {
 		System.out.println("Controller"+PaisController.class.getName());
-		pais.setId(id);
+//		pais.setId(id);
 		service.save(pais);
 		return "redirect:/base/paises";
 	}

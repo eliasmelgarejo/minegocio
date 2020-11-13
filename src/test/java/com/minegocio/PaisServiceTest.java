@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
+import com.minegocio.base.service.dto.PaisDto;
 import com.minegocio.base.service.impl.PaisServiceImpl;
 
 @SpringBootTest
@@ -34,16 +35,16 @@ public class PaisServiceTest {
 	
 	@Test
 	public void whenEditPais_thenCorrect() {
-		Pais pais;
+		PaisDto pais;
 		pais = service.findById(1L);
-		pais.setGentilicio("Paragayo");
+		pais.setGentilicio("PARAGUAYA/O");
 		//pais.setId(1L);
-		assertTrue(service.save(pais).getGentilicio().equals("Paragayo"));
+		assertTrue(service.save(pais).getGentilicio().equals("PARAGUAYA/O"));
 	}
 	
 	@Test
 	public void whenFindAllPaises_thenCorrect() {
-		List<Pais> paises = service.findAll();
+		List<PaisDto> paises = service.findAll();
 		assertTrue(paises.size() > 0);
 	}
 	

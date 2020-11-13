@@ -18,7 +18,7 @@
 	                	</div>
 	 				</div>
                		<div class="container">
-               			<form th:action="@{/base/paises/{id}(id=${pais.id})}" th:nethod="put" th:object="${pais}">  
+               			<form th:action="@{/base/paises/{id}(id=${pais.id})}" th:method="put" th:object="${pais}">  
                			
                				<div class="form-group col-md-6">
 					          <label class="control-label">Id</label>
@@ -39,7 +39,9 @@
 					          <label class="control-label">Activo</label>
 					          <input class="form-control" type="checkbox" th:checked="${pais.activo}" />
 					        </div>
+					        
 					        <button class="btn btn-default" type="submit">Guardar</button>
+					        
 					      </form>
 					      <div class="pull-right">
 					        <a class="btn btn-succes" href="/base/paises">Volver</a>
