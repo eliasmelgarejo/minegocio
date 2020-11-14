@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
 import com.minegocio.base.service.dto.PaisDto;
 import com.minegocio.config.ConfigModulosMenus;
@@ -99,9 +98,10 @@ public class PaisController {
 	}
 
 	@PutMapping("{id}")
-	public String update(@ModelAttribute PaisDto pais) {
-		System.out.println("Controller"+PaisController.class.getName());
-//		pais.setId(id);
+//	@RequestMapping(value = "update={id}", method = {RequestMethod.PUT})
+	public String update(@PathVariable Long id, @ModelAttribute PaisDto pais) {
+		System.out.println("PaisController metodo PUT...");
+		pais.setId(id);
 		service.save(pais);
 		return "redirect:/base/paises";
 	}

@@ -18,26 +18,26 @@
 	                	</div>
 	 				</div>
                		<div class="container">
-               			<form th:action="@{/base/paises/{id}(id=${pais.id})}" th:method="put" th:object="${pais}">  
+               			<form th:action="@{/base/paises/{id}(id=*{id})}" th:method="put" th:object="${pais}">  
                			
                				<div class="form-group col-md-6">
 					          <label class="control-label">Id</label>
-					          <input class="form-control" readonly type="text" th:value="${pais.id}" />
+					          <input class="form-control" readonly type="number" th:field="*{id}" />
 					        </div>             			
 					        
 					        <div class="form-group col-md-6">
 					          <label class="control-label">Nombre</label>
-					          <input class="form-control" type="text" th:value="${pais.nombre}" />
+					          <input class="form-control" type="text" th:field="*{nombre}" />
 					        </div>
 
 					        <div class="form-group col-md-6">
 					          <label class="control-label">Gentilicio</label>
-					          <input class="form-control" type="text" th:value="${pais.gentilicio}" />
+					          <input class="form-control" type="text" th:field="*{gentilicio}" />
 					        </div>
 					        
 					        <div class="form-group col-md-6">
 					          <label class="control-label">Activo</label>
-					          <input class="form-control" type="checkbox" th:checked="${pais.activo}" />
+					          <input class="form-control" type="checkbox" th:field="*{activo}" />
 					        </div>
 					        
 					        <button class="btn btn-default" type="submit">Guardar</button>
