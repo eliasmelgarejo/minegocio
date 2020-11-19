@@ -36,6 +36,15 @@ public class PaisService2 extends AbstractService<Pais>{
 		return repo;
 	}
 	
-	
+	// custom method
+	public Pais findByNombre(String nombre) {
+		Pais pais;
+		try {
+			pais = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			pais= null;
+		}
+		return pais;
+	}
 
 }

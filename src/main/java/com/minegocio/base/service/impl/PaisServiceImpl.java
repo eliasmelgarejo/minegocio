@@ -49,8 +49,7 @@ public class PaisServiceImpl implements PaisService{
 	@Override
 	public PaisDto save(PaisDto dto) {
 		Pais pais = convertToDto(dto);
-		repo.saveAndFlush(pais);
-		System.out.println("Updaet Pais: "+pais.getId().toString());
+		repo.save(pais);
 		PaisDto val = convertToEntity(pais);
 		return val;
 	}
@@ -98,4 +97,8 @@ public class PaisServiceImpl implements PaisService{
         return paisPage;
     }
 	
+	public PaisDto findByNombre(String nombre) {
+		PaisDto dto = convertToEntity(repo.findByNombre(nombre));
+		return dto;
+	}
 }

@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.minegocio.inventario.domain.Marca;
 import com.minegocio.inventario.service.MarcaService;
-import com.minegocio.inventario.service.impl.MarcaServiceImpl;
 
 @SpringBootTest
 public class MarcaServiceTest {

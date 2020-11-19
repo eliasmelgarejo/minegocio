@@ -1,23 +1,24 @@
 package com.minegocio;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.minegocio.base.service.PaisService;
+import com.minegocio.base.domain.Pais;
+import com.minegocio.base.service.PaisService2;
 import com.minegocio.base.service.dto.PaisDto;
 
 @SpringBootTest
-public class PaisServiceTest {
+public class PaisService2Test {
 
 	@Autowired
-	private PaisService service;
+	private PaisService2 service;
 	
 //	@Test
 //	public void whenCreatePais_thenCorrect() {
@@ -27,40 +28,39 @@ public class PaisServiceTest {
 //		pais.setGentilicio("Paises");
 //		pais.setNombre("Paises");
 //		
-//		assertThat(service.save(pais)).isNotNull();
+//		assertThat(service.create(service.convertToEntity(pais))).isNotNull();
 //		
 //	}
 	
 //	@Test
 //	public void whenEditPais_thenCorrect() {
-//		PaisDto pais;
+//		Pais pais;
 //		pais = service.findByNombre("Paises");
 //		pais.setGentilicio("PAISANO");
 //		System.out.println("Update Pais: "+pais.getId().toString());
-//		assertTrue(service.save(pais).getGentilicio().equals("PAISANO"));
+//		assertTrue(service.update(pais).getGentilicio().equals("PAISANO"));
 //	}
 	
 //	@Test
 //	public void whenFindAllPaises_thenCorrect() {
-//		List<PaisDto> paises = service.findAll();
+//		List<Pais> paises = service.findAll();
 //		assertTrue(paises.size() > 0);
 //	}
-	
+//	
 //	@Test
 //	public void whenFindByNombrePaises_thenCorrect() {
-//		PaisDto pais = service.findByNombre("Paises");
+//		Pais pais = service.findByNombre("Paises");
 //		System.out.println("nombre: "+pais.getNombre());
 //		assertTrue(pais != null);
 //	}
 	
-	@Test
-	public void whenDeletePais_tehnCorrect() {
-		PaisDto pais;
-		pais = service.findByNombre("Paises");
-		System.out.println("Delete Pais: "+pais.getId().toString());
-		service.delete(pais.getId());
-		PaisDto newDto = service.findById(pais.getId());
-		assertTrue(newDto == null);
-	}
+//	@Test
+//	public void whenDeletePais_tehnCorrect() {
+//		Pais pais;
+//		pais = service.findByNombre("Paises");
+//		System.out.println("Delete Pais: "+pais.getId().toString());
+//		
+//		assertTrue(service.delete(pais));
+//	}
 	
 }

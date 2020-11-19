@@ -23,9 +23,9 @@ public interface IOperations<T extends Serializable> {
 
     T update(final T entity);
 
-    void delete(final T entity);
+    boolean delete(final T entity);
 
-    void deleteById(final long entityId);
+    boolean deleteById(final long entityId);
     
     // wrapper dto/entity
     

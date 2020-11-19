@@ -11,53 +11,100 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
+
 @Transactional
 @Service
 public abstract class AbstractService<T extends Serializable> implements IOperations<T> {
 
-    // read - one
+	// read - one
 
-    @Override
-    @Transactional(readOnly = true)
-    public T findById(final long id) {
-        return getRepo().findById(id).orElse(null);
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public T findById(final long id) {
+		return getRepo().findById(id).orElse(null);
+	}
 
-    // read - all
+	// read - all
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<T> findAll() {
-        return Lists.newArrayList(getRepo().findAll());
-    }
+	@Override
+	@Transactional(readOnly = true)
+	public List<T> findAll() {
+		List<T> l;
+		try {
+			l = Lists.newArrayList(getRepo().findAll());
+		} catch (Exception e) {
+			l = null;
+		}
+		return l;
+	}
 
-    @Override
-    public Page<T> findPaginated(final int page, final int size) {
-        return getRepo().findAll(PageRequest.of(page, size));
-    }
+	@Override
+	public Page<T> findPaginated(final int page, final int size) {
+		Page<T> p;
+		try {
+			p = getRepo().findAll(PageRequest.of(page, size));
+		} catch (Exception e) {
+			p = null;
+		}
+		return p;
+	}
 
-    // write
-    
-    @Override
-    public T create(final T entity) {
-        return getRepo().save(entity);
-    }
-    
-    @Override
-    public T update(final T entity) {
-        return getRepo().save(entity);
-    }
+	// write
 
-    @Override
-    public void delete(final T entity) {
-        getRepo().delete(entity);
-    }
+	@Override
+	public T create(final T entity) {
+		T t;
+		try {
+			t = getRepo().save(entity);
+		} catch (Exception e) {
+			t = null;
+		}
+		return t;
+	}
 
-    @Override
-    public void deleteById(final long entityId) {
-        getRepo().deleteById(entityId);
-    }
+	@Override
+	public T update(final T entity) {
+		T t;
+		try {
+			t = getRepo().save(entity);
+		} catch (Exception e) {
+			t = null;
+		}
+		return t;
+	}
 
-    protected abstract JpaRepository<T, Long> getRepo();
+	@Override
+	public boolean delete(final T entity) {
+		boolean result;
+		try {
+			if (entity != null) {
+				getRepo().delete(entity);
+				result = true;
+			} else {
+				result = false;
+			}
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	@Override
+	public boolean deleteById(final long entityId) {
+		boolean result;
+		try {
+			if (entityId == 0) {
+				getRepo().deleteById(entityId);
+				result = true;
+			} else {
+				result = false;
+			}
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
+
+	protected abstract JpaRepository<T, Long> getRepo();
 
 }

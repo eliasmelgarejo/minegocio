@@ -10,4 +10,5 @@ import com.minegocio.core.IWriteService;
 
 public interface PaisService extends IReadService<PaisDto>, IWriteService<PaisDto>{
 	Page<PaisDto> findPaginated(Pageable pageable);
+	PaisDto findByNombre(String nombre);
 }
