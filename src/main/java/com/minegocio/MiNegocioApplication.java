@@ -6,7 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.minegocio.base.service.PaisService2;
+import com.minegocio.base.service.DepartamentoService;
+import com.minegocio.base.service.PaisService;
 
 @SpringBootApplication
 public class MiNegocioApplication {
@@ -19,11 +20,5 @@ public class MiNegocioApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-	
-	//Services
-	
-	@Bean
-	public PaisService2 paisService2() {
-		return new PaisService2();
-	}
+		
 }
