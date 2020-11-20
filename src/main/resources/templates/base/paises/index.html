@@ -18,15 +18,15 @@
 <!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
 							<a class="btn btn-primary" href="/base/paises/new">Nuevo</a>
 	                	</div>
-	                	<div class="panel-body">
-		                	<div class="table-responsive">
-		                		<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+	                	<div class="panel-body" style="width: 100%">
+		                	<div class="col-lg-10 mt-5 mb-5">
+		                		<table id="tablepais" class="table table-bordered table-responsive" style="width: 100%">
 									<thead class="text-info">
 										<th>ID</th>
 				                        <th>Nombre</th>
 				                        <th>Gentilicio</th>
 				                        <th>Activo</th>
-				                        <th>Acciones</th>
+				                        <th></th>
 									</thead>
 									<tbody>
 										<tr th:each="p : ${paisPage.content}" th:object="${p}">
@@ -36,9 +36,13 @@
 				                          <td th:text="${p.activo}"></td>
 				                          <td>
 				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/paises/{id}(id=${p.id})}">Ver</a>
+				                          </td>
+				                          <td>	
 				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${p.id})}">Editar</a>
+				                          </td>
+				                          <td>
 				                          	<form th:action="@{/base/paises/{id}(id=${p.id})}" th:method="destroy">
-								            	<input class="btn btn-danger" type="submit" value="Eliminar" />
+								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
 								            </form>
 				                          </td>
 				                        </tr>
@@ -66,7 +70,13 @@
 		 </div>
 	</div>
 <!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
-	
 </body>
+
+
+<!-- <script> -->
+// $(document).ready(function() {
+//     $('#tablepais').DataTable();
+// } );
+<!-- </script> -->
 
 </html>
