@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Entity
@@ -31,9 +30,10 @@ public class Usuario implements Serializable{
 	private Date expiredDate;
 	private boolean activo;
 	private boolean bloqueado;
-//	@Null
-//	@ManyToMany(mappedBy = "id")
-//	private List<Rol> roles;
+	@Null
+	@ManyToMany
+	@JoinTable
+	private List<Rol> roles;
 	
 	public String getNombres() {
 		return nombres;
@@ -77,12 +77,12 @@ public class Usuario implements Serializable{
 	public void setNombreusuario(String nombreusuario) {
 		this.nombreusuario = nombreusuario;
 	}
+	public List<Rol> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
 	
-//	public List<Rol> getRoles() {
-//		return roles;
-//	}
-//	public void setRoles(List<Rol> roles) {
-//		this.roles = roles;
-//	}	
-	
+		
 }

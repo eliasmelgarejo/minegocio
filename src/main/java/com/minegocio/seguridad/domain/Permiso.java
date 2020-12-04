@@ -1,6 +1,9 @@
 package com.minegocio.seguridad.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 import com.minegocio.core.BaseEntity;
 
@@ -13,10 +16,18 @@ public class Permiso extends BaseEntity{
 	private static final long serialVersionUID = 5173309859329490470L;
 	
 	private String nombre;
+	@ManyToMany(mappedBy = "permisos")
+	private List<Rol> roles;
 	private String modulo;
 	private String url;
 	private boolean accion;
-	
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
 	public String getNombre() {
 		return nombre;
 	}
