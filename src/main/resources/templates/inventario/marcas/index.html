@@ -5,17 +5,17 @@
 		<link rel="stylesheet" href="/css/bootstrap.css" />
 		<script src="/js/jquery.js"></script>
 		<script src="/js/bootstrap.js"></script>
-		<title>Paises</title>
+		<title>Marcas</title>
 	</head>
   <body>
     <div class="container">
-      <h1>Listado de Paises</h1>
+      <h1>Listado de Marcas</h1>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Gentilicio</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
             <!-- ③ -->
             <td th:text="*{id}"></td>
             <td th:text="*{nombre}"></td>
-            <td th:text="*{gentiliciol}"></td>
+            
             <!-- ④ -->
             <td><a class="btn btn-default btn-xs" th:href="@{/base/pais/{id}(id=*{id})}">Ver</a></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/base/pais/{id}/edit(id=*{id})}">Editar</a></td>

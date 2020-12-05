@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.minegocio.inventario.domain.Marca;
-import com.minegocio.inventario.service.MarcaService;
+import com.minegocio.inventario.service.MarcaOLDService;
 
 @SpringBootTest
 public class MarcaServiceTest {
 
 	@Autowired
-	private MarcaService service;
+	private MarcaOLDService service;
 	
 	@Test
 	public void whenfindAllMarca_thenCorrect() {

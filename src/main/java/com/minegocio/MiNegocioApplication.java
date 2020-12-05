@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import com.minegocio.base.service.DepartamentoService;
 import com.minegocio.base.service.PaisService;
 
+
 @SpringBootApplication
 public class MiNegocioApplication {
 
