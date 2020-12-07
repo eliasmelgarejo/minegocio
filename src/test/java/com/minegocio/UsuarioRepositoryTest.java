@@ -1,10 +1,13 @@
 package com.minegocio;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.minegocio.seguridad.domain.Usuario;
 import com.minegocio.seguridad.repository.UsuarioRepository;
@@ -14,17 +17,21 @@ public class UsuarioRepositoryTest {
 
 	@Autowired
 	private UsuarioRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	@Test
 	public void whenCreateUsuario_thenCorrect() {
+
 		Usuario u = new Usuario();
-		u.setNombreusuario("emelgarejo");
-		u.setPassword("123");
-		u.setNombres("Elias Jan");
-		u.setApellidos("Melgarejo Herrera");
+		u.setNombreusuario("admin");
+		u.setPassword(encoder.encode("admin"));
+		u.setNombres("Administrador");
+		u.setApellidos("-*-");
 		u.setActivo(true);
 		u.setBloqueado(false);
-		Usuario retorno = repo.save(u);
-		assertThat(retorno).isNotNull();
+		assertThat(repo.save(u)).isNotNull();
 		
 	}
 }
