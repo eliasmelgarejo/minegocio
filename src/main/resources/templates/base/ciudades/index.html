@@ -1,31 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="plantillas/plantilla_listado :: head">
-</head>
+<head th:replace="plantillas/plantilla_listado :: head"> </head>
 <meta charset="utf-8">
 <body>
 	<div th:replace="plantillas/plantilla_listado :: sidebar"></div>
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
-	
-	
-	<div class="main-panel" style="padding:10px;">
-		
-		<!-- Content header -->
-		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-		<!-- Content body -->
-		<table class="border">
-			<thead>
-				<tr><td>titulo1</td><td>titulo2</td><td>titulo3</td></tr>
-			</thead>
-			<tbody>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-			</tbody>
-		</table>
+
+	<div class="main-panel">
+		<!-- <div class="container"> -->
+	 	<div class="container-fluid">
+	 		<div class="row">
+	 			<div class="col-md-12">
+	 				<div class="panel">
+	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
+	                  		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
+							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+							<a class="btn btn-primary" href="/base/ciudades/new">Nuevo</a>
+	                	</div>
+	                	<div class="panel-body" style="width: 100%">
+		                	<div class="col-lg-10 mt-5 mb-5">
+		                		<table id="tablepais" class="table table-bordered table-responsive" style="width: 100%">
+									<thead class="text-info">
+										<th>ID</th>
+				                        <th>Nombre</th>
+				                        <th>Activo</th>
+				                        <th>Acciones</th>
+									</thead>
+									<tbody>
+										<tr th:each="p : ${ciudadPage.content}" th:object="${p}">
+				                          <td th:text="${p.id}"></td>
+				                          <td th:text="${p.nombre}"></td>
+				                          <td th:text="${p.activo}"></td>
+				                          <td>
+				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/ciudades/{id}(id=${p.id})}">Ver</a>
+				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/ciudades/edit={id}(id=${p.id})}">Editar</a>
+				                          	<form th:action="@{/base/ciudades/{id}(id=${p.id})}" th:method="destroy">
+								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
+								            </form>
+				                          </td>
+				                        </tr>
+									</tbody>
+								</table>
+								<div class="container">
+									<ul class="pagination" >
+								
+									    <li th:if="${ciudadPage.totalPages > 0}" class="pagination"
+											th:each="pageNumber : ${pageNumbers}">
+									    	<a th:href="@{/base/ciudades (size=${ciudadPage.size}, page=${pageNumber})}"
+									        th:text=${pageNumber}
+									        th:class="${pageNumber==ciudadPage.number + 1} ? active"></a>
+									    </li>
+								        
+									</ul>	
+								</div>						
+		                	</div>
+	                	</div>
+	                	
+	 				</div>
+	 			</div>
+	 		</div>
+<!-- 	 	</div> -->
+		 </div>
 	</div>
-	
-	<footer th:replace="plantillas/plantilla_listado :: footer"></footer>
+<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
+
+
+<!-- <script> -->
+// $(document).ready(function() {
+//     $('#tablepais').DataTable();
+// } );
+<!-- </script> -->
 
 </html>

@@ -9,20 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.minegocio.core.AbstractService;
 import com.minegocio.core.BaseDto;
-import com.minegocio.core.IOperations;
 import com.minegocio.inventario.domain.Marca;
 import com.minegocio.inventario.repository.MarcaRepository;
 import com.minegocio.inventario.service.dto.MarcaDto;
 
 @Service
 @Transactional
-public class MarcaService extends AbstractService<Marca> implements IOperations<Marca>{
+public class MarcaService extends AbstractService<Marca>{
 	
 	@Autowired
-	private MarcaRepository	repo;
+	private MarcaRepository repo;
+	
 	@Autowired
-	private ModelMapper	modelMapper;
-
+    private ModelMapper modelMapper;
+	
 	@Override
 	public MarcaDto convertToDto(Marca marca) {
 		MarcaDto dto = modelMapper.map(marca, MarcaDto.class);
@@ -36,8 +36,11 @@ public class MarcaService extends AbstractService<Marca> implements IOperations<
 	}
 
 	@Override
-	protected JpaRepository<Marca,Long> getRepo() {		
+	protected JpaRepository<Marca, Long> getRepo() {
+		// TODO Auto-generated method stub
 		return repo;
 	}
+	
+	
 
 }

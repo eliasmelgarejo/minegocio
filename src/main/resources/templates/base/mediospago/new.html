@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="/css/bootstrap.css" />
-		<script src="/js/jquery.js"></script>
-		<script src="/js/bootstrap.js"></script>
-		<title>Insert title here</title>
-	</head>
-	<body>
-	new Pais
-	</body>
+<head th:replace="plantillas/plantilla_cuerpo :: head">
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+
+	<div class="main-panel">
+	 	<div class="container-fluid">
+	 		<div class="row">
+	 			<div class="col-md-12">
+	 				<div class="panel">
+	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
+	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
+	                  		</div>
+	                	</div>
+	 				</div>
+               		<div class="container">
+               			<form th:action="@{/base/mediospago/create}" th:method="post">               			
+					        
+					        <div class="form-group">
+					          <label class="control-label">Nombre</label>
+					          <input class="form-control" type="text" name="nombre" />
+					        </div>
+
+					        <div class="form-group">
+					          <label class="control-label">Tipo Medio de Pago</label>
+					          <input class="form-control" type="text" name="tipo_medio_pago" />
+					        </div>
+					        
+					        <button class="btn btn-default" type="submit">Guardar</button>
+					      </form>
+					      <div class="pull-right">
+					        <a class="btn btn-link" href="/base/paises">Volver</a>
+					      </div>
+               		</div>
+	 			</div>
+	 		</div>
+		 </div>
+	</div>
+		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
+	
+</body>
+
 </html>

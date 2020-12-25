@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head">
+		<meta charset="utf-8">
+<!-- 		<link rel="stylesheet" href="/css/bootstrap.css" /> -->
+		<title>Mi Negocio</title>
+
+ 		<!-- Material Kit CSS -->
+		<link href="../../assets/css/material-dashboard.css" rel="stylesheet" />
+<!-- 		<link href="../../assets/demo/demo.css" rel="stylesheet" /> -->
+<!-- 		<link href="../../assets/datatable/datatables.min.css" rel="stylesheet" /> -->
+		
+		
+		<link href="../../fontawesome/css/all.css" rel="stylesheet"> 
+<!-- 		<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' /> -->
+	    
+	    <!--     Fonts and icons     -->
+	    <link rel="stylesheet" type="text/css" href="../../material-design-icons/iconfont/material-icons.css"/>
+		<!-- js -->
+		<script src="../../js/jquery.js"></script>
+		<script src="../../js/bootstrap.js"></script>
+<!-- 		<script src="../../js/bootstrap.min.js"></script> -->
+<!-- 		<script src="../../assets/datatable/js/bootstrap.min.js"></script> -->
+		
+		
+		
+	</head>
+	<body>
+	
+		<div th:fragment="sidebar" class="sidebar" data-color="azure" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+			<div class="logo">
+				<a href="/" class="simple-text logo-mini"> 
+					<i class="fas fa-home">
+						HOME
+					</i>
+				</a>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="/dashboard">
+			              <i class="material-icons">dashboard</i>
+			              <p>Dashboard</p>
+			            </a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/base">
+			              <i class="material-icons">settings</i>
+			              <p>Base</p>
+			            </a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/inventario">
+							<i class="material-icons">assignment</i>
+							<p>Inventario</p>
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/compras">
+							<i class="material-icons">shopping_cart</i>
+							<p>Compras</p>
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/ventas">
+							<i class="material-icons">store</i>
+							<p>Ventas</p>
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/tesoreria">
+							<i class="material-icons">store</i>
+							<p>Tesoreria</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div th:fragment="main-panel (modulo)" class="main-panel">
+			
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+				<a class="navbar-brand" href="/home" ><i class="fa fa-home" th:text="${modulo}"></i></a>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item" th:each="variable : ${menus}" >
+							<a class="nav-link" th:href=${variable.URL} th:text="${variable.menu}"></a>
+						</li>
+					</ul>
+
+<!-- 					<ul -->
+<!-- 						class="navbar-nav collapse navbar-collapse justify-content-end"> -->
+<!-- 						<li class="nav-item"><a class="nav-link" href="javascript:;"> -->
+<!-- 								<i class="material-icons">account_circle</i> Accounts -->
+<!-- 						</a></li> -->
+<!-- 					</ul> -->
+
+ 				</div>
+			</nav>	
+	
+		</div>
+		
+		<div th:fragment="titulo-listado (titulo_listado)">
+			<h3 style="color: white !important;" th:text="${titulo_listado}"> </h3>
+		</div>
+		
+		<footer th:fragment="footer" th:footer="footer" class="footer fixed-bottom">
+			<div class="container-fluid">
+				<div class="copyright float-right">
+					&copy;
+					<script>
+						document.write(new Date().getFullYear())
+					</script>
+					, made with <i class="material-icons">favorite</i> by <a
+						href="https://www.creative-tim.com" target="_blank">Ideas
+						Pymes</a> Soporte TI.
+				</div>
+			</div>
+			<!-- your footer here -->
+		</footer>
+	</body>
+</html>

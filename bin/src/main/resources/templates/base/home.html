@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/layout :: head">
+</head>
+<body>
+	<div th:insert="plantillas/layout :: sidebar"></div>
+	<div th:insert="plantillas/layout :: main-panel (modulo=${modulo})"></div>
+	<div th:insert="plantillas/layout :: footer"></div>
+</body>
+
+</html>

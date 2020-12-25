@@ -47,6 +47,25 @@ public class Producto extends BaseEntity{
 	private Categoria categoria;
 	
 	
+	
+	public String getCodigobarras() {
+		return codigobarras;
+	}
+	public void setCodigobarras(String codigobarras) {
+		this.codigobarras = codigobarras;
+	}
+	public String getDescripcioncorta() {
+		return descripcioncorta;
+	}
+	public void setDescripcioncorta(String descripcioncorta) {
+		this.descripcioncorta = descripcioncorta;
+	}
+	public String getDescripcionlarga() {
+		return descripcionlarga;
+	}
+	public void setDescripcionlarga(String descripcionlarga) {
+		this.descripcionlarga = descripcionlarga;
+	}
 	public String getCodigo() {
 		return codigo;
 	}
@@ -65,4 +84,5 @@ public class Producto extends BaseEntity{
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
 }
