@@ -9,3 +9,7 @@ import com.minegocio.base.domain.Sucursal;
 public interface SucursalRepository extends JpaRepository<Sucursal, Long>{
 
 }
+
+
+
+
