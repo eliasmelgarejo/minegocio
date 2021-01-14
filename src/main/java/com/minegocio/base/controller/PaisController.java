@@ -7,10 +7,8 @@ import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.PaisService;
-import com.minegocio.base.service.dto.PaisDto;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/paises")
-public class PaisController {
+public class PaisController implements IController<Pais> {
 
 	@Autowired
 	private PaisService service;
@@ -39,23 +37,21 @@ public class PaisController {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Pais> paisPage = service.findPaginated(currentPage-1, size);
+        Page<Pais> entityPage = service.findPaginated(currentPage-1, pageSize);
         
-        model.addAttribute("paisPage",paisPage);
+        model.addAttribute("entityPage",entityPage);
         
-        int totalPages = paisPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        
-//		List<Pais> lista = service.findAll();
+
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_listado","Listado de Paises");
-//		model.addAttribute("lista", lista);
 		
 		return "base/paises/index";
 	}
@@ -65,6 +61,7 @@ public class PaisController {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear País");
+		
 		return "base/paises/new";
 	}
 	
@@ -74,6 +71,7 @@ public class PaisController {
 		pais.setNombre(pais.getNombre().toUpperCase());
 		pais.setGentilicio(pais.getGentilicio().toUpperCase());
 		service.create(pais);
+		
 		return "redirect:/base/paises"; // ⑦
 	}
 
@@ -84,6 +82,7 @@ public class PaisController {
 		model.addAttribute("titulo_cuerpo","Datos de País");
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
+		
 		return "base/paises/show";
 	}
 	
@@ -94,23 +93,21 @@ public class PaisController {
 		model.addAttribute("titulo_cuerpo","Actualizar País");
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
-		System.out.println("##### Entro en edit Pais...");
+
 		return "base/paises/edit";
 	}
 
 	@PutMapping("{id}")
-//	@RequestMapping(value = "update={id}", method = {RequestMethod.PUT})
 	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
-		System.out.println("PaisController metodo PUT...");
 		pais.setId(id);
 		service.update(pais);
 		return "redirect:/base/paises";
 	}
-
-	@DeleteMapping("{id}")
+	
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		System.out.println("Method Destroy invocado...");
-		service.deleteById(id);
-		return "redirect:/base/paises";
+	    service.deleteById(id);
+	    return "redirect:/base/paises";
 	}
+
 }

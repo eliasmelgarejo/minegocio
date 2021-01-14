@@ -30,7 +30,7 @@
 				                        <th></th>
 									</thead>
 									<tbody>
-										<tr th:each="p : ${paisPage.content}" th:object="${p}">
+										<tr th:each="p : ${entityPage.content}" th:object="${p}">
 				                          <td th:text="${p.id}"></td>
 				                          <td th:text="${p.nombre}"></td>
 				                          <td th:text="${p.gentilicio}"></td>
@@ -42,9 +42,9 @@
 				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${p.id})}">Editar</a>
 				                          </td>
 				                          <td>
-				                          	<form th:action="@{/base/paises/{id}(id=${p.id})}" th:method="destroy">
-								            	<a id="btnEliminar" class="btn btn-danger" type="submit" value="">Eliminar</a>
-								            </form>
+<!-- 				                          	<form th:action="@{/base/paises/{id}(id=${p.id})}" th:method="delete"> -->
+								           	<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/paises/delete/{id}(id=${p.id})}" >Eliminar</a>
+<!-- 								            </form> -->
 				                          </td>
 				                        </tr>
 									</tbody>
@@ -52,17 +52,12 @@
 								<div class="container">
 									<ul class="pagination" >
 								
-									    <li th:if="${paisPage.totalPages > 0}" class="pagination"
+									    <li th:if="${entityPage.totalPages > 0}" class="pagination"
 											th:each="pageNumber : ${pageNumbers}">
-												<a>Página </a>
-										    	<a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}"
-										        th:text=${pageNumber}
-										        th:class="${pageNumber==paisPage.number + 1} ? active"></a>
-										        <a> de </a>
-										        <a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}"
-										        th:text=${pageNumber}
-										        th:class="${pageNumber==paisPage.size + 1} ? active"></a>
-										        <a> Páginas </a>
+										    	<a th:href="@{/base/paises (size=${entityPage.size}, page=${pageNumber})}"
+										        th:text= ${pageNumber} 
+										        th:class="${pageNumber==entityPage.number + 1} ? active"
+										        ></a>										        
 									    </li>
 								        
 									</ul>	
@@ -76,7 +71,7 @@
 <!-- 	 	</div> -->
 		 </div>
 	</div>
-<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+	<footer th:replace="plantillas/plantilla_listado :: footer"></footer>
 </body>
 
 
