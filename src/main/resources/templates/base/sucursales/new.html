@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="plantillas/plantilla_cuerpo :: head">
-</head>
-<meta charset="utf-8">
-<body>
-	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
-	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+	<head th:replace="plantillas/plantilla_cuerpo :: head">
+	</head>
+	<meta charset="utf-8">
+	<body>
+		<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+		<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
 
-	<div class="main-panel">
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
-	                  		</div>
-	                	</div>
+		<div class="main-panel">
+	 		<div class="container-fluid">
+	 			<div class="row">
+	 				<div class="col-md-12">
+		 				<div class="panel">
+		 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
+		                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+		                	</div>
+		 				</div>
+	               		<div class="container">
+	               			<form th:action="@{/base/sucursales/create}" th:method="post">
+						        <div class="form-group">
+						          <label class="control-label">Direcci&oacute;n</label>
+						          <input class="form-control" type="text" name="direccion" />
+						        </div>
+						        
+								<button class="btn btn-default" type="submit">Guardar</button>
+						     </form>
+						     <div class="pull-right">
+						     	<a class="btn btn-link" href="/base/sucursales">Volver</a>
+						     </div>
+	               		</div>
 	 				</div>
-               		<div class="container">
-               			<form th:action="@{/base/sucursales/create}" th:method="post">               			
-					        
-					        <div class="form-group">
-					          <label class="control-label">Direccion</label>
-					          <input class="form-control" type="text" name="direccion" />
-					        </div>
-
-					        
-					        <button class="btn btn-default" type="submit">Guardar</button>
-					      </form>
-					      <div class="pull-right">
-					        <a class="btn btn-link" href="/base/sucursales">Volver</a>
-					      </div>
-               		</div>
 	 			</div>
-	 		</div>
-		 </div>
-	</div>
+		 	</div>
+		</div>
 		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-	
-</body>
-
+	</body>
 </html>

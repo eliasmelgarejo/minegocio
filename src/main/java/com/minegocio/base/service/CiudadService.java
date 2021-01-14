@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.minegocio.base.domain.Ciudad;
-import com.minegocio.base.domain.Departamento;
 import com.minegocio.base.repository.CiudadRepository;
 import com.minegocio.base.service.dto.CiudadDto;
 import com.minegocio.core.AbstractService;
@@ -21,12 +20,13 @@ public class CiudadService extends AbstractService<Ciudad>{
 	
 	@Autowired
 	private CiudadRepository repo;
+	
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
-	public CiudadDto convertToDto(Ciudad t) {
-		CiudadDto dto = modelMapper.map(t, CiudadDto.class);
+	public CiudadDto convertToDto(Ciudad entity) {
+		CiudadDto dto = modelMapper.map(entity, CiudadDto.class);
 		return dto;
 	}
 
@@ -42,7 +42,7 @@ public class CiudadService extends AbstractService<Ciudad>{
 	}
 	
 	//custom
-	public List<Ciudad> findByDepartamento(Departamento departamento){
+	/*public List<Ciudad> findByDepartamento(Departamento departamento){
 		List<Ciudad> list;
 		try {
 			list = repo.findByDepartamento(departamento);
@@ -50,6 +50,6 @@ public class CiudadService extends AbstractService<Ciudad>{
 			list = null;
 		}
 		return list;
-	}
+	}*/
 	
 }

@@ -39,5 +39,4 @@ public class MedioPago extends BaseEntity{
 		this.depositable = depositable;
 	}
 	
-	
 }

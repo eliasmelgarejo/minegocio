@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla_listado :: head">
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_listado :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
+
+	<div class="main-panel">
+		<!-- <div class="container"> -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
+							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+							<a class="btn btn-primary" href="/base/personas/new">Nuevo</a>
+						</div>
+						<div class="panel-body" style="width: 100%">
+							<div class="col-lg-10 mt-5 mb-5">
+								<table id="tablepersonas" class="table table-bordered table-responsive" style="width: 100%">
+									<thead class="text-info">
+										<th>#ID</th>
+										<th>Nombres</th>
+										<th>Apellidos</th>
+										<th>Nro. Documento</th>
+										<th>Fec. Nac.</th>
+										<th>Direcci&oacute;n</th>
+										<th>Estado Civil</th>
+										<th>Telefono</th>
+										<th>Tipo Doc.</th>
+										<th>Ciudad</th>
+										<th>Barrio</th>
+										<th>Activo</th>
+										<th>Operaciones</th>
+									</thead>
+									<tbody>
+										<tr th:each="p : ${personaPage.content}" th:object="${p}">
+											<td th:text="${p.id}"></td>
+											<td th:text="${p.nombres}"></td>
+											<td th:text="${p.apellidos}"></td>
+											<td th:text="${p.documento}"></td>
+											<td th:text="${p.fechaNac}"></td>
+											<td th:text="${p.direccion}"></td>
+											<td th:text="${p.telefono}"></td>
+											<td th:text="${p.tipoDocumento}"></td>
+											<td th:text="${p.ciudad}"></td>
+											<td th:text="${p.barrio}"></td>
+											<td th:text="${p.activo}"></td>
+											<td>
+												<a id="btnVer" class="btn btn-info" th:href="@{/base/personas/{id}(id=${p.id})}">Ver</a>
+												<a id="btnEditar" class="btn btn-success" th:href="@{/base/personas/edit={id}(id=${p.id})}">Editar</a>
+												<form th:action="@{/base/personas/{id}(id=${p.id})}" th:method="destroy">
+													<a class="btn btn-danger" type="submit" value="">Eliminar</a>
+												</form>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="container">
+									<ul class="pagination">
+										<li th:if="${paisPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+											<a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==paisPage.number + 1} ? active"></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+		</div>
+	</div>
+	<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+</body>
+
+<!-- <script> -->
+// $(document).ready(function() { // $('#tablepais').DataTable(); // }
+);
+<!-- </script> -->
+
+</html>

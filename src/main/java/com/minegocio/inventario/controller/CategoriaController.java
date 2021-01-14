@@ -29,6 +29,7 @@ public class CategoriaController {
 	private CategoriaService service;
 	
 	
+	//Listado de categorias
 	@GetMapping
 	public String index(
 			Model model,
@@ -38,7 +39,6 @@ public class CategoriaController {
 		int currentPage = page;
         int pageSize = size;
         Page<Categoria> categoriaPage = service.findPaginated(currentPage-1, size);
-        
         model.addAttribute("categoriaPage",categoriaPage);
         
         int totalPages = categoriaPage.getTotalPages();
@@ -57,12 +57,12 @@ public class CategoriaController {
 	}
 	
 	
-	
+	//nueva categoria
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Crear Categoria");
+		model.addAttribute("titulo_cuerpo","Crear Nueva Categoria");
 		return "inventario/categorias/new";
 	}
 	
@@ -70,36 +70,29 @@ public class CategoriaController {
 	public String create(@ModelAttribute Categoria categoria) {
 		categoria.setActivo(true);
 		categoria.setNombre(categoria.getNombre().toUpperCase());
-		//pais.setGentilicio(pais.getGentilicio().toUpperCase());
 		service.create(categoria);
-		return "redirect:/inventario/categorias"; // ⑦
+		return "redirect:/inventario/categorias";
 	}
 	
 	
-	
+	//ver datos de categoria
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Categorias");
-		//Pais pais = service.findById(id);
-		//model.addAttribute("pais", pais);
-		//return "base/paises/show";
+		model.addAttribute("titulo_cuerpo","Datos de Categoria");
 		Categoria categoria = service.findById(id);
 		model.addAttribute("categoria", categoria);
 		return "inventario/categorias/show";
 	}
 	
 	
-	
+	//editar categoria
 	@GetMapping("edit={id}")
-	public String edit(@PathVariable Long id, Model model) { //
+	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Categoria");
-		//Pais pais = service.findById(id);
-		//model.addAttribute("pais", pais);
-		//return "base/paises/edit";
 		Categoria categoria = service.findById(id);
 		model.addAttribute("categoria", categoria);
 		return "inventario/categorias/edit";
@@ -119,5 +112,4 @@ public class CategoriaController {
 		return "redirect:/inventario/categorias";
 	}
 	
-
 }

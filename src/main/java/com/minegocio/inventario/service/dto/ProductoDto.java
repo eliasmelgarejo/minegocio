@@ -39,6 +39,4 @@ public class ProductoDto extends BaseDto {
 		this.descripcionlarga = descripcionlarga;
 	}
 	
-	
-	
 }

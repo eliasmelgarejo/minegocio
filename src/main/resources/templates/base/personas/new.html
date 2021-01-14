@@ -17,24 +17,31 @@
 						</div>
 					</div>
 					<div class="container">
-						<form th:object="${sucursal}">
-							<div class="form-group col-md-6">
-								<label class="control-label">#Id</label> 
-								<input class="form-control" readonly type="text" th:value="${sucursal.id}" />
+						<form th:action="@{/base/personas/create}" th:method="post">
+							<div class="form-group">
+								<label class="control-label">Nombres</label> 
+								<input class="form-control" type="text" name="nombres" />
 							</div>
-							<div class="form-group col-md-6">
+							<div class="form-group">
+								<label class="control-label">Apellidos</label> 
+								<input class="form-control" type="text" name="apellidos" />
+							</div>
+							<div class="form-group">
+								<label class="control-label">Nro. Documento</label> 
+								<input class="form-control" type="text" name="documento" />
+							</div>
+							<div class="form-group">
 								<label class="control-label">Direcci&oacute;n</label> 
-								<input class="form-control" readonly type="text" th:value="${sucursal.direccion}" />
+								<input class="form-control" type="text" name="direccion" />
 							</div>
-							<!-- falta agregar los datos de ciudad,barrio y negocio -->
-							<div class="form-group col-md-6">
-								<label class="control-label">Activo</label> 
-								<input class="form-control" disabled type="checkbox" th:checked="${sucursal.activo}" />
+							<div class="form-group">
+								<label class="control-label">Telefono</label> 
+								<input class="form-control" type="text" name="telefono" />
 							</div>
+							<button class="btn btn-default" type="submit">Guardar</button>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success" th:href="@{/base/sucursales/edit={id}(id=${sucursal.id})}">Editar</a>
-							<a class="btn btn-info " href="/base/sucursales">Volver</a>
+							<a class="btn btn-link" href="/base/personas">Volver</a>
 						</div>
 					</div>
 				</div>
@@ -45,4 +52,3 @@
 
 </body>
 </html>
-

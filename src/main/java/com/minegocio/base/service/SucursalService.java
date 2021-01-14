@@ -1,21 +1,3 @@
-/*
- * package com.minegocio.base.service;
- * 
- * import com.minegocio.base.domain.Sucursal; import
- * com.minegocio.core.IReadService; import com.minegocio.core.IWriteService;
- * 
- * public interface SucursalService extends
- * IReadService<Sucursal>,IWriteService<Sucursal> {
- * 
- * }
- */
-
-
-
-
-
-
-
 package com.minegocio.base.service;
 
 import org.modelmapper.ModelMapper;
@@ -59,6 +41,5 @@ public class SucursalService extends AbstractService<Sucursal> {
 		// TODO Auto-generated method stub
 		return repo;
 	}
-	
 	
 }

@@ -8,62 +8,51 @@
 	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
-	                  		</div>
-	                	</div>
-	 				</div>
-               		<div class="container">
-               			<form  th:object="${producto}">  
-               			
-               				<div class="form-group col-md-6">
-					          <label class="control-label">Id</label>
-					          <input class="form-control" readonly type="text" th:value="${producto.id}" />
-					        </div>             			
-					        
-					        <div class="form-group col-md-6">
-					          <label class="control-label">Codigo</label>
-					          <input class="form-control" readonly type="text" th:value="${producto.codigo}" />
-					        </div>
-
-					        <div class="form-group col-md-6">
-					          <label class="control-label">Codigo Barras</label>
-					          <input class="form-control" readonly type="text" th:value="${producto.codigobarras}" />
-					        </div>
-					        
-					        <div class="form-group col-md-6">
-					          <label class="control-label">Activo</label>
-					          <input class="form-control" disabled type="checkbox" th:checked="${producto.activo}" />
-					        </div>
-					        
-					        <div class="form-group col-md-6">
-					          <label class="control-label">Descripcion Corta</label>
-					          <input class="form-control" readonly type="text" th:value="${producto.descripcioncorta}" />
-					        </div>
-					        
-					        <div class="form-group col-md-6">
-					          <label class="control-label">Descripcion larga</label>
-					          <input class="form-control" readonly type="text" th:value="${producto.descripcionlarga}" />
-					        </div>
-					        
-					      </form>
-					      <div class="pull-right">
-				            <a class="btn btn-success" th:href="@{/inventario/productos/edit={id}(id=${producto.id})}">Editar</a>
-					        <a class="btn btn-info " href="/inventario/productos">Volver</a>
-					      </div>
-					        
-               		</div>
-	 			</div>
-	 		</div>
-		 </div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
+						<form th:object="${producto}">
+							<div class="form-group col-md-6">
+								<label class="control-label">#Id</label> 
+								<input class="form-control" readonly type="text" th:value="${producto.id}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">C&oacute;digo</label> 
+								<input class="form-control" readonly type="text" th:value="${producto.codigo}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">C&oacute;digo Barras</label> 
+								<input class="form-control" readonly type="text" th:value="${producto.codigobarras}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Activo</label> 
+								<input class="form-control" disabled type="checkbox" th:checked="${producto.activo}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Descripci&oacute;n Corta</label> 
+								<input class="form-control" readonly type="text" th:value="${producto.descripcioncorta}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Descripci&oacute;n larga</label> 
+								<input class="form-control" readonly type="text" th:value="${producto.descripcionlarga}" />
+							</div>
+						</form>
+						<div class="pull-right">
+							<a class="btn btn-success" th:href="@{/inventario/productos/edit={id}(id=${producto.id})}">Editar</a>
+							<a class="btn btn-info " href="/inventario/productos">Volver</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-	
-</body>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
 
+</body>
 </html>
-					      

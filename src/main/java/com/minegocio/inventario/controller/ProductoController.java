@@ -28,7 +28,7 @@ public class ProductoController {
 	@Autowired
 	private ProductoService service;
 	
-	
+	//Listado de Productos
 	@GetMapping
 	public String index(
 			Model model,
@@ -39,7 +39,6 @@ public class ProductoController {
         int pageSize = size;
         
         Page<Producto> productoPage = service.findPaginated(currentPage-1, size);
-        
         model.addAttribute("productoPage",productoPage);
         
         int totalPages = productoPage.getTotalPages();
@@ -50,7 +49,6 @@ public class ProductoController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
         
-
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_listado","Listado de Productos");
@@ -60,11 +58,12 @@ public class ProductoController {
 	
 	
 	
+	//nuevo producto
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Crear Producto");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Producto");
 		return "inventario/productos/new";
 	}
 	
@@ -77,12 +76,12 @@ public class ProductoController {
 		producto.setDescripcionlarga(producto.getDescripcionlarga());
 		
 		service.create(producto);
-		return "redirect:/inventario/productos"; // ⑦
+		return "redirect:/inventario/productos";
 	}
 	
 	
 	
-	
+	//ver datos de producto
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
@@ -97,9 +96,9 @@ public class ProductoController {
 	
 	
 	
-	
+	//editar producto
 	@GetMapping("edit={id}")
-	public String edit(@PathVariable Long id, Model model) { //
+	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Producto");
@@ -116,12 +115,11 @@ public class ProductoController {
 		return "redirect:/inventario/productos";
 	}
 
+	//
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
 		service.deleteById(id);
 		return "redirect:/inventario/productos";
 	}
-	
-	
 	
 }

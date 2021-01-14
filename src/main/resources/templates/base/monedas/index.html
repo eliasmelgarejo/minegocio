@@ -8,73 +8,62 @@
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-<!-- 		 <div class="container"> -->
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-<!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
+		<!-- <div class="container"> -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
+							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
 							<a class="btn btn-primary" href="/base/monedas/new">Nuevo</a>
-	                	</div>
-	                	<div class="panel-body" style="width: 100%">
-		                	<div class="col-lg-10 mt-5 mb-5">
-		                		<table id="tablemoneda" class="table table-bordered table-responsive" style="width: 100%">
+						</div>
+						<div class="panel-body" style="width: 100%">
+							<div class="col-lg-10 mt-5 mb-5">
+								<table id="tablemoneda" class="table table-bordered table-responsive" style="width: 100%">
 									<thead class="text-info">
-										<th>ID</th>
-				                        <th>Simbolo</th>
-				                        <th>Base</th>
-				                        <th>Activo</th>
-				                        <th>Pais</th>
-				                        <th>Operaciones</th>
+										<th>#Id</th>
+										<th>Simbolo</th>
+										<th>Base</th>
+										<th>Activo</th>
+										<th>Operaciones</th>
 									</thead>
 									<tbody>
 										<tr th:each="p : ${monedaPage.content}" th:object="${p}">
-				                          <td th:text="${p.id}"></td>
-				                          <td th:text="${p.simbolo}"></td>
-				                          <td th:text="${p.base}"></td>
-				                          <td th:text="${p.activo}"></td>
-				                          <td th:text="${p.pais_id}"></td>
-				                          <td>
-				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/monedas/{id}(id=${p.id})}">Ver</a>	
-				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/monedas/edit={id}(id=${p.id})}">Editar</a>
-				                          	<form th:action="@{/base/monedas/{id}(id=${p.id})}" th:method="destroy">
-								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
-								            </form>
-				                          </td>
-				                        </tr>
+											<td th:text="${p.id}"></td>
+											<td th:text="${p.simbolo}"></td>
+											<td th:text="${p.base}"></td>
+											<td th:text="${p.activo}"></td>
+											<td>
+												<a id="btnVer" class="btn btn-info" th:href="@{/base/monedas/{id}(id=${p.id})}">Ver</a> 
+												<a id="btnEditar" class="btn btn-success" th:href="@{/base/monedas/edit={id}(id=${p.id})}">Editar</a>
+												<form th:action="@{/base/monedas/{id}(id=${p.id})}" th:method="destroy">
+													<a class="btn btn-danger" type="submit" value="">Eliminar</a>
+												</form>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<div class="container">
-									<ul class="pagination" >
-								
-									    <li th:if="${monedaPage.totalPages > 0}" class="pagination"
-											th:each="pageNumber : ${pageNumbers}">
-									    	<a th:href="@{/base/monedas (size=${monedaPage.size}, page=${pageNumber})}"
-									        th:text=${pageNumber}
-									        th:class="${pageNumber==monedaPage.number + 1} ? active"></a>
-									    </li>
-								        
-									</ul>	
-								</div>						
-		                	</div>
-	                	</div>
-	                	
-	 				</div>
-	 			</div>
-	 		</div>
-<!-- 	 	</div> -->
-		 </div>
+									<ul class="pagination">
+										<li th:if="${monedaPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+											<a th:href="@{/base/monedas (size=${monedaPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==monedaPage.number + 1} ? active"></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+		</div>
 	</div>
-<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
 
-
 <!-- <script> -->
-// $(document).ready(function() {
-//     $('#tablepais').DataTable();
-// } );
+// $(document).ready(function() { // $('#tablepais').DataTable(); // }
+);
 <!-- </script> -->
-
 </html>

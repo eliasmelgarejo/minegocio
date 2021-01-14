@@ -11,7 +11,7 @@ public class ConfigModulosMenus {
 		dto.nombre="Base";
 		dto.permission="base";
 		
-		dto.menus.add(new MenuDTO("Negocio","/base/infonegocio",null,"base.infonegocio"));
+		dto.menus.add(new MenuDTO("Negocio","/base/infonegocios",null,"base.infonegocios"));
 		dto.menus.add(new MenuDTO("Sucursales","/base/sucursales",null,"base.sucursales"));
 		dto.menus.add(new MenuDTO("Empleados","/base/empleados",null,"base.empleados"));
 		dto.menus.add(new MenuDTO("Paises","/base/paises",null,"base.paises"));
@@ -20,6 +20,7 @@ public class ConfigModulosMenus {
 		dto.menus.add(new MenuDTO("Barrios","/base/barrios",null,"base.barrios"));
 		dto.menus.add(new MenuDTO("Monedas","/base/monedas",null,"base.monedas"));
 		dto.menus.add(new MenuDTO("Medios de Pago","/base/mediospago",null,"base.mediospago"));
+		dto.menus.add(new MenuDTO("Persona", "/base/personas", null, "base.personas"));
 		
 		return dto;
 	}

@@ -41,6 +41,4 @@ public class MarcaService extends AbstractService<Marca>{
 		return repo;
 	}
 	
-	
-
 }

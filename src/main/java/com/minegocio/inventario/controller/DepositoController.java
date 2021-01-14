@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.minegocio.base.domain.Pais;
-import com.minegocio.base.service.PaisService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.inventario.domain.Deposito;
 import com.minegocio.inventario.service.DepositoService;
@@ -30,7 +28,7 @@ public class DepositoController {
 	@Autowired
 	private DepositoService service;
 	
-	
+	//Listado de Depositos
 	@GetMapping
 	public String index(
 			Model model,
@@ -59,24 +57,26 @@ public class DepositoController {
 	}
 	
 	
-	
+	//nuevo deposito
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Crear Deposito");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Deposito");
 		return "inventario/depositos/new";
 	}
 	
 	@PostMapping("create")
-	public String create(@ModelAttribute Deposito deposito) { // ⑥
+	public String create(@ModelAttribute Deposito deposito) {
 		deposito.setActivo(true);
 		deposito.setNombre(deposito.getNombre().toUpperCase());
 		service.create(deposito);
-		return "redirect:/inventario/depositos"; // ⑦
+		return "redirect:/inventario/depositos";
 	}
 	
 	
+	
+	//ver datos de deposito
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
@@ -88,15 +88,12 @@ public class DepositoController {
 	}
 	
 	
-	
+	//editar deposito
 	@GetMapping("edit={id}")
-	public String edit(@PathVariable Long id, Model model) { //
+	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Deposito");
-		//Pais pais = service.findById(id);
-		//model.addAttribute("pais", pais);
-		//return "inventario/paises/edit";
 		Deposito deposito = service.findById(id);
 		model.addAttribute("deposito", deposito);
 		return "inventario/depositos/edit";
@@ -108,16 +105,13 @@ public class DepositoController {
 		service.update(deposito);
 		return "redirect:/inventario/depositos";
 	}
-
 	
 	
-	
+	//
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
 		service.deleteById(id);
 		return "redirect:/inventario/depositos";
 	}
 	
-	
-
 }

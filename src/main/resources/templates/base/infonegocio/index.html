@@ -8,19 +8,19 @@
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-<!-- 		 <div class="container"> -->
+		<!-- <div class="container"> -->
 	 	<div class="container-fluid">
 	 		<div class="row">
 	 			<div class="col-md-12">
 	 				<div class="panel">
 	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
 	                  		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-<!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
-							<a class="btn btn-primary" href="/base/infonegocio/new">Nuevo</a>
+							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+							<a class="btn btn-primary" href="/base/infonegocios/new">Nuevo</a>
 	                	</div>
 	                	<div class="panel-body" style="width: 100%">
 		                	<div class="col-lg-10 mt-5 mb-5">
-		                		<table id="tableinfoNegocio" class="table table-bordered table-responsive" style="width: 100%">
+		                		<table id="tableinfonegocio" class="table table-bordered table-responsive" style="width: 100%">
 									<thead class="text-info">
 										<th>ID</th>
 				                        <th>Nombre</th>
@@ -31,7 +31,7 @@
 				                        <th>Operaciones</th>
 									</thead>
 									<tbody>
-										<tr th:each="p : ${infoNegocioPage.content}" th:object="${p}">
+										<tr th:each="p : ${infonegocioPage.content}" th:object="${p}">
 				                          <td th:text="${p.id}"></td>
 				                          <td th:text="${p.nombre}"></td>
 				                          <td th:text="${p.contacto}"></td>
@@ -39,11 +39,9 @@
 				                          <td th:text="${p.email}"></td>
 				                          <td th:text="${p.telefono}"></td>
 				                          <td>
-				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/infonegocio/{id}(id=${p.id})}">Ver</a>
-				                          
-				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/infonegocio/edit={id}(id=${p.id})}">Editar</a>
-				                          
-				                          	<form th:action="@{/base/infonegocio/{id}(id=${p.id})}" th:method="destroy">
+				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/infonegocios/{id}(id=${p.id})}">Ver</a>
+				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/infonegocios/edit={id}(id=${p.id})}">Editar</a>
+				                          	<form th:action="@{/base/infonegocios/{id}(id=${p.id})}" th:method="destroy">
 								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
 								            </form>
 				                          </td>
@@ -53,11 +51,11 @@
 								<div class="container">
 									<ul class="pagination" >
 								
-									    <li th:if="${infoNegocioPage.totalPages > 0}" class="pagination"
+									    <li th:if="${infonegocioPage.totalPages > 0}" class="pagination"
 											th:each="pageNumber : ${pageNumbers}">
-									    	<a th:href="@{/base/infonegocio (size=${infoNegocioPage.size}, page=${pageNumber})}"
+									    	<a th:href="@{/base/infonegocios (size=${infonegocioPage.size}, page=${pageNumber})}"
 									        th:text=${pageNumber}
-									        th:class="${pageNumber==infoNegocioPage.number + 1} ? active"></a>
+									        th:class="${pageNumber==infonegocioPage.number + 1} ? active"></a>
 									    </li>
 								        
 									</ul>	
@@ -68,12 +66,11 @@
 	 				</div>
 	 			</div>
 	 		</div>
-<!-- 	 	</div> -->
+			<!-- </div> -->
 		 </div>
 	</div>
-<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
-
 
 <!-- <script> -->
 // $(document).ready(function() {

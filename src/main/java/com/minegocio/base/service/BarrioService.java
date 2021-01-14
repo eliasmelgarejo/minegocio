@@ -21,12 +21,13 @@ public class BarrioService extends AbstractService<Barrio> {
 
 	@Autowired
 	private BarrioRepository repo;
+	
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
-	public BarrioDto convertToDto(Barrio t) {
-		BarrioDto dto = modelMapper.map(t, BarrioDto.class);
+	public BarrioDto convertToDto(Barrio entity) {
+		BarrioDto dto = modelMapper.map(entity, BarrioDto.class);
 		return dto;
 	}
 

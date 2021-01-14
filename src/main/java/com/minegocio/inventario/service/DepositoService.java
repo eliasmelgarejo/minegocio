@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.minegocio.inventario.domain.Deposito;
 import com.minegocio.inventario.repository.DepositoRepository;
 import com.minegocio.inventario.service.dto.DepositoDto;
-import com.minegocio.base.domain.Pais;
-import com.minegocio.base.repository.PaisRepository;
-import com.minegocio.base.service.dto.PaisDto;
 import com.minegocio.core.AbstractService;
 import com.minegocio.core.BaseDto;
 

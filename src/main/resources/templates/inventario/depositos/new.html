@@ -8,37 +8,31 @@
 	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
-	                  		</div>
-	                	</div>
-	 				</div>
-               		<div class="container">
-               			<form th:action="@{/inventario/depositos/create}" th:method="post">               			
-					        
-					        <div class="form-group">
-					          <label class="control-label">Nombre</label>
-					          <input class="form-control" type="text" name="nombre" />
-					        </div>
-
-					        
-					        
-					        <button class="btn btn-default" type="submit">Guardar</button>
-					      </form>
-					      <div class="pull-right">
-					        <a class="btn btn-link" href="/inventario/depositos">Volver</a>
-					      </div>
-               		</div>
-	 			</div>
-	 		</div>
-		 </div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
+						<form th:action="@{/inventario/depositos/create}" th:method="post">
+							<div class="form-group">
+								<label class="control-label">Nombre</label> 
+								<input class="form-control" type="text" name="nombre" />
+							</div>
+							<button class="btn btn-default" type="submit">Guardar</button>
+						</form>
+						<div class="pull-right">
+							<a class="btn btn-link" href="/inventario/depositos">Volver</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-	
-</body>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
 
+</body>
 </html>
