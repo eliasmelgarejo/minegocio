@@ -43,7 +43,7 @@
 				                          </td>
 				                          <td>
 				                          	<form th:action="@{/base/paises/{id}(id=${p.id})}" th:method="destroy">
-								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
+								            	<a id="btnEliminar" class="btn btn-danger" type="submit" value="">Eliminar</a>
 								            </form>
 				                          </td>
 				                        </tr>
@@ -54,9 +54,15 @@
 								
 									    <li th:if="${paisPage.totalPages > 0}" class="pagination"
 											th:each="pageNumber : ${pageNumbers}">
-									    	<a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}"
-									        th:text=${pageNumber}
-									        th:class="${pageNumber==paisPage.number + 1} ? active"></a>
+												<a>Página </a>
+										    	<a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}"
+										        th:text=${pageNumber}
+										        th:class="${pageNumber==paisPage.number + 1} ? active"></a>
+										        <a> de </a>
+										        <a th:href="@{/base/paises (size=${paisPage.size}, page=${pageNumber})}"
+										        th:text=${pageNumber}
+										        th:class="${pageNumber==paisPage.size + 1} ? active"></a>
+										        <a> Páginas </a>
 									    </li>
 								        
 									</ul>	
@@ -74,10 +80,18 @@
 </body>
 
 
-<!-- <script> -->
-// $(document).ready(function() {
-//     $('#tablepais').DataTable();
-// } );
-<!-- </script> -->
+<script >
+	$(document).ready(function() {
+	     console.log('Listado de paises');
+	     
+// 	 	 $("#btnEliminar").on('click',function(e){
+	 		 
+// 	 		e.preventDefault();
+//             e.stopPropagation();
+            
+// 	 		console.log('Click en eliminar...');
+// 	 	 }); 
+	} );
+</script>
 
 </html>

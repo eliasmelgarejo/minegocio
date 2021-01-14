@@ -109,6 +109,7 @@ public class PaisController {
 
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
+		System.out.println("Method Destroy invocado...");
 		service.deleteById(id);
 		return "redirect:/base/paises";
 	}
