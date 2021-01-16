@@ -28,6 +28,7 @@
 				                        <th>Activo</th>
 				                        <th></th>
 				                        <th></th>
+				                        <th></th>
 									</thead>
 									<tbody>
 										<tr th:each="p : ${entityPage.content}" th:object="${p}">
@@ -78,14 +79,7 @@
 <script >
 	$(document).ready(function() {
 	     console.log('Listado de paises');
-	     
-// 	 	 $("#btnEliminar").on('click',function(e){
-	 		 
-// 	 		e.preventDefault();
-//             e.stopPropagation();
-            
-// 	 		console.log('Click en eliminar...');
-// 	 	 }); 
+ 
 	} );
 </script>
 

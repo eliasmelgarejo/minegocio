@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Departamento;
+import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.DepartamentoService;
+import com.minegocio.base.service.PaisService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
 
@@ -27,6 +29,8 @@ public class DepartamentoController implements IController<Departamento>{
 
 	@Autowired
 	private DepartamentoService service;
+	@Autowired
+	private PaisService paisService;
 	
 	@GetMapping
 	public String index(
@@ -60,6 +64,8 @@ public class DepartamentoController implements IController<Departamento>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Departamento");
+		model.addAttribute("lista_paises",paisService.findAll());
+		//model.addAttribute("pais_nombre", new String());
 		
 		return "base/departamentos/new";
 	}
@@ -68,6 +74,10 @@ public class DepartamentoController implements IController<Departamento>{
 	public String create(@ModelAttribute Departamento departamento) { // ⑥
 		departamento.setActivo(true);
 		departamento.setNombre(departamento.getNombre().toUpperCase());
+		System.out.println("***"+departamento.getPais().getId());
+		System.out.println("***"+departamento.getPais().getNombre());
+		Pais p = paisService.findByNombre(departamento.getPais().getNombre());
+		departamento.setPais(p);
 		service.create(departamento);
 		
 		return "redirect:/base/departamentos"; // ⑦
@@ -107,5 +117,6 @@ public class DepartamentoController implements IController<Departamento>{
 	    service.deleteById(id);
 	    return "redirect:/base/departamentos";
 	}
-
+	
+	
 }

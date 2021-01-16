@@ -51,6 +51,6 @@ public class DepartamentoService extends AbstractService<Departamento>{
 			list = null;
 		}
 		return list;
-	}
+	}	
 	
 }

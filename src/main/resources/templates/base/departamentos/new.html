@@ -1,13 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="/css/bootstrap.css" />
-		<script src="/js/jquery.js"></script>
-		<script src="/js/bootstrap.js"></script>
-		<title>Insert title here</title>
-	</head>
-	<body>
-	new Info
-	</body>
+<head th:replace="plantillas/plantilla_cuerpo :: head">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script th:inline="javascript">
+    var real_data = /*[[${paises}]]*/'noValue';
+    $(document).ready(function() {
+        $("#nameInput").autocomplete({
+            minLength : 1,
+            source : real_data,
+            select : function(e, ui) {
+                $("#nameOutput").text('You have selected : ' + ui.item.value);
+                return ui.item.value;
+            }
+        })
+    });
+</script>
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+
+	<div class="main-panel">
+	 	<div class="container-fluid">
+	 		<div class="row">
+	 			<div class="col-md-12">
+	 				<div class="panel">
+	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
+	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
+	                  		</div>
+	                	</div>
+	 				</div>
+               		<div class="container">
+               			<form th:action="@{/base/departamentos/create}" th:method="post">               			
+					        
+					        <div class="form-group">
+					          <label class="control-label">Nombre</label>
+					          <input class="form-control" type="text" name="nombre" />
+					        </div>
+
+					        <div class="form-group">
+					          <label class="control-label">País</label>
+					          <input class="form-control" list="paises" id="paisesinput" name="pais.nombre">  </input>
+						      <datalist id="paises">
+						          <option th:each="row : ${lista_paises}" th:value="${row.nombre}" th:label="${row.nombre}">
+						      </datalist>
+					        </div>
+					        
+					        <button class="btn btn-default" type="submit">Guardar</button>
+					      </form>
+					      <div class="pull-right">
+					        <a class="btn btn-link" href="/base/departamentos">Volver</a>
+					      </div>
+               		</div>
+	 			</div>
+	 		</div>
+		 </div>
+	</div>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
+	
+	
+</body>
 </html>
