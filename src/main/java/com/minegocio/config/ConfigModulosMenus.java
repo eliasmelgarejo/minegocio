@@ -58,6 +58,7 @@ public class ConfigModulosMenus {
 		dto.menus.add(new MenuDTO("Depósitos","/inventario/depositos",null,"inventario.depositos"));
 		dto.menus.add(new MenuDTO("Marcas","/inventario/marcas",null,"inventario.marcas"));
 		dto.menus.add(new MenuDTO("Productos","/inventario/productos",null,"inventario.productos"));
+		dto.menus.add(new MenuDTO("Lineas","/inventario/lineas",null,"inventario.lineas"));
 		
 		return dto;
 	}
