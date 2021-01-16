@@ -1,0 +1,21 @@
+/*
+
+
+INSERT INTO public.usuario (nombreusuario, activo, apellidos, bloqueado, expired_date, nombres, password)
+VALUES ('admin', '1', 'admin', '0', NULL, 'admin', '$2a$10$nG85QONI25WH4bwNQVz2h.u02rXMHBZ4v7KBM/Aeb4YcO3iQgcQ5e');
+
+
+
+
+INSERT INTO public.rol (activo, nombre)
+VALUES ('1', 'ADMIN');
+
+
+
+
+
+INSERT INTO public.usuario_roles (usuarios_nombreusuario, roles_id)
+VALUES ('admin', 1);
+
+
+*/
