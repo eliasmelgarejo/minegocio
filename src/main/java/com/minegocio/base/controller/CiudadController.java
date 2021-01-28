@@ -18,15 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Ciudad;
+import com.minegocio.base.domain.Departamento;
+import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.CiudadService;
+import com.minegocio.base.service.DepartamentoService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/ciudades")
-public class CiudadController{
+public class CiudadController implements IController<Ciudad>{
 	
 	@Autowired
 	private CiudadService service;
+	@Autowired
+	private DepartamentoService departamentoService;
 	
 	//Listado de ciudades
 	@GetMapping
@@ -38,10 +44,10 @@ public class CiudadController{
 		int currentPage = page;
         int pageSize = size;
         
-        Page<Ciudad> ciudadPage = service.findPaginated(currentPage-1, size);
-        model.addAttribute("ciudadPage",ciudadPage);
+        Page<Ciudad> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
         
-        int totalPages = ciudadPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,19 +57,21 @@ public class CiudadController{
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de Ciudades");
+		model.addAttribute("titulo_listado","Lista Ciudades");
 		
 		return "base/ciudades/index";
 	}
 	
 	
 	
-	//crear nueva ciudad
+	//Crear Nueva ciudad
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo", "Crear Nueva Ciudad");
+		model.addAttribute("titulo_cuerpo", "crear nueva Ciudad");
+		model.addAttribute("lista_departamentos", departamentoService.findAll());
+		
 		return "base/ciudades/new";
 	}
 	
@@ -71,52 +79,55 @@ public class CiudadController{
 	public String create(@ModelAttribute Ciudad ciudad) {
 		ciudad.setActivo(true);
 		ciudad.setNombre(ciudad.getNombre().toUpperCase());
+		Departamento d = departamentoService.findByNombre(ciudad.getDepartamento().getNombre());
+		ciudad.setDepartamento(d);
 		service.create(ciudad);
 		return "redirect:/base/ciudades";
 	}
 	
 	
-	//ver datos de ciudad
+	//Ver ciudad
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Ciudad");
-		
+		model.addAttribute("titulo_cuerpo","Datos Ciudad");
 		Ciudad ciudad = service.findById(id);
 		model.addAttribute("ciudad", ciudad);
-		
 		return "base/ciudades/show";
 	}
 	
 	
-	//editar ciudad
+	//Editar ciudad
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Datos de Ciudad");
-		
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		Ciudad ciudad = service.findById(id);
+		model.addAttribute("lista_departamentos", departamentoService.findAll());
 		model.addAttribute("ciudad", ciudad);
-		
 		return "base/ciudades/edit";
+		
 	}
 	
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Ciudad ciudad) {
+		//ME FALTA PONER POR DEFAULT EL DEPARTAMENTO QUE ESTA REGISTRADO CON LA CIUDAD.
+		Departamento d = departamentoService.findByNombre(ciudad.getDepartamento().getNombre());
+		ciudad.setDepartamento(d);
+				
 		ciudad.setId(id);
 		service.update(ciudad);
 		
 		return "redirect:/base/ciudades";
 	}
 	
-	
-	//NO FUNCIONA, NO ELIMINA EL REGISTRO, NO PASA NADA EN LA PANTALLA.
-	@DeleteMapping("{id}")
+	//Eliminar ciudad
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/base/ciudades";
+	    service.deleteById(id);
+	    return "redirect:/base/ciudades";
 	}
 	
 }

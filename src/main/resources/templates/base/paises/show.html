@@ -19,11 +19,11 @@
 					<div class="container">
 						<form th:object="${pais}">
 							<div class="form-group col-md-6">
-								<label class="control-label">Id</label> 
+								<label class="control-label">#Id</label> 
 								<input class="form-control" readonly type="text" th:value="${pais.id}" />
 							</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Nombre</label> 
+								<label class="control-label">Pa&iacute;s</label> 
 								<input class="form-control" readonly type="text" th:value="${pais.nombre}" />
 							</div>
 							<div class="form-group col-md-6">
@@ -36,8 +36,8 @@
 							</div>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${pais.id})}">Editar</a> 
-							<a class="btn btn-info " href="/base/paises">Volver</a>
+							<a class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${pais.id})}">Actualizar</a> 
+							<a class="btn btn-info" href="/base/paises">Volver</a>
 						</div>
 					</div>
 				</div>

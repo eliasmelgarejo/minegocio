@@ -23,19 +23,20 @@
 								<input class="form-control" readonly type="text" th:value="${barrio.id}" />
 							</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Nombre</label> <input
-									class="form-control" readonly type="text"
-									th:value="${barrio.nombre}" />
+								<label class="control-label">Nombre</label> 
+								<input class="form-control" readonly type="text" th:value="${barrio.nombre}" />
 							</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Activo</label> <input
-									class="form-control" disabled type="checkbox"
-									th:checked="${barrio.activo}" />
+					          <label class="control-label">Ciudad</label>
+					          <input class="form-control" readonly type="text" th:value="${barrio.ciudad.nombre}" />
+					        </div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Activo</label> 
+								<input class="form-control" disabled type="checkbox" th:checked="${barrio.activo}" />
 							</div>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success"
-								th:href="@{/base/barrios/edit={id}(id=${barrio.id})}">Editar</a>
+							<a class="btn btn-success" th:href="@{/base/barrios/edit={id}(id=${barrio.id})}">Actualizar</a>
 							<a class="btn btn-info " href="/base/barrios">Volver</a>
 						</div>
 					</div>
@@ -46,6 +47,5 @@
 	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
 
 </body>
-
 </html>
 

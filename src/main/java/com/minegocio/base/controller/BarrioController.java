@@ -18,15 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Barrio;
+import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.service.BarrioService;
+import com.minegocio.base.service.CiudadService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/barrios")
-public class BarrioController{
+public class BarrioController implements IController<Barrio>{
 	
 	@Autowired
 	private BarrioService service;
+	@Autowired
+	private CiudadService ciudadService;
 	
 	//Listado de barrios
 	@GetMapping
@@ -38,10 +43,10 @@ public class BarrioController{
 		int currentPage = page;
         int pageSize = size;
         
-        Page<Barrio> barrioPage = service.findPaginated(currentPage-1, size);
-        model.addAttribute("barrioPage", barrioPage);
+        Page<Barrio> entityPage = service.findPaginated(currentPage-1, pageSize);
+		model.addAttribute("entityPage", entityPage);
         
-        int totalPages = barrioPage.getTotalPages();
+		int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,19 +56,20 @@ public class BarrioController{
         
         model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de Barrios");
+		model.addAttribute("titulo_listado","Lista Barrios");
 		
 		return "base/barrios/index";
 	}
 	
 	
 	
-	//crear nuevo barrio
+	//Crear Nuevo barrio
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Crear Nuevo Barrio");
+		model.addAttribute("titulo_cuerpo","crear nuevo Barrio");
+		model.addAttribute("lista_ciudades", ciudadService.findAll());
 		return "base/barrios/new";
 	}
 	
@@ -71,6 +77,8 @@ public class BarrioController{
 	public String create(@ModelAttribute Barrio barrio) {
 		barrio.setActivo(true);
 		barrio.setNombre(barrio.getNombre().toUpperCase());
+		Ciudad c = ciudadService.findByNombre(barrio.getCiudad().getNombre());
+		barrio.setCiudad(c);
 		service.create(barrio);
 		
 		return "redirect:/base/barrios";
@@ -78,13 +86,12 @@ public class BarrioController{
 	
 	
 	
-	//ver datos de barrio
+	//Ver barrio
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Barrio");
-		
+		model.addAttribute("titulo_cuerpo","Datos Barrio");
 		Barrio barrio = service.findById(id);
 		model.addAttribute("barrio", barrio);
 		
@@ -93,13 +100,14 @@ public class BarrioController{
 	
 	
 	
-	//editar barrio
+	//Editar barrio
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Barrio");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		Barrio barrio = service.findById(id);
+		model.addAttribute("lista_ciudades", ciudadService.findAll());
 		model.addAttribute("barrio", barrio);
 
 		return "base/barrios/edit";
@@ -107,6 +115,9 @@ public class BarrioController{
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Barrio barrio) {
+		//ME FALTA PONER POR DEFAULT LA CIUDAD QUE ESTA REGISTRADO CON EL BARRIO.
+		Ciudad c = ciudadService.findByNombre(barrio.getCiudad().getNombre());
+		barrio.setCiudad(c);
 		barrio.setId(id);
 		service.update(barrio);
 		
@@ -114,11 +125,11 @@ public class BarrioController{
 	}
 	
 	
-	//NO FUNCIONA
-	@DeleteMapping("{id}")
+	//Eliminar departamento
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/base/barrios";
+	    service.deleteById(id);
+	    return "redirect:/base/barrios";
 	}
 	
 }

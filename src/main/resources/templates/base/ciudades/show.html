@@ -27,12 +27,16 @@
 								<input class="form-control" readonly type="text" th:value="${ciudad.nombre}" />
 							</div>
 							<div class="form-group col-md-6">
+					          <label class="control-label">Departamento</label>
+					          <input class="form-control" readonly type="text" th:value="${ciudad.departamento.nombre}" />
+					        </div>
+							<div class="form-group col-md-6">
 								<label class="control-label">Activo</label> 
 								<input class="form-control" disabled type="checkbox" th:checked="${ciudad.activo}" />
 							</div>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success" th:href="@{/base/ciudades/edit={id}(id=${ciudad.id})}">Editar</a>
+							<a class="btn btn-success" th:href="@{/base/ciudades/edit={id}(id=${ciudad.id})}">Actualizar</a>
 							<a class="btn btn-info " href="/base/ciudades">Volver</a>
 						</div>
 					</div>

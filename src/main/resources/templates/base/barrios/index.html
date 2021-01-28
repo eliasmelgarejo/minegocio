@@ -24,28 +24,28 @@
 									<thead class="text-info">
 										<th>#Id</th>
 										<th>Nombre</th>
+										<th>Ciudad</th>
 										<th>Activo</th>
 										<th>Operaciones</th>
 									</thead>
 									<tbody>
-										<tr th:each="p : ${barrioPage.content}" th:object="${p}">
+										<tr th:each="p : ${entityPage.content}" th:object="${p}">
 											<td th:text="${p.id}"></td>
 											<td th:text="${p.nombre}"></td>
-											<td th:text="${p.activo}"></td>
+											<td th:text="${p.ciudad.nombre}"></td>
+											<td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO'" /></td>
 											<td>
 												<a id="btnVer" class="btn btn-info" th:href="@{/base/barrios/{id}(id=${p.id})}">Ver</a> 
-												<a id="btnEditar" class="btn btn-success" th:href="@{/base/barrios/edit={id}(id=${p.id})}">Editar</a>
-												<form th:action="@{/base/barrios/{id}(id=${p.id})}" th:method="destroy">
-													<a class="btn btn-danger" type="submit" value="">Eliminar</a>
-												</form>
+												<a id="btnEditar" class="btn btn-success" th:href="@{/base/barrios/edit={id}(id=${p.id})}">Actualizar</a>
+												<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/barrios/delete/{id}(id=${p.id})}">Eliminar</a>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 								<div class="container">
 									<ul class="pagination">
-										<li th:if="${barrioPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-											<a th:href="@{/base/barrios (size=${barrioPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==barrioPage.number + 1} ? active"></a>
+										<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+											<a th:href="@{/base/barrios (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
 										</li>
 									</ul>
 								</div>
@@ -60,8 +60,10 @@
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
 
-<!-- <script> -->
-// $(document).ready(function() { // $('#tablepais').DataTable(); // }
-);
-<!-- </script> -->
+<script>
+$(document).ready(function() { 
+	//$('#tablebarrio').DataTable();
+	console.log('Listado de barrios');
+	});
+</script>
 </html>

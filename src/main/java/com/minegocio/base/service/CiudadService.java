@@ -52,4 +52,15 @@ public class CiudadService extends AbstractService<Ciudad>{
 		return list;
 	}*/
 	
+	// custom method
+	public Ciudad findByNombre(String nombre) {
+		Ciudad ciudad;
+		try {
+			ciudad = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			ciudad= null;
+		}
+		return ciudad;
+	}
+	
 }
