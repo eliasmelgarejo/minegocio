@@ -69,7 +69,7 @@ public class CiudadController implements IController<Ciudad>{
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo", "crear nueva Ciudad");
+		model.addAttribute("titulo_cuerpo", "Crear Nueva Ciudad");
 		model.addAttribute("lista_departamentos", departamentoService.findAll());
 		
 		return "base/ciudades/new";

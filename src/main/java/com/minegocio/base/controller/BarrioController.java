@@ -68,7 +68,7 @@ public class BarrioController implements IController<Barrio>{
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","crear nuevo Barrio");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Barrio");
 		model.addAttribute("lista_ciudades", ciudadService.findAll());
 		return "base/barrios/new";
 	}
