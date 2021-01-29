@@ -21,40 +21,6 @@
 							</a>
 						</div>
 						<div class="panel-body" style="width: 100%">
-							<!--
-							<div class="col-lg-10 mt-5 mb-5">
-								<table id="tablebarrio" class="table table-bordered table-responsive" style="width: 100%">
-									<thead class="text-info">
-										<th>#Id</th>
-										<th>Nombre</th>
-										<th>Ciudad</th>
-										<th>Activo</th>
-										<th>Operaciones</th>
-									</thead>
-									<tbody>
-										<tr th:each="p : ${entityPage.content}" th:object="${p}">
-											<td th:text="${p.id}"></td>
-											<td th:text="${p.nombre}"></td>
-											<td th:text="${p.ciudad.nombre}"></td>
-											<td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO'" /></td>
-											<td>
-												<a id="btnVer" class="btn btn-info" th:href="@{/base/barrios/{id}(id=${p.id})}">Ver</a> 
-												<a id="btnEditar" class="btn btn-success" th:href="@{/base/barrios/edit={id}(id=${p.id})}">Actualizar</a>
-												<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/barrios/delete/{id}(id=${p.id})}">Eliminar</a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="container">
-									<ul class="pagination">
-										<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-											<a th:href="@{/base/barrios (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							-->
-							<!-- *** -->
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
@@ -99,7 +65,6 @@
 									</div>
 								</div>
 							</div>
-							<!-- *** -->
 						</div>
 					</div>
 				</div>

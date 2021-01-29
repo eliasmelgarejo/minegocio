@@ -39,8 +39,8 @@ public class PaisController implements IController<Pais>{
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Pais> entityPage = service.findPaginated(currentPage-1, size);
         
+        Page<Pais> entityPage = service.findPaginated(currentPage-1, size);
         model.addAttribute("entityPage", entityPage);
         
         int totalPages = entityPage.getTotalPages();

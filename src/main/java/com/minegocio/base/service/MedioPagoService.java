@@ -43,4 +43,15 @@ public class MedioPagoService extends AbstractService<MedioPago>{
 	}
 	
 	
+	// custom method
+	public MedioPago findByNombre(String nombre) {
+		MedioPago medioPago;
+		try {
+			medioPago = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			medioPago= null;
+		}
+		return medioPago;
+	}
+	
 }

@@ -17,6 +17,7 @@
 						</div>
 					</div>
 					<div class="container">
+					<!-- 
 						<form th:action="@{/base/monedas/create}" th:method="post">
 							<div class="form-group">
 								<label class="control-label">S&iacute;mbolo</label> 
@@ -25,8 +26,60 @@
 							<button class="btn btn-default" type="submit">Guardar</button>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-link" href="/base/paises">Volver</a>
+							<a class="btn btn-link" href="/base/monedas">Volver</a>
 						</div>
+						 -->
+						 <!-- *** -->
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/base/monedas/create}" th:method="post">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">S&iacute;mbolo</label>
+														<input type="text" class="form-control" name="simbolo" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Pa&iacute;s</label>
+														<input class="form-control" list="paises" id="paisesinput" name="pais.nombre"> 
+												      	<datalist id="paises">
+												       		<option th:each="row : ${lista_paises}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Monedas necesario para la tabla de Monedas.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/base/monedas">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- *** -->
 					</div>
 				</div>
 			</div>

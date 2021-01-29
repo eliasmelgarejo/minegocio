@@ -17,19 +17,59 @@
 						</div>
 					</div>
 					<div class="container">
-						<form th:action="@{/base/mediospago/create}" th:method="post">
-							<div class="form-group">
-								<label class="control-label">Nombre</label> 
-								<input class="form-control" type="text" name="nombre" />
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/base/mediospago/create}" th:method="post">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nombre</label>
+														<input type="text" class="form-control" name="nombre" />
+													</div>
+												</div>
+											</div>
+											<!-- <div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Tipo medio Pago</label>
+														<input type="text" class="form-control" name="tipoMedioPago" />
+													</div>
+												</div>
+											</div> -->
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Depositable</label> 
+														<input class="form-control" type="checkbox" name="depositable" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Tipo medios Pago necesario para la tabla de Medios de pago.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/base/mediospago">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
 							</div>
-							<!-- <div class="form-group">
-								<label class="control-label">Tipo Medio de Pago</label> 
-								<input class="form-control" type="text" name="tipoMedioPago" />
-							</div> -->
-							<button class="btn btn-default" type="submit">Guardar</button>
-						</form>
-						<div class="pull-right">
-							<a class="btn btn-link" href="/base/mediospago">Volver</a>
 						</div>
 					</div>
 				</div>

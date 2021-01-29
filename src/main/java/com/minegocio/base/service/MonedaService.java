@@ -39,4 +39,15 @@ public class MonedaService extends AbstractService<Moneda>{
 		return repo;
 	}
 	
+	// custom method
+	public Moneda findBySimbolo(String simbolo) {
+		Moneda moneda;
+		try {
+			moneda = repo.findBySimbolo(simbolo);
+		} catch (Exception e) {
+			moneda= null;
+		}
+		return moneda;
+	}
+	
 }

@@ -20,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.minegocio.base.domain.MedioPago;
 import com.minegocio.base.service.MedioPagoService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/mediospago")
-public class MedioPagoController {
+public class MedioPagoController implements IController<MedioPago>{
 
 	@Autowired
 	private MedioPagoService service;
 	
-	//Listado de medios de pago
+	//Listado de MediosPago
 	@GetMapping
 	public String index(
 			Model model,
@@ -37,11 +38,11 @@ public class MedioPagoController {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<MedioPago> medioPagoPage = service.findPaginated(currentPage-1, size);
         
-        model.addAttribute("medioPagoPage",medioPagoPage);
+        Page<MedioPago> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
         
-        int totalPages = medioPagoPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,19 +52,18 @@ public class MedioPagoController {
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de Medios de Pago");
+		model.addAttribute("titulo_listado","Lista Medios Pago");
 
 		return "base/mediospago/index";
 	}
 	
 	
-	
-	//nuevo medio de pago
+	//Crear Nuevo medioPago
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Crear Medio de Pago");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Medio de Pago");
 		
 		return "base/mediospago/new";
 	}
@@ -73,18 +73,19 @@ public class MedioPagoController {
 		medioPago.setActivo(true);
 		medioPago.setNombre(medioPago.getNombre().toUpperCase());
 		//medioPago.setTipoMedioPago(medioPago.getTipoMedioPago());
+		medioPago.setDepositable(medioPago.isDepositable());
 		service.create(medioPago);
 		
 		return "redirect:/base/mediospago";
 	}
 	
 	
-	//ver datos de medio de pago
+	//Ver mediosPago
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Medios de Pago");
+		model.addAttribute("titulo_cuerpo","Datos Medios Pago");
 
 		MedioPago medioPago = service.findById(id);
 		model.addAttribute("medioPago", medioPago);
@@ -94,7 +95,7 @@ public class MedioPagoController {
 	
 	
 	
-	//Editar medios de pago
+	//Editar medioPago
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
@@ -114,11 +115,11 @@ public class MedioPagoController {
 	}
 	
 	
-	
-	@DeleteMapping("{id}")
+	//Eliminar medioPago
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/base/mediospago";
+	    service.deleteById(id);
+	    return "redirect:/base/mediospago";
 	}
 	
 }

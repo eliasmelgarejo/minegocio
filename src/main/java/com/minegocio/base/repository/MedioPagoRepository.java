@@ -10,7 +10,9 @@ import com.minegocio.base.enums.TipoMedioPago;
 
 @Repository
 public interface MedioPagoRepository extends JpaRepository<MedioPago, Long>{
+	MedioPago findByNombre(String nombre);
 	
-	List<MedioPago> findByNombre(String nombre);
-	List<MedioPago> findByTipoMedioPago(TipoMedioPago tipoMedioPago);
+	//ESTE CODIGO NO ESTABA COMENTADO ORIGINALMENTE
+	//List<MedioPago> findByNombre(String nombre);
+	//List<MedioPago> findByTipoMedioPago(TipoMedioPago tipoMedioPago);
 }

@@ -10,8 +10,11 @@ import com.minegocio.base.domain.Pais;
 
 @Repository
 public interface MonedaRepository extends JpaRepository<Moneda, Long> {
+	Moneda findBySimbolo(String simbolo);
 	
-	List<Moneda> findByPais(Pais pais);	
-	List<Moneda> findByBaseTrue();
-	List<Moneda> findByBaseTrueAndPais(Pais pais);
+	//EN EL CODIGO ORIGINAL ESTOS METODOS NO ESTABAN COMENTADOS
+	//List<Moneda> findByPais(Pais pais);	
+	//List<Moneda> findByBaseTrue();
+	//List<Moneda> findByBaseTrueAndPais(Pais pais);
+	
 }
