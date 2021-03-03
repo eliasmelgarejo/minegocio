@@ -17,15 +17,51 @@
 						</div>
 					</div>
 					<div class="container">
-						<form th:action="@{/inventario/categorias/create}" th:method="post">
-							<div class="form-group">
-								<label class="control-label">Nombre</label> 
-								<input class="form-control" type="text" name="nombre" />
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/inventario/categorias/create}" th:method="post">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Categor&iacute;a</label>
+														<input type="text" class="form-control" name="nombre" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Imagen</label>
+														<input type="text" class="form-control" name="image" value="1" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Categor&iacute;as necesario para la tabla de Categor&iacute;as.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/inventario/categorias">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
 							</div>
-							<button class="btn btn-default" type="submit">Guardar</button>
-						</form>
-						<div class="pull-right">
-							<a class="btn btn-link" href="/inventario/categorias">Volver</a>
 						</div>
 					</div>
 				</div>

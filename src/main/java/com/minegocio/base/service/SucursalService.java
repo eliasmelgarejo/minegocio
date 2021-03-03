@@ -42,4 +42,16 @@ public class SucursalService extends AbstractService<Sucursal> {
 		return repo;
 	}
 	
+	
+	// custom method
+	public Sucursal findByDireccion(String direccion) {
+		Sucursal sucursal;
+		try {
+			sucursal = repo.findByDireccion(direccion);
+		} catch (Exception e) {
+			sucursal= null;
+		}
+		return sucursal;
+	}
+	
 }

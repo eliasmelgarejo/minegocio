@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 import com.minegocio.inventario.domain.Categoria;
 import com.minegocio.inventario.service.CategoriaService;
 
 @Controller
 @RequestMapping("/inventario/categorias")
-public class CategoriaController {
+public class CategoriaController implements IController<Categoria>{
 	
 	@Autowired
 	private CategoriaService service;
-	
 	
 	//Listado de categorias
 	@GetMapping
@@ -38,10 +38,11 @@ public class CategoriaController {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Categoria> categoriaPage = service.findPaginated(currentPage-1, size);
-        model.addAttribute("categoriaPage",categoriaPage);
         
-        int totalPages = categoriaPage.getTotalPages();
+        Page<Categoria> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
+        
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,13 +52,13 @@ public class CategoriaController {
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_listado","Listado de Categorias");
+		model.addAttribute("titulo_listado","Lista Categorias");
 		
 		return "inventario/categorias/index";
 	}
 	
 	
-	//nueva categoria
+	//Crear Nueva categoria
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
@@ -70,24 +71,26 @@ public class CategoriaController {
 	public String create(@ModelAttribute Categoria categoria) {
 		categoria.setActivo(true);
 		categoria.setNombre(categoria.getNombre().toUpperCase());
+		categoria.setImage(categoria.getImage());
 		service.create(categoria);
 		return "redirect:/inventario/categorias";
 	}
 	
 	
-	//ver datos de categoria
+	//Ver categoria
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
+		System.out.println("ENTRO ACA");
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Categoria");
+		model.addAttribute("titulo_cuerpo","Datos Categoria");
 		Categoria categoria = service.findById(id);
 		model.addAttribute("categoria", categoria);
 		return "inventario/categorias/show";
 	}
 	
 	
-	//editar categoria
+	//Editar categoria
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
@@ -106,10 +109,11 @@ public class CategoriaController {
 	}
 	
 	
-	@DeleteMapping("{id}")
+	//Eliminar categoria
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/inventario/categorias";
+	    service.deleteById(id);
+	    return "redirect:/inventario/categorias";
 	}
 	
 }

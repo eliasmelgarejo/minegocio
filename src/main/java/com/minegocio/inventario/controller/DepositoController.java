@@ -17,18 +17,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.minegocio.base.domain.Sucursal;
+import com.minegocio.base.service.SucursalService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 import com.minegocio.inventario.domain.Deposito;
 import com.minegocio.inventario.service.DepositoService;
 
 @Controller
 @RequestMapping("/inventario/depositos")
-public class DepositoController {
+public class DepositoController implements IController<Deposito> {
 
 	@Autowired
 	private DepositoService service;
+	@Autowired
+	private SucursalService sucursalService;
 	
-	//Listado de Depositos
+	//Listado de depositos
 	@GetMapping
 	public String index(
 			Model model,
@@ -37,11 +42,11 @@ public class DepositoController {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Deposito> depositoPage = service.findPaginated(currentPage-1, size);
         
-        model.addAttribute("depositoPage",depositoPage);
+        Page<Deposito> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
         
-        int totalPages = depositoPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,18 +56,19 @@ public class DepositoController {
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_listado","Listado de Depositos");
+		model.addAttribute("titulo_listado","Lista Depositos");
 		
 		return "inventario/depositos/index";
 	}
 	
 	
-	//nuevo deposito
+	//Crear Nuevo deposito
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo Deposito");
+		model.addAttribute("lista_sucursales", sucursalService.findAll());
 		return "inventario/depositos/new";
 	}
 	
@@ -70,25 +76,27 @@ public class DepositoController {
 	public String create(@ModelAttribute Deposito deposito) {
 		deposito.setActivo(true);
 		deposito.setNombre(deposito.getNombre().toUpperCase());
+		Sucursal s = sucursalService.findByDireccion(deposito.getSucursal().getDireccion());
+		deposito.setSucursal(s);
 		service.create(deposito);
 		return "redirect:/inventario/depositos";
 	}
 	
 	
 	
-	//ver datos de deposito
+	//ver deposito
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Deposito");
+		model.addAttribute("titulo_cuerpo","Datos Deposito");
 		Deposito deposito= service.findById(id);
 		model.addAttribute("deposito", deposito);
 		return "inventario/depositos/show";
 	}
 	
 	
-	//editar deposito
+	//Editar deposito
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
@@ -107,7 +115,7 @@ public class DepositoController {
 	}
 	
 	
-	//
+	//Eliminar deposito
 	@DeleteMapping("{id}")
 	public String destroy(@PathVariable Long id) {
 		service.deleteById(id);

@@ -100,15 +100,16 @@ import com.minegocio.base.domain.Empleado;
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.EmpleadoService;
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/empleados")
-public class EmpleadoController {
+public class EmpleadoController implements IController<Empleado> {
 	
 	@Autowired
 	private EmpleadoService service;
 	
-	
+	//Listado de empleados
 	@GetMapping
 	public String index(
 			Model model,
@@ -117,11 +118,16 @@ public class EmpleadoController {
 		
 		int currentPage = page;
         int pageSize = size;
-        Page<Empleado> empleadoPage = service.findPaginated(currentPage-1, size);
         
-        model.addAttribute("empleadoPage",empleadoPage);
+        //Page<Empleado> empleadoPage = service.findPaginated(currentPage-1, size);
+        //model.addAttribute("empleadoPage",empleadoPage);
         
-        int totalPages = empleadoPage.getTotalPages();
+        Page<Empleado> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
+        
+        //int totalPages = empleadoPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
+        
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -132,31 +138,30 @@ public class EmpleadoController {
 
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de Empleados");
+		model.addAttribute("titulo_listado","Lista Empleados");
 		
 		return "base/empleados/index";
 	}
 	
 	
-	
-	
+	//Crear Nuevo empleado
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Crear Empleado");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Empleado");
 		return "base/empleados/new";
 	}
 	
 	@PostMapping("create")
-	public String create(@ModelAttribute Empleado empleado) { // ⑥
-		empleado.setActivo(true);
+	public String create(@ModelAttribute Empleado empleado) {
+		empleado.setCajero(true);
 		empleado.setCodigo(empleado.getCodigo());
-		//pais.setGentilicio(pais.getGentilicio().toUpperCase());
+		empleado.setId(empleado.getId());
 		service.create(empleado);
-		return "redirect:/base/empleados"; // ⑦
+		return "redirect:/base/empleados";
 	}
-	
+	//HASTA AQUI LLEGUE CON ESTE NO PUDE INSERTAR
 	
 	
 	

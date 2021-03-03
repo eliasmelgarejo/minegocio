@@ -11,4 +11,6 @@ import com.minegocio.base.domain.Ciudad;
 @Repository
 public interface BarrioRepository extends JpaRepository<Barrio, Long>{
 	List<Barrio> findByCiudad(Ciudad ciudad);
+	
+	Barrio findByNombre(String nombre);
 }

@@ -51,5 +51,20 @@ public class BarrioService extends AbstractService<Barrio> {
 		}
 		return list;
 	}
+	
+	
+	
+	
+	// custom method
+	public Barrio findByNombre(String nombre) {
+		Barrio barrio;
+		try {
+			barrio = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			barrio= null;
+		}
+		return barrio;
+	}
+		
 
 }

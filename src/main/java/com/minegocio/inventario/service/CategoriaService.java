@@ -41,4 +41,15 @@ public class CategoriaService  extends AbstractService<Categoria>{
 		// TODO Auto-generated method stub
 		return repo;
 	}
+	
+	// custom method
+	public Categoria findByNombre(String nombre) {
+		Categoria categoria;
+		try {
+			categoria = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			categoria= null;
+		}
+		return categoria;
+	}
 }

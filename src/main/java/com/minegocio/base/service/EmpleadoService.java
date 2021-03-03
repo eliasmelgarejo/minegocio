@@ -64,6 +64,15 @@ public class EmpleadoService extends AbstractService<Empleado>{
 		return repo;
 	}
 	
-	
+	// custom method
+	public Empleado findByCodigo(String codigo) {
+		Empleado empleado;
+		try {
+			empleado = repo.findByCodigo(codigo);
+		} catch (Exception e) {
+			empleado= null;
+		}
+		return empleado;
+	}
 	
 }

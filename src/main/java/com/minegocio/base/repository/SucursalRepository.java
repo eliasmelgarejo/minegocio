@@ -7,7 +7,7 @@ import com.minegocio.base.domain.Sucursal;
 
 @Repository
 public interface SucursalRepository extends JpaRepository<Sucursal, Long>{
-
+	Sucursal findByDireccion(String direccion);
 }
 
 

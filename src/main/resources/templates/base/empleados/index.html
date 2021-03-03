@@ -8,73 +8,116 @@
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-<!-- 		 <div class="container"> -->
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-<!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
-							<a class="btn btn-primary" href="/base/empleados/new">Nuevo</a>
-	                	</div>
-	                	<div class="panel-body" style="width: 100%">
-		                	<div class="col-lg-10 mt-5 mb-5">
-		                		<table id="tableempleado" class="table table-bordered table-responsive" style="width: 100%">
+		<!-- <div class="container"> -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
+							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
+							<!-- <a class="btn btn-primary" href="/base/empleados/new">Nuevo</a> -->
+							<a href="/base/empleados/new" class="btn btn-primary btn-icon-split" title="Nuevo Registro"> 
+								<span class="icon text-white-50"><i class="fas fa-plus"></i></span> <span class="text">Nuevo</span>
+							</a>
+						</div>
+						<div class="panel-body" style="width: 100%">
+						
+							<!-- <div class="col-lg-10 mt-5 mb-5">
+								<table id="tableempleado" class="table table-bordered table-responsive" style="width: 100%">
 									<thead class="text-info">
 										<th>ID</th>
-				                        <th>Codigo</th>
-				                        <th>Cajero</th>
-				                        <th>Activo</th>
-				                        <th>Operaciones</th>
+										<th>Codigo</th>
+										<th>Cajero</th>
+										<th>Activo</th>
+										<th>Operaciones</th>
 									</thead>
 									<tbody>
 										<tr th:each="p : ${empleadoPage.content}" th:object="${p}">
-				                          <td th:text="${p.id}"></td>
-				                          <td th:text="${p.codigo}"></td>
-				                          <td th:text="${p.cajero}"></td>
-				                          <td th:text="${p.activo}"></td>
-				                          <td>
-				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/empleados/{id}(id=${p.id})}">Ver</a>
-				                          
-				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/empleados/edit={id}(id=${p.id})}">Editar</a>
-				                         
-				                          	<form th:action="@{/base/empleados/{id}(id=${p.id})}" th:method="destroy">
-								            	<a class="btn btn-danger" type="submit" value="">Eliminar</a>
-								            </form>
-				                          </td>
-				                        </tr>
+											<td th:text="${p.id}"></td>
+											<td th:text="${p.codigo}"></td>
+											<td th:text="${p.cajero}"></td>
+											<td th:text="${p.activo}"></td>
+											<td>
+												<a id="btnVer" class="btn btn-info" th:href="@{/base/empleados/{id}(id=${p.id})}">Ver</a> 
+												<a id="btnEditar" class="btn btn-success" th:href="@{/base/empleados/edit={id}(id=${p.id})}">Editar</a>
+
+												<form th:action="@{/base/empleados/{id}(id=${p.id})}" th:method="destroy">
+													<a class="btn btn-danger" type="submit" value="">Eliminar</a>
+												</form>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<div class="container">
-									<ul class="pagination" >
-								
-									    <li th:if="${empleadoPage.totalPages > 0}" class="pagination"
-											th:each="pageNumber : ${pageNumbers}">
-									    	<a th:href="@{/base/empleadoss (size=${empleadoPage.size}, page=${pageNumber})}"
-									        th:text=${pageNumber}
-									        th:class="${pageNumber==empleadoPage.number + 1} ? active"></a>
-									    </li>
-								        
-									</ul>	
-								</div>						
-		                	</div>
-	                	</div>
-	                	
-	 				</div>
-	 			</div>
-	 		</div>
-<!-- 	 	</div> -->
-		 </div>
+									<ul class="pagination">
+										<li th:if="${empleadoPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+											<a th:href="@{/base/empleadoss (size=${empleadoPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==empleadoPage.number + 1} ? active"></a>
+										</li>
+									</ul>
+								</div>
+							</div> -->
+							
+							<!-- *** -->
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="tableempleado" class="table">
+											<thead class=" text-primary">
+												<th>#ID</th>
+												<th>Persona</th>
+												<th>Nro. Documento</th>
+												<th>Es Cajero</th>
+												<th>Cod. Empleado</th>
+												<th>Operaciones</th>
+											</thead>
+											<tbody>
+												<tr th:each="p : ${entityPage.content}" th:object="${p}">
+													<td th:text="${p.id}"></td>
+													<td th:text="${p.id}"></td>
+													<td th:text="${p.id}"></td>
+													<td th:text="${p.cajero} ? 'SI' : 'NO'" /></td>
+													<td>
+														<a id="btnVer" class="btn btn-info btn-sm" th:href="@{/base/paises/{id}(id=${p.id})}"> 
+															<i class="material-icons">info_outline</i> Ver
+														</a> 
+														<a id="btnEditar" class="btn btn-success btn-sm" th:href="@{/base/paises/edit={id}(id=${p.id})}"> 
+															<i class="material-icons">edit</i> Actualizar
+														</a> 
+														<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/{id}(id=${p.id})}"> 
+															<i class="material-icons">close</i>Eliminar
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="container">
+										<ul class="pagination">
+											<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+												<a th:href="@{/base/empleados (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- *** -->
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+		</div>
 	</div>
-<!-- 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
 
-
-<!-- <script> -->
-// $(document).ready(function() {
-//     $('#tablepais').DataTable();
-// } );
-<!-- </script> -->
+<script>
+	$(document).ready(function() { 
+		// $('#tableempleado').DataTable();
+		console.log('Listado de empleados');
+	});
+</script>
 
 </html>

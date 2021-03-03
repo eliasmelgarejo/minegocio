@@ -1,38 +1,129 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="plantillas/plantilla_cuerpo :: head">
-	</head>
-	<meta charset="utf-8">
-	<body>
-		<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
-		<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+<head th:replace="plantillas/plantilla_cuerpo :: head">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script th:inline="javascript">
+	var real_data = /*[[${infonegocios}]]*/'noValue';
+    $(document).ready(function() {
+        $("#nameInput").autocomplete({
+            minLength : 1,
+            source : real_data,
+            select : function(e, ui) {
+                $("#nameOutput").text('You have selected : ' + ui.item.value);
+                return ui.item.value;
+            }
+        })
+    });
+</script>
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
 
-		<div class="main-panel">
-	 		<div class="container-fluid">
-	 			<div class="row">
-	 				<div class="col-md-12">
-		 				<div class="panel">
-		 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-		                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
-		                	</div>
-		 				</div>
-	               		<div class="container">
-	               			<form th:action="@{/base/sucursales/create}" th:method="post">
-						        <div class="form-group">
-						          <label class="control-label">Direcci&oacute;n</label>
-						          <input class="form-control" type="text" name="direccion" />
-						        </div>
-						        
-								<button class="btn btn-default" type="submit">Guardar</button>
-						     </form>
-						     <div class="pull-right">
-						     	<a class="btn btn-link" href="/base/sucursales">Volver</a>
-						     </div>
-	               		</div>
-	 				</div>
-	 			</div>
-		 	</div>
+	<div class="main-panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
+						<!--
+						<form th:action="@{/base/sucursales/create}" th:method="post">
+							<div class="form-group">
+								<label class="control-label">Direcci&oacute;n</label> 
+								<input class="form-control" type="text" name="direccion" />
+							</div>
+
+							<button class="btn btn-default" type="submit">Guardar</button>
+						</form>
+						<div class="pull-right">
+							<a class="btn btn-link" href="/base/sucursales">Volver</a>
+						</div>
+						-->
+						<!-- *** -->
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/base/sucursales/create}" th:method="post">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Direcci&oacute;n</label>
+														<input type="text" class="form-control" name="direccion" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Negocio</label>
+														<input class="form-control" list="negocios" id="infonegociosinput" name="infonegocio.nombre" />
+												      	<datalist id="negocios">
+												       		<option th:each="row : ${lista_infonegocios}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Ciudad</label>
+														<input class="form-control" list="ciudades" id="ciudadesinput" name="ciudad.nombre">  </input>
+												      	<datalist id="ciudades">
+												       		<option th:each="row : ${lista_ciudades}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Barrio</label>
+														<input class="form-control" list="barrios" id="barriosinput" name="barrio.nombre" />
+												      	<datalist id="barrios">
+												       		<option th:each="row : ${lista_barrios}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Sucursales necesario para la tabla de Sucursales.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/base/sucursales">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- *** -->
+					</div>
+				</div>
+			</div>
 		</div>
-		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-	</body>
+	</div>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
+</body>
 </html>

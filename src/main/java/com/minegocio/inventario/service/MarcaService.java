@@ -1,6 +1,5 @@
 package com.minegocio.inventario.service;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,6 +38,17 @@ public class MarcaService extends AbstractService<Marca>{
 	protected JpaRepository<Marca, Long> getRepo() {
 		// TODO Auto-generated method stub
 		return repo;
+	}
+	
+	// custom method
+	public Marca findByNombre(String nombre) {
+		Marca marca;
+		try {
+			marca = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			marca= null;
+		}
+		return marca;
 	}
 	
 }

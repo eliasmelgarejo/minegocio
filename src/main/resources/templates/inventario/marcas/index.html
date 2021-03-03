@@ -16,9 +16,13 @@
 						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
 							<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
 							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
-							<a class="btn btn-primary" href="/inventario/marcas/new">Nuevo</a>
+							<!-- <a class="btn btn-primary" href="/inventario/marcas/new">Nuevo</a> -->
+							<a href="/inventario/marcas/new" class="btn btn-primary btn-icon-split" title="Nuevo Registro"> 
+								<span class="icon text-white-50"><i class="fas fa-plus"></i></span> <span class="text">Nuevo</span>
+							</a>
 						</div>
 						<div class="panel-body" style="width: 100%">
+							<!--
 							<div class="col-lg-10 mt-5 mb-5">
 								<table id="tablemarca" class="table table-bordered table-responsive" style="width: 100%">
 									<thead class="text-info">
@@ -50,6 +54,48 @@
 									</ul>
 								</div>
 							</div>
+							-->
+							<!-- *** -->
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="tablemarca" class="table">
+											<thead class=" text-primary">
+												<th>#ID</th>
+												<th>Nombre</th>
+												<th>Estado</th>
+												<th>Operaciones</th>
+											</thead>
+											<tbody>
+												<tr th:each="p : ${entityPage.content}" th:object="${p}">
+													<td th:text="${p.id}"></td>
+													<td th:text="${p.nombre}"></td>
+													<td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO'" /></td>
+													<td>
+														<a id="btnVer" class="btn btn-info btn-sm" th:href="@{/inventario/marcas/{id}(id=${p.id})}"> 
+															<i class="material-icons">info_outline</i> Ver
+														</a> 
+														<a id="btnEditar" class="btn btn-success btn-sm" th:href="@{/inventario/marcas/edit={id}(id=${p.id})}"> 
+															<i class="material-icons">edit</i> Actualizar
+														</a> 
+														<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/inventario/marcas/delete/{id}(id=${p.id})}"> 
+															<i class="material-icons">close</i>Eliminar
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="container">
+										<ul class="pagination">
+											<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+												<a th:href="@{/inventario/marcas (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- *** -->
 						</div>
 					</div>
 				</div>
@@ -60,8 +106,10 @@
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
 
-<!-- <script> -->
-// $(document).ready(function() { // $('#tablepais').DataTable(); // }
-);
-<!-- </script> -->
+<script>
+	$(document).ready(function() { 
+		//$('#tablemarca').DataTable(); 
+		console.log('Listado de marcas');
+	});
+</script>
 </html>

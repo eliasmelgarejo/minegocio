@@ -42,4 +42,14 @@ public class DepositoService extends AbstractService<Deposito>{
 		return repo;
 	}
 
+	// custom method
+	public Deposito findByNombre(String nombre) {
+		Deposito deposito;
+		try {
+			deposito = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			deposito= null;
+		}
+		return deposito;
+	}
 }
