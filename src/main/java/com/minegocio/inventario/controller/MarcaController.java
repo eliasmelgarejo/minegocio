@@ -31,7 +31,6 @@ public class MarcaController implements IController<Marca>{
 	@Autowired
 	private MarcaService service;
 	
-	//HASTA AQUI LLEGUE, HICE HASTA LA VISTA SHOW.
 	
 	//Listado de marcas
 	@GetMapping
@@ -43,12 +42,9 @@ public class MarcaController implements IController<Marca>{
 		int currentPage = page;
         int pageSize = size;
         
-        //Page<Marca> marcaPage = service.findPaginated(currentPage-1, size);
-        //model.addAttribute("marcaPage",marcaPage);
         Page<Marca> entityPage = service.findPaginated(currentPage-1, size);
         model.addAttribute("entityPage", entityPage);
         
-        //int totalPages = marcaPage.getTotalPages();
         int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -65,12 +61,12 @@ public class MarcaController implements IController<Marca>{
 	}
 	
 	
-	//Crear Nuevo marca
+	//Crear Nueva marca
 	@GetMapping("new") 
 	public String create(Model model) {
 		model.addAttribute("modulo"," "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Crear Nuevo Marca"); 
+		model.addAttribute("titulo_cuerpo","Crear Nueva Marca"); 
 		return "inventario/marcas/new"; 
 	 }
 	 
@@ -108,18 +104,19 @@ public class MarcaController implements IController<Marca>{
 		return "inventario/marcas/edit"; 
 	}
 	 
-	@PutMapping("{id}")  
-	public String update(@PathVariable Long id, @ModelAttribute Marca marca) { 
+	@PutMapping("{id}")
+	public String update(@PathVariable Long id, @ModelAttribute Marca marca) {
 		marca.setId(id);
-		service.update(marca); 
-		return "redirect:/inventario/marcas"; 
+		service.update(marca);
+		return "redirect:/inventario/marcas";
 	}
 	
+	
 	//Eliminar marca
-	@DeleteMapping("{id}") 
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id); 
-		return "redirect:/inventario/marcas"; 
+	    service.deleteById(id);
+	    return "redirect:/inventario/marcas";
 	}
 	
 }

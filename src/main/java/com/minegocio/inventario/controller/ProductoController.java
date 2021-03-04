@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.config.ConfigModulosMenus;
+import com.minegocio.core.IController;
 import com.minegocio.inventario.domain.Producto;
 import com.minegocio.inventario.service.ProductoService;
 
 @Controller
 @RequestMapping("/inventario/productos")
-public class ProductoController {
+public class ProductoController implements IController<Producto> {
+	
+	//HASTA AQUI LLEGUE, EN EL INDEX EN LA TABLA PREPARE LOS ENCABEZADOS, FALTAN LOS DATOS.
 	
 	@Autowired
 	private ProductoService service;
@@ -38,10 +41,13 @@ public class ProductoController {
 		int currentPage = page;
         int pageSize = size;
         
-        Page<Producto> productoPage = service.findPaginated(currentPage-1, size);
-        model.addAttribute("productoPage",productoPage);
+        //Page<Producto> productoPage = service.findPaginated(currentPage-1, size);
+        //model.addAttribute("productoPage",productoPage);
+        Page<Producto> entityPage = service.findPaginated(currentPage-1, size);
+        model.addAttribute("entityPage", entityPage);
         
-        int totalPages = productoPage.getTotalPages();
+        //int totalPages = productoPage.getTotalPages();
+        int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
@@ -51,7 +57,7 @@ public class ProductoController {
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_listado","Listado de Productos");
+		model.addAttribute("titulo_listado","Lista Productos");
 		
 		return "inventario/productos/index";
 	}

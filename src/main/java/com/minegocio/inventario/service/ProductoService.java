@@ -42,4 +42,16 @@ public class ProductoService extends AbstractService<Producto> {
 		return repo;
 	}
 	
+	// custom method
+	public Producto findByCodigo(String codigo) {
+		Producto producto;
+		try {
+			producto = repo.findByCodigo(codigo);
+		} catch (Exception e) {
+			producto = null;
+		}
+		
+		return producto;
+	}
+	
 }

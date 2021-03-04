@@ -7,5 +7,5 @@ import com.minegocio.inventario.domain.Producto;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
-	Producto findByDescripcioncorta(String descripcioncorta);
+	Producto findByCodigo(String codigo);
 }
