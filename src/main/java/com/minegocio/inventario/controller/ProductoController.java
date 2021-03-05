@@ -19,17 +19,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
+import com.minegocio.inventario.domain.Categoria;
+import com.minegocio.inventario.domain.Marca;
 import com.minegocio.inventario.domain.Producto;
+import com.minegocio.inventario.service.CategoriaService;
+import com.minegocio.inventario.service.MarcaService;
 import com.minegocio.inventario.service.ProductoService;
 
 @Controller
 @RequestMapping("/inventario/productos")
 public class ProductoController implements IController<Producto> {
 	
-	//HASTA AQUI LLEGUE, EN EL INDEX EN LA TABLA PREPARE LOS ENCABEZADOS, FALTAN LOS DATOS.
+	//HASTA AQUI LLEGUE, HICE TODO EL PROCESO DE NUEVO REGISTRO PERO NO INSERTA, NO MUESTRA
+	//LA LISTA, NO MUESTRA SHOW, ESTOY TODAVIA HACIENDO EDIT FALTA PROCESAR SUS DATOS
+	
 	
 	@Autowired
 	private ProductoService service;
+	
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	@Autowired
+	private MarcaService marcaService;
 	
 	//Listado de Productos
 	@GetMapping
@@ -64,12 +76,14 @@ public class ProductoController implements IController<Producto> {
 	
 	
 	
-	//nuevo producto
+	//Crear Nuevo producto
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo Producto");
+		model.addAttribute("lista_categorias", categoriaService.findAll());
+		model.addAttribute("lista_marcas", marcaService.findAll());
 		return "inventario/productos/new";
 	}
 	
@@ -80,6 +94,16 @@ public class ProductoController implements IController<Producto> {
 		producto.setCodigobarras(producto.getCodigobarras());
 		producto.setDescripcioncorta(producto.getDescripcioncorta());
 		producto.setDescripcionlarga(producto.getDescripcionlarga());
+		producto.setInvetariable(producto.getInvetariable());
+		producto.setPerecedero(producto.getPerecedero());
+		producto.setServicio(producto.getServicio());
+		producto.setTienelote(producto.getTienelote());
+		
+		Categoria c = categoriaService.findByNombre(producto.getCategoria().getNombre());
+		producto.setCategoria(c);
+		
+		Marca m = marcaService.findByNombre(producto.getMarca().getNombre());
+		producto.setMarca(m);
 		
 		service.create(producto);
 		return "redirect:/inventario/productos";
@@ -87,12 +111,12 @@ public class ProductoController implements IController<Producto> {
 	
 	
 	
-	//ver datos de producto
+	//Ver producto
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Datos de Producto");
+		model.addAttribute("titulo_cuerpo","Datos Producto");
 		
 		Producto producto = service.findById(id);
 		model.addAttribute("producto", producto);
@@ -102,14 +126,17 @@ public class ProductoController implements IController<Producto> {
 	
 	
 	
-	//editar producto
+	//Editar producto
 	@GetMapping("edit={id}")
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Producto");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		Producto producto = service.findById(id);
 		model.addAttribute("producto", producto);
+		
+		model.addAttribute("lista_categorias", categoriaService.findAll());
+		model.addAttribute("lista_marcas", marcaService.findAll());
 		
 		return "inventario/productos/edit";
 	}

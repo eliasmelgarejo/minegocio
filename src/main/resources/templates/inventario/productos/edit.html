@@ -17,6 +17,7 @@
 						</div>
 					</div>
 					<div class="container">
+						<!--
 						<form th:action="@{/inventario/productos/{id}(id=*{id})}" th:method="put" th:object="${producto}">
 							<div class="form-group col-md-6">
 								<label class="control-label">#Id</label> 
@@ -47,6 +48,141 @@
 						<div class="pull-right">
 							<a class="btn btn-succes" href="/inventario/productos">Volver</a>
 						</div>
+						-->
+						<!-- *** -->
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/inventario/productos/{id}(id=*{id})}" th:method="put" th:object="${producto}">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">#Id</label>
+														<input class="form-control" readonly type="number" th:field="*{id}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Codigo</label>
+														<input class="form-control" type="text" th:field="*{codigo}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Codigo Barras</label>
+														<input class="form-control" type="text" th:field="*{codigobarras}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Descripcion Corta</label>
+														<input class="form-control" type="text" th:field="*{descripcioncorta}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Descripcion Larga</label>
+														<input class="form-control" type="text" th:field="*{descripcionlarga}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Inventariable</label> 
+														<input class="form-control" type="checkbox" th:field="*{invetariable}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Perecedero</label> 
+														<input class="form-control" type="checkbox" th:field="*{perecedero}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Servicio</label> 
+														<input class="form-control" type="checkbox" th:field="*{servicio}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Tiene Lote</label> 
+														<input class="form-control" type="checkbox" th:field="*{tienelote}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Categoria</label>
+														<input class="form-control" list="categorias" id="categoriasinput" name="categoria.nombre">  </input>
+												      	<datalist id="categorias">
+												       		<option th:each="row : ${lista_categorias}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Marca</label>
+														<input class="form-control" list="marcas" id="marcasinput" name="marca.nombre">  </input>
+												      	<datalist id="marcas">
+												       		<option th:each="row : ${lista_marcas}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Activo</label> 
+														<input class="form-control" type="checkbox" th:field="*{activo}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Productos necesario para la tabla de Producto.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/base/paises">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- *** -->
 					</div>
 				</div>
 			</div>

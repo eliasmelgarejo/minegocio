@@ -83,17 +83,25 @@
 											<tbody>
 												<tr th:each="p : ${entityPage.content}" th:object="${p}">
 													<td th:text="${p.id}"></td>
-													<td th:text="${p.nombre}"></td>
-													<td th:text="${p.gentilicio}"></td>
+													<td th:text="${p.codigo}"></td>
+													<td th:text="${p.codigobarras}"></td>
+													<td th:text="${p.descripcioncorta}"></td>
+													<td th:text="${p.descripcionlarga}"></td>
+													<td th:text="${p.invetariable}"></td>
+													<td th:text="${p.perecedero}"></td>
+													<td th:text="${p.servicio}"></td>
+													<td th:text="${p.tienelote}"></td>
+													<td th:text="${p.categoria.nombre}"></td>
+													<td th:text="${p.marca.nombre}"></td>
 													<td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO'" /></td>
 													<td>
-														<a id="btnVer" class="btn btn-info btn-sm" th:href="@{/base/paises/{id}(id=${p.id})}"> 
+														<a id="btnVer" class="btn btn-info btn-sm" th:href="@{/inventario/productos/{id}(id=${p.id})}"> 
 															<i class="material-icons">info_outline</i> Ver
 														</a> 
-														<a id="btnEditar" class="btn btn-success btn-sm" th:href="@{/base/paises/edit={id}(id=${p.id})}"> 
+														<a id="btnEditar" class="btn btn-success btn-sm" th:href="@{/inventario/productos/edit={id}(id=${p.id})}"> 
 															<i class="material-icons">edit</i> Actualizar
 														</a> 
-														<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/{id}(id=${p.id})}"> 
+														<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/inventario/productos/delete/{id}(id=${p.id})}"> 
 															<i class="material-icons">close</i>Eliminar
 														</a>
 													</td>
@@ -103,11 +111,8 @@
 									</div>
 									<div class="container">
 										<ul class="pagination">
-											<li th:if="${entityPage.totalPages > 0}" class="pagination"
-												th:each="pageNumber : ${pageNumbers}"><a
-												th:href="@{/base/paises (size=${entityPage.size}, page=${pageNumber})}"
-												th:text=${pageNumber}
-												th:class="${pageNumber==entityPage.number + 1} ? active"></a>
+											<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+												<a th:href="@{/base/paises (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
 											</li>
 										</ul>
 									</div>
@@ -124,8 +129,9 @@
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
 </body>
 
-<!-- <script> -->
-// $(document).ready(function() { // $('#tablepais').DataTable(); // }
-);
-<!-- </script> -->
+<script>
+	$(document).ready(function() { 
+		// $('#tableproducto').DataTable();
+	});
+</script>
 </html>

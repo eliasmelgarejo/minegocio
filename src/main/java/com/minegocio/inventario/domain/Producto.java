@@ -84,5 +84,31 @@ public class Producto extends BaseEntity{
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	public Boolean getPerecedero() {
+		return perecedero;
+	}
+	public void setPerecedero(Boolean perecedero) {
+		this.perecedero = perecedero;
+	}
+	public Boolean getInvetariable() {
+		return invetariable;
+	}
+	public void setInvetariable(Boolean invetariable) {
+		this.invetariable = invetariable;
+	}
+	public Boolean getServicio() {
+		return servicio;
+	}
+	public void setServicio(Boolean servicio) {
+		this.servicio = servicio;
+	}
+	public Boolean getTienelote() {
+		return tienelote;
+	}
+	public void setTienelote(Boolean tienelote) {
+		this.tienelote = tienelote;
+	}
+	
+	
 	
 }
