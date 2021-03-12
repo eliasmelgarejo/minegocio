@@ -75,9 +75,10 @@ public class InfoNegocioController implements IController<InfoNegocio> {
 		infoNegocio.setTelefono(infoNegocio.getTelefono());
 		infoNegocio.setEmail(infoNegocio.getEmail());
 		infoNegocio.setContacto(infoNegocio.getContacto());
-		//infoNegocio.setLogo(infoNegocio.getLogo());
+//		byte xxx=new Byte(1l);
+//		infoNegocio.setLogo(xxx);
 		service.create(infoNegocio);
-		return "redirect:/base/infonegocios";
+		return "redirect:/base/infonegocio";
 	}
 	
 	

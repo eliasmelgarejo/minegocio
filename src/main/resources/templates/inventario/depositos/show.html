@@ -19,20 +19,24 @@
 					<div class="container">
 						<form th:object="${deposito}">
 							<div class="form-group col-md-6">
-								<label class="control-label">Id</label> 
+								<label class="control-label">#Id</label> 
 								<input class="form-control" readonly type="text" th:value="${deposito.id}" />
 							</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Nombre</label> 
+								<label class="control-label">Deposito</label> 
 								<input class="form-control" readonly type="text" th:value="${deposito.nombre}" />
 							</div>
+							<div class="form-group col-md-6">
+					          <label class="control-label">Sucursal</label>
+					          <input class="form-control" readonly type="text" th:value="${deposito.sucursal.direccion}" />
+					        </div>
 							<div class="form-group col-md-6">
 								<label class="control-label">Activo</label> 
 								<input class="form-control" disabled type="checkbox" th:checked="${deposito.activo}" />
 							</div>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success" th:href="@{/inventario/depositos/edit={id}(id=${deposito.id})}">Editar</a>
+							<a class="btn btn-success" th:href="@{/inventario/depositos/edit={id}(id=${deposito.id})}">Actualizar</a>
 							<a class="btn btn-info " href="/inventario/depositos">Volver</a>
 						</div>
 					</div>

@@ -86,8 +86,10 @@ public class DepartamentoController implements IController<Departamento>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Datos Departamento");
+		
 		Departamento departamento = service.findById(id);
 		model.addAttribute("departamento", departamento);
+		
 		return "base/departamentos/show";
 	}
 	
@@ -98,8 +100,10 @@ public class DepartamentoController implements IController<Departamento>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		Departamento departamento = service.findById(id);
 		model.addAttribute("lista_paises", paisService.findAll());
+		
 		model.addAttribute("departamento", departamento);
 		
 		return "base/departamentos/edit";

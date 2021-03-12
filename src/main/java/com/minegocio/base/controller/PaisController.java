@@ -1,6 +1,5 @@
 package com.minegocio.base.controller;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -41,6 +40,7 @@ public class PaisController implements IController<Pais>{
         int pageSize = size;
         
         Page<Pais> entityPage = service.findPaginated(currentPage-1, size);
+       
         model.addAttribute("entityPage", entityPage);
         
         int totalPages = entityPage.getTotalPages();
@@ -65,6 +65,7 @@ public class PaisController implements IController<Pais>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo País");
+		
 		return "base/paises/new";
 	}
 	
@@ -95,18 +96,19 @@ public class PaisController implements IController<Pais>{
 	public String edit(@PathVariable Long id, Model model) { //
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar País");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		Pais pais = service.findById(id);
 		model.addAttribute("pais", pais);
-		System.out.println("##### Entro en edit Pais...");
+		
 		return "base/paises/edit";
 	}
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
-		System.out.println("PaisController metodo PUT...");
 		pais.setId(id);
 		service.update(pais);
+		
 		return "redirect:/base/paises";
 	}
 
@@ -117,6 +119,6 @@ public class PaisController implements IController<Pais>{
 	    service.deleteById(id);
 	    return "redirect:/base/paises";
 	}
-		
-		
+	
+	
 }

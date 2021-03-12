@@ -46,7 +46,7 @@ public class MarcaService extends AbstractService<Marca>{
 		try {
 			marca = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			marca= null;
+			marca = null;
 		}
 		return marca;
 	}

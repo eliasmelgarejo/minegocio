@@ -52,7 +52,7 @@ public class MedioPagoController implements IController<MedioPago>{
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Lista Medios Pago");
+		model.addAttribute("titulo_listado","Lista Medios de Pago");
 
 		return "base/mediospago/index";
 	}
@@ -72,7 +72,7 @@ public class MedioPagoController implements IController<MedioPago>{
 	public String create(@ModelAttribute MedioPago medioPago) {
 		medioPago.setActivo(true);
 		medioPago.setNombre(medioPago.getNombre().toUpperCase());
-		//medioPago.setTipoMedioPago(medioPago.getTipoMedioPago());
+		medioPago.setTipoMedioPago(medioPago.getTipoMedioPago());
 		medioPago.setDepositable(medioPago.isDepositable());
 		service.create(medioPago);
 		
@@ -85,14 +85,13 @@ public class MedioPagoController implements IController<MedioPago>{
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Datos Medios Pago");
+		model.addAttribute("titulo_cuerpo","Datos Medios de Pago");
 
 		MedioPago medioPago = service.findById(id);
 		model.addAttribute("medioPago", medioPago);
 		
 		return "base/mediospago/show";
 	}
-	
 	
 	
 	//Editar medioPago

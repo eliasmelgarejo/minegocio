@@ -48,7 +48,7 @@ public class CategoriaService  extends AbstractService<Categoria>{
 		try {
 			categoria = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			categoria= null;
+			categoria = null;
 		}
 		return categoria;
 	}

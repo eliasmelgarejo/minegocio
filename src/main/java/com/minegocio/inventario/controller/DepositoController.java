@@ -69,6 +69,7 @@ public class DepositoController implements IController<Deposito> {
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo Deposito");
 		model.addAttribute("lista_sucursales", sucursalService.findAll());
+		
 		return "inventario/depositos/new";
 	}
 	
@@ -78,10 +79,11 @@ public class DepositoController implements IController<Deposito> {
 		deposito.setNombre(deposito.getNombre().toUpperCase());
 		Sucursal s = sucursalService.findByDireccion(deposito.getSucursal().getDireccion());
 		deposito.setSucursal(s);
+		
 		service.create(deposito);
+		
 		return "redirect:/inventario/depositos";
 	}
-	
 	
 	
 	//ver deposito
@@ -90,8 +92,10 @@ public class DepositoController implements IController<Deposito> {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Datos Deposito");
-		Deposito deposito= service.findById(id);
+		
+		Deposito deposito = service.findById(id);
 		model.addAttribute("deposito", deposito);
+		
 		return "inventario/depositos/show";
 	}
 	
@@ -101,14 +105,21 @@ public class DepositoController implements IController<Deposito> {
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Deposito");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		Deposito deposito = service.findById(id);
+		model.addAttribute("lista_sucursales", sucursalService.findAll());
 		model.addAttribute("deposito", deposito);
+		
 		return "inventario/depositos/edit";
 	}
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Deposito deposito) {
+		//ME FALTA PONER POR DEFAULT LA SUCURSAL QUE ESTA REGISTRADO CON EL DEPOSITO.
+		Sucursal s = sucursalService.findByDireccion(deposito.getSucursal().getDireccion());
+		deposito.setSucursal(s);
+				
 		deposito.setId(id);
 		service.update(deposito);
 		return "redirect:/inventario/depositos";
@@ -116,10 +127,10 @@ public class DepositoController implements IController<Deposito> {
 	
 	
 	//Eliminar deposito
-	@DeleteMapping("{id}")
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/inventario/depositos";
+	    service.deleteById(id);
+	    return "redirect:/inventario/depositos";
 	}
 	
 }

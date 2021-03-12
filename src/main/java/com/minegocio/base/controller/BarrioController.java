@@ -62,7 +62,6 @@ public class BarrioController implements IController<Barrio>{
 	}
 	
 	
-	
 	//Crear Nuevo barrio
 	@GetMapping("new")
 	public String create(Model model) {
@@ -85,19 +84,18 @@ public class BarrioController implements IController<Barrio>{
 	}
 	
 	
-	
 	//Ver barrio
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Datos Barrio");
+	
 		Barrio barrio = service.findById(id);
 		model.addAttribute("barrio", barrio);
 		
 		return "base/barrios/show";
 	}
-	
 	
 	
 	//Editar barrio
@@ -106,6 +104,7 @@ public class BarrioController implements IController<Barrio>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+	
 		Barrio barrio = service.findById(id);
 		model.addAttribute("lista_ciudades", ciudadService.findAll());
 		model.addAttribute("barrio", barrio);
@@ -125,7 +124,7 @@ public class BarrioController implements IController<Barrio>{
 	}
 	
 	
-	//Eliminar departamento
+	//Eliminar barrio
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
 	    service.deleteById(id);
@@ -133,4 +132,3 @@ public class BarrioController implements IController<Barrio>{
 	}
 	
 }
-

@@ -60,7 +60,7 @@ public class DepartamentoService extends AbstractService<Departamento>{
 		try {
 			departamento = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			departamento= null;
+			departamento = null;
 		}
 		return departamento;
 	}

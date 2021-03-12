@@ -49,7 +49,7 @@ public class MedioPagoService extends AbstractService<MedioPago>{
 		try {
 			medioPago = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			medioPago= null;
+			medioPago = null;
 		}
 		return medioPago;
 	}

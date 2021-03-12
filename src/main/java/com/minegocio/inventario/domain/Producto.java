@@ -109,6 +109,4 @@ public class Producto extends BaseEntity{
 		this.tienelote = tienelote;
 	}
 	
-	
-	
 }

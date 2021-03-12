@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.domain.Departamento;
-import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.CiudadService;
 import com.minegocio.base.service.DepartamentoService;
 import com.minegocio.config.ConfigModulosMenus;
@@ -63,7 +62,6 @@ public class CiudadController implements IController<Ciudad>{
 	}
 	
 	
-	
 	//Crear Nueva ciudad
 	@GetMapping("new")
 	public String create(Model model) {
@@ -104,11 +102,13 @@ public class CiudadController implements IController<Ciudad>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		Ciudad ciudad = service.findById(id);
 		model.addAttribute("lista_departamentos", departamentoService.findAll());
-		model.addAttribute("ciudad", ciudad);
-		return "base/ciudades/edit";
 		
+		model.addAttribute("ciudad", ciudad);
+		
+		return "base/ciudades/edit";
 	}
 	
 	@PutMapping("{id}")
@@ -122,6 +122,7 @@ public class CiudadController implements IController<Ciudad>{
 		
 		return "redirect:/base/ciudades";
 	}
+	
 	
 	//Eliminar ciudad
 	@GetMapping("/delete/{id}")

@@ -1,7 +1,5 @@
 package com.minegocio.base.service;
 
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -41,25 +39,17 @@ public class CiudadService extends AbstractService<Ciudad>{
 		return this.repo;
 	}
 	
-	//custom
-	/*public List<Ciudad> findByDepartamento(Departamento departamento){
-		List<Ciudad> list;
-		try {
-			list = repo.findByDepartamento(departamento);
-		} catch (Exception e) {
-			list = null;
-		}
-		return list;
-	}*/
 	
 	// custom method
 	public Ciudad findByNombre(String nombre) {
 		Ciudad ciudad;
+		
 		try {
 			ciudad = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			ciudad= null;
+			ciudad = null;
 		}
+		
 		return ciudad;
 	}
 	

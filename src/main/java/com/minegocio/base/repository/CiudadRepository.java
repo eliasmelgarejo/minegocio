@@ -7,12 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.domain.Departamento;
-import com.minegocio.base.domain.Pais;
 
 @Repository
 public interface CiudadRepository extends JpaRepository<Ciudad, Long> {
 	List<Ciudad> findByDepartamento(Departamento departamento);
 	
 	Ciudad findByNombre(String nombre);
-	
 }

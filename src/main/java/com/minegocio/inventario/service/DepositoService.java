@@ -48,7 +48,7 @@ public class DepositoService extends AbstractService<Deposito>{
 		try {
 			deposito = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			deposito= null;
+			deposito = null;
 		}
 		return deposito;
 	}

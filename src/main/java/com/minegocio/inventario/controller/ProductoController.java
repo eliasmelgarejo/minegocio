@@ -30,9 +30,11 @@ import com.minegocio.inventario.service.ProductoService;
 @RequestMapping("/inventario/productos")
 public class ProductoController implements IController<Producto> {
 	
-	//HASTA AQUI LLEGUE, HICE TODO EL PROCESO DE NUEVO REGISTRO PERO NO INSERTA, NO MUESTRA
-	//LA LISTA, NO MUESTRA SHOW, ESTOY TODAVIA HACIENDO EDIT FALTA PROCESAR SUS DATOS
-	
+	/* MARK */
+	/*
+	HASTA AQUI LLEGUE, HICE TODO EL PROCESO DE NUEVO REGISTRO PERO NO INSERTA, NO MUESTRA
+	LA LISTA, NO MUESTRA SHOW, NO ACTUALIZA
+	*/
 	
 	@Autowired
 	private ProductoService service;
@@ -53,12 +55,9 @@ public class ProductoController implements IController<Producto> {
 		int currentPage = page;
         int pageSize = size;
         
-        //Page<Producto> productoPage = service.findPaginated(currentPage-1, size);
-        //model.addAttribute("productoPage",productoPage);
         Page<Producto> entityPage = service.findPaginated(currentPage-1, size);
         model.addAttribute("entityPage", entityPage);
         
-        //int totalPages = productoPage.getTotalPages();
         int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -132,6 +131,7 @@ public class ProductoController implements IController<Producto> {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		Producto producto = service.findById(id);
 		model.addAttribute("producto", producto);
 		
@@ -143,16 +143,23 @@ public class ProductoController implements IController<Producto> {
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Producto producto) {
+		Categoria c = categoriaService.findByNombre(producto.getCategoria().getNombre());
+		producto.setCategoria(c);
+		
+		Marca m = marcaService.findByNombre(producto.getMarca().getNombre());
+		producto.setMarca(m);
+		
 		producto.setId(id);
 		service.update(producto);
 		return "redirect:/inventario/productos";
 	}
 
-	//
-	@DeleteMapping("{id}")
+	
+	//Eliminar producto
+	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-		service.deleteById(id);
-		return "redirect:/inventario/productos";
+	    service.deleteById(id);
+	    return "redirect:/inventario/productos";
 	}
 	
 }

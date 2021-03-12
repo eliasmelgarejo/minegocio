@@ -29,6 +29,7 @@ public class MonedaController implements IController<Moneda>{
 	
 	@Autowired
 	private MonedaService service;
+	
 	@Autowired
 	private PaisService paisService;
 	
@@ -67,63 +68,73 @@ public class MonedaController implements IController<Moneda>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nueva Moneda");
+		
 		model.addAttribute("lista_paises", paisService.findAll());
+		
 		return "base/monedas/new";
 	}
 		
-		@PostMapping("create")
-		public String create(@ModelAttribute Moneda moneda) {
-			moneda.setActivo(true);
-			moneda.setSimbolo(moneda.getSimbolo().toUpperCase());
-			moneda.setBase(true);
-			Pais p = paisService.findByNombre(moneda.getPais().getNombre());
-			moneda.setPais(p);
-			service.create(moneda);
-			return "redirect:/base/monedas";
-		}
+	@PostMapping("create")
+	public String create(@ModelAttribute Moneda moneda) {
+		moneda.setActivo(true);
+		moneda.setSimbolo(moneda.getSimbolo().toUpperCase());
+		moneda.setBase(true);
+		
+		Pais p = paisService.findByNombre(moneda.getPais().getNombre());
+		moneda.setPais(p);
+		
+		service.create(moneda);
+		return "redirect:/base/monedas";
+	}
 
 		
-		//Ver moneda
-		@GetMapping("{id}")
-		public String show(@PathVariable Long id, Model model) {
-			model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
-			model.addAttribute("menus", ConfigModulosMenus.base().menus);
-			model.addAttribute("titulo_cuerpo","Datos Moneda");
-			Moneda moneda = service.findById(id);
-			model.addAttribute("moneda", moneda);
-			return "base/monedas/show";
-		}
-		
-		
-		//Editar moneda
-		@GetMapping("edit={id}")
-		public String edit(@PathVariable Long id, Model model) {
-			model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
-			model.addAttribute("menus", ConfigModulosMenus.base().menus);
-			model.addAttribute("titulo_cuerpo","Actualizar Moneda");
-			Moneda moneda = service.findById(id);
-			model.addAttribute("lista_paises", paisService.findAll());
-			model.addAttribute("moneda", moneda);
-			return "base/monedas/edit";
-		}
+	//Ver moneda
+	@GetMapping("{id}")
+	public String show(@PathVariable Long id, Model model) {
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_cuerpo","Datos Moneda");
 
-		@PutMapping("{id}")
-		public String update(@PathVariable Long id, @ModelAttribute Moneda moneda) {
-			//ME FALTA PONER POR DEFAULT EL PAIS QUE ESTA REGISTRADO CON LA MONEDA
-			Pais p = paisService.findByNombre(moneda.getPais().getNombre());
-			moneda.setPais(p);
-			
-			moneda.setId(id);
-			service.update(moneda);
-			return "redirect:/base/monedas";
-		}
+		Moneda moneda = service.findById(id);
+		model.addAttribute("moneda", moneda);
+		
+		return "base/monedas/show";
+	}
+		
+		
+	//Editar moneda
+	@GetMapping("edit={id}")
+	public String edit(@PathVariable Long id, Model model) {
+		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
+		model.addAttribute("menus", ConfigModulosMenus.base().menus);
+		model.addAttribute("titulo_cuerpo","Actualizar Moneda");
+		
+		Moneda moneda = service.findById(id);
+		model.addAttribute("lista_paises", paisService.findAll());
+		
+		model.addAttribute("moneda", moneda);
+		
+		return "base/monedas/edit";
+	}
+
+	@PutMapping("{id}")
+	public String update(@PathVariable Long id, @ModelAttribute Moneda moneda) {
+		//ME FALTA PONER POR DEFAULT EL PAIS QUE ESTA REGISTRADO CON LA MONEDA
+		Pais p = paisService.findByNombre(moneda.getPais().getNombre());
+		moneda.setPais(p);
+		
+		moneda.setId(id);
+		service.update(moneda);
+		
+		return "redirect:/base/monedas";
+	}
 
 		
-		//Eliminar moneda
-		@GetMapping("/delete/{id}")
-		public String destroy(@PathVariable Long id) {
-		    service.deleteById(id);
-		    return "redirect:/base/monedas";
-		}
+	//Eliminar moneda
+	@GetMapping("/delete/{id}")
+	public String destroy(@PathVariable Long id) {
+	    service.deleteById(id);
+	    return "redirect:/base/monedas";
+	}
 	
 }

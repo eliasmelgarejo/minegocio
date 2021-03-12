@@ -54,11 +54,8 @@
 									</div>
 									<div class="container">
 										<ul class="pagination">
-											<li th:if="${entityPage.totalPages > 0}" class="pagination"
-												th:each="pageNumber : ${pageNumbers}"><a
-												th:href="@{/inventario/depositos (size=${entityPage.size}, page=${pageNumber})}"
-												th:text=${pageNumber}
-												th:class="${pageNumber==entityPage.number + 1} ? active"></a>
+											<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+												<a th:href="@{/inventario/depositos (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
 											</li>
 										</ul>
 									</div>
@@ -68,7 +65,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- </div> -->
 		</div>
 	</div>
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->

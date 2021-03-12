@@ -95,7 +95,7 @@ public class CategoriaController implements IController<Categoria>{
 	public String edit(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Categoria");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		Categoria categoria = service.findById(id);
 		model.addAttribute("categoria", categoria);
 		return "inventario/categorias/edit";

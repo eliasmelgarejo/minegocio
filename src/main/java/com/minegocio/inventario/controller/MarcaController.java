@@ -1,6 +1,5 @@
 package com.minegocio.inventario.controller;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,7 +29,6 @@ public class MarcaController implements IController<Marca>{
 
 	@Autowired
 	private MarcaService service;
-	
 	
 	//Listado de marcas
 	@GetMapping
@@ -67,6 +65,7 @@ public class MarcaController implements IController<Marca>{
 		model.addAttribute("modulo"," "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nueva Marca"); 
+		
 		return "inventario/marcas/new"; 
 	 }
 	 
@@ -97,8 +96,9 @@ public class MarcaController implements IController<Marca>{
 	public String edit(@PathVariable Long id, Model model) {  
 		model.addAttribute("modulo"," "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Marca"); 
-		Marca marca= service.findById(id); 
+		model.addAttribute("titulo_cuerpo","Actualizar Datos"); 
+		
+		Marca marca = service.findById(id); 
 		model.addAttribute("marca", marca);
 		  
 		return "inventario/marcas/edit"; 

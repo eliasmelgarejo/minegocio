@@ -1,6 +1,5 @@
 package com.minegocio.base.service;
 
-
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.minegocio.base.domain.Departamento;
 import com.minegocio.base.domain.Pais;
 import com.minegocio.base.repository.PaisRepository;
 import com.minegocio.base.service.dto.PaisDto;
@@ -47,22 +45,18 @@ public class PaisService extends AbstractService<Pais>{
 	// custom method
 	public Pais findByNombre(String nombre) {
 		Pais pais;
+		
 		try {
 			pais = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			pais= null;
+			pais = null;
 		}
+		
 		return pais;
 	}
-//	public List<Pais> findByNombre(String nombre){
-//		List<Pais> list;
-//		try {
-//			list = repo.findByNombre(nombre);
-//		} catch (Exception e) {
-//			list = null;
-//		}
-//		
-//		return list;
-//	}
+	
+	public List<Pais> findAllOrderByNombre(){
+		return repo.findAllByOrderByNombreAsc();
+	}
 
 }

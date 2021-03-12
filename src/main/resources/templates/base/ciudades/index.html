@@ -8,14 +8,12 @@
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-		<!-- <div class="container"> -->
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel">
 						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
 							<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-							<!-- <p class="card-category"> Here is a subtitle for this table</p> -->
 							<a href="/base/ciudades/new" class="btn btn-primary btn-icon-split" title="Nuevo Registro"> 
 								<span class="icon text-white-50"><i class="fas fa-plus"></i></span> <span class="text">Nuevo</span>
 							</a>
@@ -69,7 +67,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- </div> -->
 		</div>
 	</div>
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
