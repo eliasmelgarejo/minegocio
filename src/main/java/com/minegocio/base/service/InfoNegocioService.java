@@ -23,15 +23,15 @@ public class InfoNegocioService extends AbstractService<InfoNegocio>{
     private ModelMapper modelMapper;
 	
 	@Override
-	public InfoNegocioDto convertToDto(InfoNegocio infonegocio) {
-		InfoNegocioDto dto = modelMapper.map(infonegocio, InfoNegocioDto.class);
+	public InfoNegocioDto convertToDto(InfoNegocio infoNegocio) {
+		InfoNegocioDto dto = modelMapper.map(infoNegocio, InfoNegocioDto.class);
 		return dto;
 	}
 
 	@Override
 	public InfoNegocio convertToEntity(BaseDto dto) {
-		InfoNegocio infonegocio = modelMapper.map((InfoNegocioDto)dto, InfoNegocio.class);
-		return infonegocio;
+		InfoNegocio infoNegocio = modelMapper.map((InfoNegocioDto)dto, InfoNegocio.class);
+		return infoNegocio;
 	}
 
 	@Override
@@ -42,13 +42,15 @@ public class InfoNegocioService extends AbstractService<InfoNegocio>{
 	
 	// custom method
 	public InfoNegocio findByNombre(String nombre) {
-		InfoNegocio infonegocio;
+		InfoNegocio infoNegocio;
+		
 		try {
-			infonegocio = repo.findByNombre(nombre);
+			infoNegocio = repo.findByNombre(nombre);
 		} catch (Exception e) {
-			infonegocio= null;
+			infoNegocio = null;
 		}
-		return infonegocio;
+		
+		return infoNegocio;
 	}
 
 }

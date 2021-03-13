@@ -1,4 +1,4 @@
-package com.minegocio.base.controller;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,20 +17,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.minegocio.base.domain.Sucursal;
-import com.minegocio.base.service.SucursalService;
+import com.minegocio.base.domain.Pais;
+import com.minegocio.base.service.PaisService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
 
 @Controller
-@RequestMapping("/base/sucursales")
-public class SucursalController implements IController<Sucursal>{
-	//HASTA AQUI LLEGUE, MODIFIQUE EL CONTROLLER, EL SERVICE, EL REPO, ME FALTAN LAS VISTAS DE SUCURSAL
+@RequestMapping("/base/paises")
+public class PaisController implements IController<Pais>{
 
 	@Autowired
-	private SucursalService service;
+	private PaisService service;
 	
-	//Listado de sucursales
+	//Listado de paises
 	@GetMapping
 	public String index(
 			Model model,
@@ -40,8 +39,9 @@ public class SucursalController implements IController<Sucursal>{
 		int currentPage = page;
         int pageSize = size;
         
-        Page<Sucursal> entityPage = service.findPaginated(currentPage-1, size);
-       model.addAttribute("entityPage", entityPage);
+        Page<Pais> entityPage = service.findPaginated(currentPage-1, size);
+       
+        model.addAttribute("entityPage", entityPage);
         
         int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
@@ -53,75 +53,71 @@ public class SucursalController implements IController<Sucursal>{
         
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Lista Sucursales");
+		model.addAttribute("titulo_listado","Lista Paises");
 		
-		return "base/sucursales/index";
+		return "base/paises/index";
 	}
 	
 	
-	//Crear Nueva sucursal
+	//Crear Nuevo pais
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Crear Nueva Sucursal");
+		model.addAttribute("titulo_cuerpo","Crear Nuevo País");
 		
-		return "base/sucursales/new";
+		return "base/paises/new";
 	}
 	
 	@PostMapping("create")
-	public String create(@ModelAttribute Sucursal sucursal) {
-		sucursal.setActivo(true);
-		sucursal.setNombre(sucursal.getNombre().toUpperCase());
-		sucursal.setGentilicio(sucursal.getGentilicio().toUpperCase());
-		
-		service.create(sucursal);
-		
-		return "redirect:/base/sucursales";
+	public String create(@ModelAttribute Pais pais) {
+		pais.setActivo(true);
+		pais.setNombre(pais.getNombre().toUpperCase());
+		pais.setGentilicio(pais.getGentilicio().toUpperCase());
+		service.create(pais);
+		return "redirect:/base/paises";
 	}
 
 	
-	//Ver sucursal
+	//Ver pais
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Datos Sucursal");
-		
-		Sucursal sucursal = service.findById(id);
-		model.addAttribute("sucursal", sucursal);
-		
-		return "base/sucursales/show";
+		model.addAttribute("titulo_cuerpo","Datos País");
+		Pais pais = service.findById(id);
+		model.addAttribute("pais", pais);
+		return "base/paises/show";
 	}
 	
 	
-	//Editar sucursal
+	//Editar pais
 	@GetMapping("edit={id}")
-	public String edit(@PathVariable Long id, Model model) {
+	public String edit(@PathVariable Long id, Model model) { //
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		
-		Sucursal sucursal = service.findById(id);
-		model.addAttribute("sucursal", sucursal);
+		Pais pais = service.findById(id);
+		model.addAttribute("pais", pais);
 		
-		return "base/sucursales/edit";
+		return "base/paises/edit";
 	}
 
 	@PutMapping("{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Sucursal sucursal) {
-		sucursal.setId(id);
-		service.update(sucursal);
+	public String update(@PathVariable Long id, @ModelAttribute Pais pais) {
+		pais.setId(id);
+		service.update(pais);
 		
-		return "redirect:/base/sucursales";
+		return "redirect:/base/paises";
 	}
 
 	
-	//Eliminar sucursal
+	//Eliminar pais
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
 	    service.deleteById(id);
-	    return "redirect:/base/sucursales";
+	    return "redirect:/base/paises";
 	}
 	
 	

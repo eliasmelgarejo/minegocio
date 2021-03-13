@@ -14,24 +14,22 @@ import com.minegocio.core.BaseDto;
 
 @Service
 @Transactional
-public class SucursalService extends AbstractService<Sucursal> {
+public class SucursalService extends AbstractService<Sucursal>{
 	
 	@Autowired
 	private SucursalRepository repo;
 	
 	@Autowired
     private ModelMapper modelMapper;
-
+	
 	@Override
 	public SucursalDto convertToDto(Sucursal sucursal) {
-		// TODO Auto-generated method stub
 		SucursalDto dto = modelMapper.map(sucursal, SucursalDto.class);
 		return dto;
 	}
 
 	@Override
 	public Sucursal convertToEntity(BaseDto dto) {
-		// TODO Auto-generated method stub
 		Sucursal sucursal = modelMapper.map((SucursalDto)dto, Sucursal.class);
 		return sucursal;
 	}
@@ -42,16 +40,18 @@ public class SucursalService extends AbstractService<Sucursal> {
 		return repo;
 	}
 	
-	
 	// custom method
+	// Como no tengo el campo Nombre en la tabla Sucursal, uso el campo direccion para este metodo.
 	public Sucursal findByDireccion(String direccion) {
 		Sucursal sucursal;
+		
 		try {
 			sucursal = repo.findByDireccion(direccion);
 		} catch (Exception e) {
-			sucursal= null;
+			sucursal = null;
 		}
+		
 		return sucursal;
 	}
-	
+
 }

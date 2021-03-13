@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,12 +24,13 @@ import com.minegocio.core.IController;
 
 @Controller
 @RequestMapping("/base/infonegocios")
-public class InfoNegocioController implements IController<InfoNegocio> {
+public class InfoNegocioController implements IController<InfoNegocio>{
 
 	@Autowired
 	private InfoNegocioService service;
 	
-	//Listado de infonegocio
+
+	//Listado de infonegocios
 	@GetMapping
 	public String index(
 			Model model,
@@ -55,19 +55,20 @@ public class InfoNegocioController implements IController<InfoNegocio> {
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_listado","Lista Negocios");
 		
-		return "base/infonegocio/index";
+		return "base/infonegocios/index";
 	}
 	
 	
-	//Crear Nuevo infoNegocio
+	//Crear Nuevo InfoNegocio
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Crear Nuevo InfoNegocio");
-		return "base/infonegocio/new";
-	}
+		model.addAttribute("titulo_cuerpo","Crear Nuevo Negocio");
 		
+		return "base/infonegocios/new";
+	}
+	
 	@PostMapping("create")
 	public String create(@ModelAttribute InfoNegocio infoNegocio) {
 		infoNegocio.setActivo(true);
@@ -75,49 +76,54 @@ public class InfoNegocioController implements IController<InfoNegocio> {
 		infoNegocio.setTelefono(infoNegocio.getTelefono());
 		infoNegocio.setEmail(infoNegocio.getEmail());
 		infoNegocio.setContacto(infoNegocio.getContacto());
-//		byte xxx=new Byte(1l);
-//		infoNegocio.setLogo(xxx);
+		
 		service.create(infoNegocio);
-		return "redirect:/base/infonegocio";
+		return "redirect:/base/infonegocios";
 	}
+
 	
-	
-	//Ver infoNegocio
+	//Ver InfoNegocio
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Datos Negocio");
+		
 		InfoNegocio infoNegocio = service.findById(id);
 		model.addAttribute("infoNegocio", infoNegocio);
-		return "base/infonegocio/show";
+		
+		return "base/infonegocios/show";
 	}
-		
-		
-	//Editar infoNegocio
+	
+	
+	//Editar InfoNegocio
 	@GetMapping("edit={id}")
-	public String edit(@PathVariable Long id, Model model) {
+	public String edit(@PathVariable Long id, Model model) { //
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_cuerpo","Actualizar Negocio");
+		model.addAttribute("titulo_cuerpo","Actualizar Datos");
+		
 		InfoNegocio infoNegocio = service.findById(id);
 		model.addAttribute("infoNegocio", infoNegocio);
-		return "base/infonegocio/edit";
+		
+		return "base/infonegocios/edit";
 	}
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute InfoNegocio infoNegocio) {
 		infoNegocio.setId(id);
 		service.update(infoNegocio);
+		
 		return "redirect:/base/infonegocios";
 	}
 
-		
-	//Eliminar infoNegocio
+	
+	//Eliminar InfoNegocio
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
 	    service.deleteById(id);
 	    return "redirect:/base/infonegocios";
 	}
+	
 	
 }

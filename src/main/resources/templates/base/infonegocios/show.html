@@ -28,7 +28,7 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label class="control-label">Telefono</label> 
-								<input class="form-control" readonly type="text" th:value="${infoNegocio.gentilicio}" />
+								<input class="form-control" readonly type="text" th:value="${infoNegocio.telefono}" />
 							</div>
 							<div class="form-group col-md-6">
 								<label class="control-label">Email</label> 
@@ -45,7 +45,7 @@
 						</form>
 						<div class="pull-right">
 							<a class="btn btn-success" th:href="@{/base/infonegocios/edit={id}(id=${infoNegocio.id})}">Actualizar</a> 
-							<a class="btn btn-info" href="/base/infonegocio">Volver</a>
+							<a class="btn btn-info" href="/base/infonegocios">Volver</a>
 						</div>
 					</div>
 				</div>
