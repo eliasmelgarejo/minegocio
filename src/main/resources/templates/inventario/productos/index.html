@@ -25,15 +25,15 @@
 										<table id="tableproducto" class="table">
 											<thead class=" text-primary">
 												<th>#ID</th>
-												<th>Codigo</th>
-												<th>Codigo Barras</th>
-												<th>Desc. Corta</th>
-												<th>Desc. Larga</th>
+												<th>C&oacute;digo</th>
+												<th>C&oacute;digo Barras</th>
+												<th>Descripci&oacute;n Corta</th>
+												<th>Descripci&oacute;n Larga</th>
 												<th>Inventariable</th>
 												<th>Perecedero</th>
 												<th>Servicio</th>
 												<th>Tiene Lote</th>
-												<th>Categoria</th>
+												<th>Categor&iacute;a</th>
 												<th>Marca</th>
 												<th>Estado</th>
 												<th>Operaciones</th>
@@ -45,10 +45,10 @@
 													<td th:text="${p.codigobarras}"></td>
 													<td th:text="${p.descripcioncorta}"></td>
 													<td th:text="${p.descripcionlarga}"></td>
-													<td th:text="${p.invetariable}"></td>
-													<td th:text="${p.perecedero}"></td>
-													<td th:text="${p.servicio}"></td>
-													<td th:text="${p.tienelote}"></td>
+													<td th:text="${p.inventariable} ? 'SI' : 'NO'"></td>
+													<td th:text="${p.perecedero} ? 'SI' : 'NO'"></td>
+													<td th:text="${p.servicio} ? 'SI' : 'NO'"></td>
+													<td th:text="${p.tienelote} ? 'SI' : 'NO'"></td>
 													<td th:text="${p.categoria.nombre}"></td>
 													<td th:text="${p.marca.nombre}"></td>
 													<td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO'" /></td>
@@ -70,7 +70,7 @@
 									<div class="container">
 										<ul class="pagination">
 											<li th:if="${entityPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-												<a th:href="@{/base/paises (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
+												<a th:href="@{/base/productos (size=${entityPage.size}, page=${pageNumber})}" th:text=${pageNumber} th:class="${pageNumber==entityPage.number + 1} ? active"></a>
 											</li>
 										</ul>
 									</div>
@@ -80,7 +80,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- </div> -->
 		</div>
 	</div>
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->

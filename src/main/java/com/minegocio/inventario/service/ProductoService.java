@@ -43,6 +43,7 @@ public class ProductoService extends AbstractService<Producto> {
 	}
 	
 	// custom method
+	//Como no tengo el campo "nombre" uso el campo "codigo" como campo de busqueda
 	public Producto findByCodigo(String codigo) {
 		Producto producto;
 		try {

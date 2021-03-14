@@ -31,7 +31,7 @@ public class Producto extends BaseEntity{
 	@Column(columnDefinition = "boolean default false")
 	private Boolean perecedero;
 	@Column(columnDefinition = "boolean default false")
-	private Boolean invetariable;
+	private Boolean inventariable;
 	@Column(columnDefinition = "boolean default false")
 	private Boolean servicio;
 	@Column(columnDefinition = "boolean default false")
@@ -90,11 +90,11 @@ public class Producto extends BaseEntity{
 	public void setPerecedero(Boolean perecedero) {
 		this.perecedero = perecedero;
 	}
-	public Boolean getInvetariable() {
-		return invetariable;
+	public Boolean getInventariable() {
+		return inventariable;
 	}
-	public void setInvetariable(Boolean invetariable) {
-		this.invetariable = invetariable;
+	public void setInventariable(Boolean inventariable) {
+		this.inventariable = inventariable;
 	}
 	public Boolean getServicio() {
 		return servicio;

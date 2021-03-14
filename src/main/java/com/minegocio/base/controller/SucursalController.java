@@ -31,7 +31,6 @@ import com.minegocio.core.IController;
 @Controller
 @RequestMapping("/base/sucursales")
 public class SucursalController implements IController<Sucursal>{
-	//HASTA AQUI LLEGUE, NO FUNCIONA INSERTAR NI ACTUALIZAR
 
 	@Autowired
 	private SucursalService service;
@@ -56,7 +55,7 @@ public class SucursalController implements IController<Sucursal>{
         int pageSize = size;
         
         Page<Sucursal> entityPage = service.findPaginated(currentPage-1, size);
-       model.addAttribute("entityPage", entityPage);
+        model.addAttribute("entityPage", entityPage);
         
         int totalPages = entityPage.getTotalPages();
         if (totalPages > 0) {
@@ -162,6 +161,5 @@ public class SucursalController implements IController<Sucursal>{
 	    service.deleteById(id);
 	    return "redirect:/base/sucursales";
 	}
-	
 	
 }

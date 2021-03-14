@@ -74,15 +74,16 @@ public class ProductoController implements IController<Producto> {
 	}
 	
 	
-	
 	//Crear Nuevo producto
 	@GetMapping("new")
 	public String create(Model model) {
 		model.addAttribute("modulo", " "+ConfigModulosMenus.inventario().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.inventario().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo Producto");
+		
 		model.addAttribute("lista_categorias", categoriaService.findAll());
 		model.addAttribute("lista_marcas", marcaService.findAll());
+		
 		return "inventario/productos/new";
 	}
 	
@@ -93,7 +94,7 @@ public class ProductoController implements IController<Producto> {
 		producto.setCodigobarras(producto.getCodigobarras());
 		producto.setDescripcioncorta(producto.getDescripcioncorta());
 		producto.setDescripcionlarga(producto.getDescripcionlarga());
-		producto.setInvetariable(producto.getInvetariable());
+		producto.setInventariable(producto.getInventariable());
 		producto.setPerecedero(producto.getPerecedero());
 		producto.setServicio(producto.getServicio());
 		producto.setTienelote(producto.getTienelote());
