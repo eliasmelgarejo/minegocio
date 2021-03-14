@@ -17,7 +17,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.minegocio.base.domain.Barrio;
+import com.minegocio.base.domain.Ciudad;
+import com.minegocio.base.domain.InfoNegocio;
 import com.minegocio.base.domain.Sucursal;
+import com.minegocio.base.service.BarrioService;
+import com.minegocio.base.service.CiudadService;
+import com.minegocio.base.service.InfoNegocioService;
 import com.minegocio.base.service.SucursalService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
@@ -25,10 +31,19 @@ import com.minegocio.core.IController;
 @Controller
 @RequestMapping("/base/sucursales")
 public class SucursalController implements IController<Sucursal>{
-	//HASTA AQUI LLEGUE, MODIFIQUE EL CONTROLLER, EL SERVICE, EL REPO, ME FALTAN LAS VISTAS DE SUCURSAL
+	//HASTA AQUI LLEGUE, NO FUNCIONA INSERTAR NI ACTUALIZAR
 
 	@Autowired
 	private SucursalService service;
+	
+	@Autowired
+	private InfoNegocioService infoNegocioService;
+	
+	@Autowired
+	private CiudadService ciudadService;
+	
+	@Autowired
+	private BarrioService barrioService;
 	
 	//Listado de sucursales
 	@GetMapping
@@ -65,6 +80,9 @@ public class SucursalController implements IController<Sucursal>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nueva Sucursal");
+		model.addAttribute("lista_infoNegocios", infoNegocioService.findAll());
+		model.addAttribute("lista_ciudades", ciudadService.findAll());
+		model.addAttribute("lista_barrios", barrioService.findAll());
 		
 		return "base/sucursales/new";
 	}
@@ -72,8 +90,16 @@ public class SucursalController implements IController<Sucursal>{
 	@PostMapping("create")
 	public String create(@ModelAttribute Sucursal sucursal) {
 		sucursal.setActivo(true);
-		sucursal.setNombre(sucursal.getNombre().toUpperCase());
-		sucursal.setGentilicio(sucursal.getGentilicio().toUpperCase());
+		sucursal.setDireccion(sucursal.getDireccion().toUpperCase());
+		
+		InfoNegocio n = infoNegocioService.findByNombre(sucursal.getInfoNegocio().getNombre());
+		sucursal.setInfoNegocio(n);
+		
+		Ciudad c = ciudadService.findByNombre(sucursal.getCiudad().getNombre());
+		sucursal.setCiudad(c);
+		
+		Barrio b = barrioService.findByNombre(sucursal.getBarrio().getNombre());
+		sucursal.setBarrio(b);
 		
 		service.create(sucursal);
 		
@@ -103,6 +129,9 @@ public class SucursalController implements IController<Sucursal>{
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		
 		Sucursal sucursal = service.findById(id);
+		model.addAttribute("lista_infoNegocios", infoNegocioService.findAll());
+		model.addAttribute("lista_ciudades", ciudadService.findAll());
+		model.addAttribute("lista_barrios", barrioService.findAll());
 		model.addAttribute("sucursal", sucursal);
 		
 		return "base/sucursales/edit";
@@ -110,6 +139,16 @@ public class SucursalController implements IController<Sucursal>{
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Sucursal sucursal) {
+		//ME FALTA PONER POR DEFAULT LOS DATOS QUE TENIA
+		InfoNegocio n = infoNegocioService.findByNombre(sucursal.getInfoNegocio().getNombre());
+		sucursal.setInfoNegocio(n);
+		
+		Ciudad c = ciudadService.findByNombre(sucursal.getCiudad().getNombre());
+		sucursal.setCiudad(c);
+		
+		Barrio b = barrioService.findByNombre(sucursal.getBarrio().getNombre());
+		sucursal.setBarrio(b);
+			
 		sucursal.setId(id);
 		service.update(sucursal);
 		

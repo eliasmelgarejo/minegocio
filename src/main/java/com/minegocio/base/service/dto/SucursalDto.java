@@ -15,7 +15,7 @@ public class SucursalDto extends BaseDto {
 	private Barrio barrio;
 	private Ciudad ciudad;
 	private String direccion;
-	private InfoNegocio negocio;
+	private InfoNegocio infoNegocio;
 	
 	public Barrio getBarrio() {
 		return barrio;
@@ -35,11 +35,12 @@ public class SucursalDto extends BaseDto {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public InfoNegocio getNegocio() {
-		return negocio;
+	public InfoNegocio getInfoNegocio() {
+		return infoNegocio;
 	}
-	public void setNegocio(InfoNegocio negocio) {
-		this.negocio = negocio;
+	public void setInfoNegocio(InfoNegocio infoNegocio) {
+		this.infoNegocio = infoNegocio;
 	}
+	
 
 }

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script th:inline="javascript">
-	var real_data = /*[[${infonegocios}]]*/'noValue';
+	var real_data = /*[[${infoNegocios}]]*/'noValue';
     $(document).ready(function() {
         $("#nameInput").autocomplete({
             minLength : 1,
@@ -33,20 +33,6 @@
 						</div>
 					</div>
 					<div class="container">
-						<!--
-						<form th:action="@{/base/sucursales/create}" th:method="post">
-							<div class="form-group">
-								<label class="control-label">Direcci&oacute;n</label> 
-								<input class="form-control" type="text" name="direccion" />
-							</div>
-
-							<button class="btn btn-default" type="submit">Guardar</button>
-						</form>
-						<div class="pull-right">
-							<a class="btn btn-link" href="/base/sucursales">Volver</a>
-						</div>
-						-->
-						<!-- *** -->
 						<div class="row">
 							<div class="col-md-8">
 								<div class="card">
@@ -55,19 +41,19 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Direcci&oacute;n</label>
-														<input type="text" class="form-control" name="direccion" />
+														<label class="bmd-label-floating">Nombre Negocio</label>
+														<input class="form-control" list="infoNegocios" id="infoNegociosinput" name="infoNegocio.nombre">  </input>
+												      	<datalist id="infoNegocios">
+												       		<option th:each="row : ${lista_infoNegocios}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Negocio</label>
-														<input class="form-control" list="negocios" id="infonegociosinput" name="infonegocio.nombre" />
-												      	<datalist id="negocios">
-												       		<option th:each="row : ${lista_infonegocios}" th:value="${row.nombre}" th:label="${row.nombre}">
-												      	</datalist>
+														<label class="bmd-label-floating">Direcci&oacute;n</label>
+														<input type="text" class="form-control" name="direccion" />
 													</div>
 												</div>
 											</div>
@@ -86,7 +72,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="bmd-label-floating">Barrio</label>
-														<input class="form-control" list="barrios" id="barriosinput" name="barrio.nombre" />
+														<input class="form-control" list="barrios" id="barriosinput" name="barrio.nombre">  </input>
 												      	<datalist id="barrios">
 												       		<option th:each="row : ${lista_barrios}" th:value="${row.nombre}" th:label="${row.nombre}">
 												      	</datalist>
@@ -118,12 +104,12 @@
 								</div>
 							</div>
 						</div>
-						<!-- *** -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
+
 </body>
 </html>

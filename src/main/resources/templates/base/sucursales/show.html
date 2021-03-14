@@ -23,18 +23,29 @@
 								<input class="form-control" readonly type="text" th:value="${sucursal.id}" />
 							</div>
 							<div class="form-group col-md-6">
+					          <label class="control-label">Nombre Negocio</label>
+					          <input class="form-control" readonly type="text" th:value="${sucursal.infoNegocio.nombre}" />
+					        </div>
+							<div class="form-group col-md-6">
 								<label class="control-label">Direcci&oacute;n</label> 
 								<input class="form-control" readonly type="text" th:value="${sucursal.direccion}" />
 							</div>
-							<!-- falta agregar los datos de ciudad,barrio y negocio -->
+							<div class="form-group col-md-6">
+					          <label class="control-label">Ciudad</label>
+					          <input class="form-control" readonly type="text" th:value="${sucursal.ciudad.nombre}" />
+					        </div>
+					        <div class="form-group col-md-6">
+					          <label class="control-label">Barrio</label>
+					          <input class="form-control" readonly type="text" th:value="${sucursal.barrio.nombre}" />
+					        </div>
 							<div class="form-group col-md-6">
 								<label class="control-label">Activo</label> 
 								<input class="form-control" disabled type="checkbox" th:checked="${sucursal.activo}" />
 							</div>
 						</form>
 						<div class="pull-right">
-							<a class="btn btn-success" th:href="@{/base/sucursales/edit={id}(id=${sucursal.id})}">Editar</a>
-							<a class="btn btn-info " href="/base/sucursales">Volver</a>
+							<a class="btn btn-success" th:href="@{/base/sucursales/edit={id}(id=${sucursal.id})}">Actualizar</a> 
+							<a class="btn btn-info" href="/base/sucursales">Volver</a>
 						</div>
 					</div>
 				</div>

@@ -19,7 +19,7 @@ public class Sucursal extends BaseEntity {
 	@ManyToOne
 	private Barrio barrio;
 	@ManyToOne
-	private InfoNegocio negocio;
+	private InfoNegocio infoNegocio;
 	
 	public String getDireccion() {
 		return direccion;
@@ -39,11 +39,12 @@ public class Sucursal extends BaseEntity {
 	public void setBarrio(Barrio barrio) {
 		this.barrio = barrio;
 	}
-	public InfoNegocio getNegocio() {
-		return negocio;
+	public InfoNegocio getInfoNegocio() {
+		return infoNegocio;
 	}
-	public void setNegocio(InfoNegocio negocio) {
-		this.negocio = negocio;
+	public void setInfoNegocio(InfoNegocio infoNegocio) {
+		this.infoNegocio = infoNegocio;
 	}
+	
 	
 }
