@@ -1,5 +1,5 @@
 package com.minegocio.base.enums;
 
 public enum EstadoCivil {
-	CADADO,SOLTERO,DIVORSIADO,SEPARADO,OTRO;
+	CASADO,SOLTERO,DIVORCIADO,SEPARADO,OTRO;
 }

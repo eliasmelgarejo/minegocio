@@ -7,5 +7,5 @@ import com.minegocio.base.domain.Persona;
 
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, Long>{
-	//Persona findByNombre(String nombre);
+	Persona findByNombres(String nombres);
 }

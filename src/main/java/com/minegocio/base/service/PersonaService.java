@@ -41,14 +41,14 @@ public class PersonaService extends AbstractService<Persona>{
 	}
 	
 	// custom method
-	/*public Persona findByNombre(String nombre) {
+	public Persona findByNombres(String nombres) {
 		Persona persona;
 		try {
-			persona = repo.findByNombre(nombre);
+			persona = repo.findByNombres(nombres);
 		} catch (Exception e) {
 			persona = null;
 		}
 		return persona;
-	}*/
+	}
 
 }

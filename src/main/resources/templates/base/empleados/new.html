@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="plantillas/plantilla_cuerpo :: head">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script th:inline="javascript">
+	var real_data = /*[[${ciudades}]]*/'noValue';
+    $(document).ready(function() {
+        $("#nameInput").autocomplete({
+            minLength : 1,
+            source : real_data,
+            select : function(e, ui) {
+                $("#nameOutput").text('You have selected : ' + ui.item.value);
+                return ui.item.value;
+            }
+        })
+    });
+</script>
 </head>
 <meta charset="utf-8">
 <body>
@@ -8,29 +24,15 @@
 	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
 
 	<div class="main-panel">
-	 	<div class="container-fluid">
-	 		<div class="row">
-	 			<div class="col-md-12">
-	 				<div class="panel">
-	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
-	                  		<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})">
-	                  		</div>
-	                	</div>
-	 				</div>
-               		<div class="container">
-               			<!--
-               			<form th:action="@{/base/empleados/create}" th:method="post">
-					        <div class="form-group">
-					          <label class="control-label">Codigo</label>
-					          <input class="form-control" type="text" name="codigo" />
-					        </div>
-					        <button class="btn btn-default" type="submit">Guardar</button>
-					     </form>
-					     <div class="pull-right">
-					        <a class="btn btn-link" href="/base/empleados">Volver</a>
-					     </div>
-					     -->
-					     <!-- *** -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
 						<div class="row">
 							<div class="col-md-8">
 								<div class="card">
@@ -39,7 +41,104 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Codigo</label>
+														<label class="bmd-label-floating">Nombres</label>
+														<input type="text" class="form-control" name="nombres" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Apellidos</label>
+														<input type="text" class="form-control" name="apellidos" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nro. Documento</label>
+														<input type="text" class="form-control" name="documento" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Tipo Documento</label>
+														<!-- <input class="form-control" list="paises" id="paisesinput" name="pais.nombre">  </input>
+												      	<datalist id="paises">
+												       		<option th:each="row : ${lista_paises}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist> -->
+												      	<!-- <select class="form-control" th:field="*{tipoDocumento}" name="tipoDocumento">
+														    <option th:value="'CEDULA'" th:text="CEDULA"></option>
+														    <option th:value="'RUC'" th:text="RUC"></option>
+														    <option th:value="'OTRO'" th:text="OTRO"></option>
+														</select> -->
+														<select class="form-control" name="tipoDocumento">
+														    <option value="CEDULA">CEDULA</option>
+														    <option value="RUC">RUC</option>
+														    <option value="OTRO">OTRO</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nacimiento</label>
+														<input type="date" class="form-control" name="fechaNac" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Estado Civil</label>
+														<select class="form-control" name="estadoCivil">
+														    <option value="CASADO">CASADO</option>
+														    <option value="SOLTERO">SOLTERO</option>
+														    <option value="DIVORCIADO">DIVORCIADO</option>
+														    <option value="SEPARADO">SEPARADO</option>
+														    <option value="OTRO">OTRO</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Tel&eacute;fono</label>
+														<input type="text" class="form-control" name="telefono" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Ciudad</label>
+														<input class="form-control" list="ciudades" id="ciudadesinput" name="ciudad.nombre">  </input>
+												      	<datalist id="ciudades">
+												       		<option th:each="row : ${lista_ciudades}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Barrio</label>
+														<input class="form-control" list="barrios" id="barriosinput" name="barrios.nombre">  </input>
+												      	<datalist id="barrios">
+												       		<option th:each="row : ${lista_barrios}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">C&oacute;digo Empleado</label>
 														<input type="text" class="form-control" name="codigo" />
 													</div>
 												</div>
@@ -47,11 +146,12 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Id</label>
-														<input type="text" class="form-control" name="id" value="1" />
+														<label class="control-label">Cajero</label> 
+														<input class="form-control" type="checkbox" name="cajero" />
 													</div>
 												</div>
 											</div>
+											
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
@@ -77,14 +177,12 @@
 								</div>
 							</div>
 						</div>
-						<!-- *** -->
-               		</div>
-	 			</div>
-	 		</div>
-		 </div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-		<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-	
-</body>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
 
+</body>
 </html>
