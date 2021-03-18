@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla_cuerpo :: head">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script th:inline="javascript">
+	var real_data = /*[[${ciudades}]]*/'noValue';
+    $(document).ready(function() {
+        $("#nameInput").autocomplete({
+            minLength : 1,
+            source : real_data,
+            select : function(e, ui) {
+                $("#nameOutput").text('You have selected : ' + ui.item.value);
+                return ui.item.value;
+            }
+        })
+    });
+</script>
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+
+	<div class="main-panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<form th:action="@{/base/empleados/{id}(id=*{id})}" th:method="put" th:object="${empleado}">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">#Id</label>
+														<input class="form-control" readonly type="number" th:field="*{id}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nombres</label>
+														<input class="form-control" type="text" th:field="*{nombres}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Apellidos</label>
+														<input class="form-control" type="text" th:field="*{apellidos}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nro. Documento</label>
+														<input class="form-control" type="text" th:field="*{documento}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Tipo Documento</label>
+														<select class="form-control" name="tipoDocumento">
+														    <option value="CEDULA">CEDULA</option>
+														    <option value="RUC">RUC</option>
+														    <option value="OTRO">OTRO</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Nacimiento</label>
+														<input class="form-control" type="date" th:field="*{fechaNac}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Estado Civil</label>
+														<select class="form-control" name="estadoCivil">
+														    <option value="CASADO">CASADO</option>
+														    <option value="SOLTERO">SOLTERO</option>
+														    <option value="DIVORCIADO">DIVORCIADO</option>
+														    <option value="SEPARADO">SEPARADO</option>
+														    <option value="OTRO">OTRO</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Tel&eacute;fono</label>
+														<input class="form-control" type="text" th:field="*{telefono}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Ciudad</label>
+														<input class="form-control" list="ciudades" id="ciudadesinput" name="ciudad.nombre" />
+												      	<datalist id="ciudades">
+												       		<option th:each="row : ${lista_ciudades}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Barrio</label>
+														<input class="form-control" list="barrios" id="barriosinput" name="barrio.nombre" />
+												      	<datalist id="ciudades">
+												       		<option th:each="row : ${lista_barrios}" th:value="${row.nombre}" th:label="${row.nombre}">
+												      	</datalist>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Activo</label> 
+														<input class="form-control" type="checkbox" th:field="*{activo}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">C&oacute;digo Empleado</label>
+														<input class="form-control" type="text" th:field="*{codigo}" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Cajero</label> 
+														<input class="form-control" type="checkbox" th:field="*{cajero}" />
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Acerca de</label>
+														<div class="form-group">
+															<label class="bmd-label-floating">
+																Registro de Empleados necesario para la tabla de Empleados.
+															</label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="pull-right">
+												<button class="btn btn-default" type="submit">
+													<span class="icon text-white-50"><i class="fas fa-save"></i></span>
+													<span class="text"> Guardar</span>
+												</button>
+												<a class="btn btn-link" href="/base/empleados">Volver</a>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer> -->
+
+</body>
+</html>
+

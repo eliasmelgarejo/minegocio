@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla_cuerpo :: head">
+</head>
+<meta charset="utf-8">
+<body>
+	<div th:replace="plantillas/plantilla_cuerpo :: sidebar"></div>
+	<div th:insert="plantillas/plantilla_cuerpo :: main-panel (modulo=${modulo})"></div>
+
+	<div class="main-panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-header panel-header-info" style="background-color: #00BCD4">
+							<div th:insert="plantillas/plantilla_cuerpo :: titulo-cuerpo (titulo_cuerpo=${titulo_cuerpo})"></div>
+						</div>
+					</div>
+					<div class="container">
+						<form th:object="${empleado}">
+							<div class="form-group col-md-6">
+								<label class="control-label">#Id</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.id}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Nombres</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.nombres}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Apellidos</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.apellidos}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Nro. Documento</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.documento}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Tipo Documento</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.tipoDocumento}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Nacimiento</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.fechaNac}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Estado Civil</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.estadoCivil}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Tel&eacute;fono</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.telefono}" />
+							</div>
+							<div class="form-group col-md-6">
+					          <label class="control-label">Ciudad</label>
+					          <input class="form-control" readonly type="text" th:value="${empleado.ciudad.nombre}" />
+					        </div>
+							<div class="form-group col-md-6">
+					          <label class="control-label">Barrio</label>
+					          <input class="form-control" readonly type="text" th:value="${empleado.barrio.nombre}" />
+					        </div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Activo</label> 
+								<input class="form-control" disabled type="checkbox" th:checked="${empleado.activo}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">C&oacute;digo Empleado</label> 
+								<input class="form-control" readonly type="text" th:value="${empleado.codigo}" />
+							</div>
+							<div class="form-group col-md-6">
+								<label class="control-label">Cajero</label> 
+								<input class="form-control" disabled type="checkbox" th:checked="${empleado.cajero}" />
+							</div>
+						</form>
+						<div class="pull-right">
+							<a class="btn btn-success" th:href="@{/base/empleados/edit={id}(id=${empleado.id})}">Actualizar</a> 
+							<a class="btn btn-info" href="/base/empleados">Volver</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
+
+</body>
+</html>
+
