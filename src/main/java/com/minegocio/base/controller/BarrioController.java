@@ -127,8 +127,9 @@ public class BarrioController implements IController<Barrio>{
 	//Eliminar barrio
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/base/barrios";
+		Barrio entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/base/barrios";
 	}
 	
 }

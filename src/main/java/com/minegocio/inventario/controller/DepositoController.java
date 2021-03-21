@@ -129,8 +129,9 @@ public class DepositoController implements IController<Deposito> {
 	//Eliminar deposito
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/inventario/depositos";
+		Deposito entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/inventario/depositos";
 	}
 	
 }

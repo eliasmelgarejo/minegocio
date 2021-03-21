@@ -160,8 +160,9 @@ public class ProductoController implements IController<Producto> {
 	//Eliminar producto
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/inventario/productos";
+		Producto entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/inventario/productos";
 	}
 	
 }

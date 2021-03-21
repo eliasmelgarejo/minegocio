@@ -158,8 +158,9 @@ public class SucursalController implements IController<Sucursal>{
 	//Eliminar sucursal
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/base/sucursales";
+		Sucursal entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/base/sucursales";
 	}
 	
 }

@@ -112,8 +112,9 @@ public class CategoriaController implements IController<Categoria>{
 	//Eliminar categoria
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/inventario/categorias";
+	    Categoria entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/inventario/categorias";
 	}
 	
 }

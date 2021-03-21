@@ -115,8 +115,9 @@ public class MarcaController implements IController<Marca>{
 	//Eliminar marca
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/inventario/marcas";
+		Marca entity = service.findById(id);
+		boolean result = service.delete(entity); 
+		return "redirect:/inventario/marcas";
 	}
 	
 }

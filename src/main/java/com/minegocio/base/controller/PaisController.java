@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minegocio.base.domain.Pais;
@@ -112,13 +113,60 @@ public class PaisController implements IController<Pais>{
 		return "redirect:/base/paises";
 	}
 
-	
-	//Eliminar pais
+	/* CODIGO ORIGINAL */
+	/* //Eliminar pais
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
 	    service.deleteById(id);
 	    return "redirect:/base/paises";
-	}
+	}*/
 	
+	/* PRIMERA PRUEBA */
+	//@RequestMapping(value = "/delete/{id}")
+	//public String destroy(@PathVariable(name = "id") Long id){
+	//    System.out.println("Id : "+id);
+	//    service.deleteById(id);
+	//    return "redirect:/base/paises";
+	//}
+	
+	/* SEGUNDA PRUEBA */
+	/*
+	 * @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET) public
+	 * String destroy(@PathVariable Long id) { System.out.println(id);
+	 * service.deleteById(id); System.out.println("test"); return
+	 * "redirect:/base/paises"; }
+	 */
+	
+	/* TERCERA PRUEBA */
+	/*
+	 * @RequestMapping(value = "/base/paises/delete", method = RequestMethod.POST)
+	 * public String delete(@ModelAttribute("p") Pais pais) {
+	 * System.out.println("ID: "+pais.getId()); //pais.setId(pais.getId());
+	 * //service.deleteById(pais); System.out.println("test"); return
+	 * "redirect:/base/paises"; }
+	 */
+
+	/* CUARTA PRUEBA */
+	/*
+	 * @DeleteMapping("{deleteId}") public String destroy(@PathVariable Long id) {
+	 * // TODO Auto-generated method stub service.deleteById(id); return
+	 * "redirect:/base/paises"; }
+	 */
+	
+	/* QUINTA PRUEBA(CON ESTE YA ME ANDUVO!) */
+	/* /minegocio/src/main/java/com/minegocio/core/AbstractService.java */
+	/*
+	 * @DeleteMapping("/delete/{id}") public String destroy(@PathVariable Long id){
+	 * System.out.println("ID: "+id); service.deleteById(id); return
+	 * "redirect:/base/paises"; }
+	 */
+	
+	@GetMapping("/delete/{id}")
+	public String destroy(@PathVariable Long id) {
+	    Pais entity = service.findById(id);
+	    boolean result = service.delete(entity); 
+	    System.out.println(result);
+	    return "redirect:/base/paises";
+	}
 	
 }

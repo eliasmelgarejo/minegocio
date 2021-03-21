@@ -42,8 +42,35 @@
 														</a> 
 														<a id="btnEditar" class="btn btn-success btn-sm" th:href="@{/base/paises/edit={id}(id=${p.id})}"> 
 															<i class="material-icons">edit</i> Actualizar
-														</a> 
-														<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/{id}(id=${p.id})}"> 
+														</a>
+														<!-- CODIGO ORIGINAL -->
+														<!-- <a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/{id}(id=${p.id})}"> 
+															<i class="material-icons">close</i>Eliminar
+														</a> -->
+														<!-- PRIMERA PRUEBA -->
+														<!-- <a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/__${p.id}__}"> 
+															<i class="material-icons">close</i>Eliminar
+														</a> -->
+														<!-- SEGUNDA PRUEBA -->
+														<!-- <a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete(id=${p.id})}"> 
+															<i class="material-icons">close</i>Eliminar
+														</a> -->
+														<!-- TERCERA PRUEBA -->
+														<!-- <form th:action="@{/base/paises/delete}" method="post" th:object="${p}">
+											              <input type="hidden" th:field="${p.id}"/>
+											              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+											           </form> -->
+											           <!-- CUARTA PRUEBA -->
+											           <!-- <form th:action="@{/base/paises/{deleteId}(id=*{id})}" th:method="delete" th:object="${p}">
+											           	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+											           </form> -->
+											           <!-- QUINTA PRUEBA(ESTE SI YA ME FUNCIONO) -->
+											           <!-- <div class="btn btn-danger btn-sm">
+											           	<form id="btnEliminar" th:action="@{/base/paises/delete/{id}(id=${p.id})}" th:method="delete">
+												      		<i class="material-icons">close</i><input type="submit" value="Eliminar" class="btn btn-danger btn-sm"/> 
+												      	</form>
+											           </div> -->
+											           	<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/paises/delete/{id}(id=${p.id})}"> 
 															<i class="material-icons">close</i>Eliminar
 														</a>
 													</td>

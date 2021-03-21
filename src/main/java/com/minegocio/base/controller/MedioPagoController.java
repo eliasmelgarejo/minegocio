@@ -117,8 +117,9 @@ public class MedioPagoController implements IController<MedioPago>{
 	//Eliminar medioPago
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
-	    return "redirect:/base/mediospago";
+		MedioPago entity = service.findById(id);
+		boolean result = service.delete(entity);
+		return "redirect:/base/mediospago";
 	}
 	
 }

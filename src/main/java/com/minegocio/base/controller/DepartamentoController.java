@@ -125,7 +125,8 @@ public class DepartamentoController implements IController<Departamento>{
 	//Eliminar departamento
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
+		Departamento entity = service.findById(id);
+	    boolean result = service.delete(entity);
 	    return "redirect:/base/departamentos";
 	}
 	

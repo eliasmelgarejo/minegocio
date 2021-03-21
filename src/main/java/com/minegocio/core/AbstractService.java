@@ -94,9 +94,12 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		boolean result;
 		try {
 			if (entityId == 0) {
+			//if (entityId > 0) {
+				//System.out.println("ENTRO EN EL IF "+entityId);
 				getRepo().deleteById(entityId);
 				result = true;
 			} else {
+				//System.out.println("ENTRO EN EL ELSE "+entityId);
 				result = false;
 			}
 		} catch (Exception e) {
