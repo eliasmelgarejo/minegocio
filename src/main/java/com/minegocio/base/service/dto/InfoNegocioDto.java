@@ -11,7 +11,7 @@ public class InfoNegocioDto extends BaseDto {
 	
 	private String contacto;
 	private String email;
-	private byte logo;
+//	private byte logo;
 	private String nombre;
 	private String telefono;
 	
@@ -27,12 +27,12 @@ public class InfoNegocioDto extends BaseDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public byte getLogo() {
-		return logo;
-	}
-	public void setLogo(byte logo) {
-		this.logo = logo;
-	}
+//	public byte getLogo() {
+//		return logo;
+//	}
+//	public void setLogo(byte logo) {
+//		this.logo = logo;
+//	}
 	public String getNombre() {
 		return nombre;
 	}

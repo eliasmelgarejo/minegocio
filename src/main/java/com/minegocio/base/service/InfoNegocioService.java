@@ -13,7 +13,7 @@ import com.minegocio.core.AbstractService;
 import com.minegocio.core.BaseDto;
 
 @Service
-@Transactional
+//@Transactional
 public class InfoNegocioService extends AbstractService<InfoNegocio>{
 	
 	@Autowired
@@ -23,8 +23,8 @@ public class InfoNegocioService extends AbstractService<InfoNegocio>{
     private ModelMapper modelMapper;
 	
 	@Override
-	public InfoNegocioDto convertToDto(InfoNegocio infoNegocio) {
-		InfoNegocioDto dto = modelMapper.map(infoNegocio, InfoNegocioDto.class);
+	public InfoNegocioDto convertToDto(InfoNegocio entity) {
+		InfoNegocioDto dto = modelMapper.map(entity, InfoNegocioDto.class);
 		return dto;
 	}
 

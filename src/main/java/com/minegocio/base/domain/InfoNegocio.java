@@ -18,8 +18,8 @@ public class InfoNegocio extends BaseEntity {
 	
 	@NotNull
 	private String nombre;
-	@Null
-	private byte logo;
+//	@Null
+//	private byte logo;
 	@Null
 	private String contacto;
 	@Null
@@ -34,12 +34,12 @@ public class InfoNegocio extends BaseEntity {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public byte getLogo() {
-		return logo;
-	}
-	public void setLogo(byte logo) {
-		this.logo = logo;
-	}
+//	public byte getLogo() {
+//		return logo;
+//	}
+//	public void setLogo(byte logo) {
+//		this.logo = logo;
+//	}
 	public String getContacto() {
 		return contacto;
 	}
