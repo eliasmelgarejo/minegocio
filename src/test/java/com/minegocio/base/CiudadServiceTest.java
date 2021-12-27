@@ -1,4 +1,4 @@
-package com.minegocio;
+package com.minegocio.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

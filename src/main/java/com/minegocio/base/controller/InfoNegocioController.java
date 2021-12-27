@@ -51,7 +51,7 @@ public class InfoNegocioController {
 
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
-		model.addAttribute("titulo_listado","Listado de InfoNegocioes");
+		model.addAttribute("titulo_listado","Listado de InfoNegocio");
 		
 		return "base/infonegocio/index";
 	}
@@ -67,9 +67,16 @@ public class InfoNegocioController {
 	
 	@PostMapping("create")
 	public String create(@ModelAttribute InfoNegocio infonegocio) { // ⑥
+		if(infonegocio!=null) {
+			System.out.println("Contacto: "+infonegocio.getContacto());
+		}
 		infonegocio.setActivo(true);
 		infonegocio.setNombre(infonegocio.getNombre().toUpperCase());
-		service.create(infonegocio);
+		service.create(infonegocio);			
+//		try {
+//		} catch (Exception e) {
+//			System.err.println("Error: "+e.getMessage());
+//		}
 		
 		return "redirect:/base/infonegocio"; // ⑦
 	}

@@ -19,37 +19,37 @@
 							<a class="btn btn-primary" href="/base/paises/new">Nuevo</a>
 	                	</div>
 	                	<div class="panel-body" style="width: 100%">
+	                		<div class="card">
+	                			<div class="card-body">
+	                				<div class="table-responsive">
+	                					<table id="tablepais" class="table">
+											<thead class="text-info">
+												<th>ID</th>
+						                        <th>Nombre</th>
+						                        <th>Gentilicio</th>
+						                        <th>Estado</th>
+						                        <th>Acciones</th>
+											</thead>
+											<tbody>
+												<tr th:each="p : ${entityPage.content}" th:object="${p}">
+						                          <td th:text="${p.id}"></td>
+						                          <td th:text="${p.nombre}"></td>
+						                          <td th:text="${p.gentilicio}"></td>
+						                          <td th:text="${p.activo} ? 'ACTIVO' : 'INACTIVO' "></td>
+						                          <td>
+						                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/paises/{id}(id=${p.id})}">Ver</a>
+						                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${p.id})}">Editar</a>
+										           	<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/paises/delete/{id}(id=${p.id})}" >Eliminar</a>
+						                          </td>
+						                          
+						                        </tr>
+											</tbody>
+										</table>								
+	                				</div>
+	                			</div>
+	                		</div>
 		                	<div class="col-lg-10 mt-5 mb-5">
-		                		<table id="tablepais" class="table table-bordered table-responsive" style="width: 100%">
-									<thead class="text-info">
-										<th>ID</th>
-				                        <th>Nombre</th>
-				                        <th>Gentilicio</th>
-				                        <th>Activo</th>
-				                        <th></th>
-				                        <th></th>
-				                        <th></th>
-									</thead>
-									<tbody>
-										<tr th:each="p : ${entityPage.content}" th:object="${p}">
-				                          <td th:text="${p.id}"></td>
-				                          <td th:text="${p.nombre}"></td>
-				                          <td th:text="${p.gentilicio}"></td>
-				                          <td th:text="${p.activo}"></td>
-				                          <td>
-				                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/paises/{id}(id=${p.id})}">Ver</a>
-				                          </td>
-				                          <td>	
-				                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/paises/edit={id}(id=${p.id})}">Editar</a>
-				                          </td>
-				                          <td>
-<!-- 				                          	<form th:action="@{/base/paises/{id}(id=${p.id})}" th:method="delete"> -->
-								           	<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/paises/delete/{id}(id=${p.id})}" >Eliminar</a>
-<!-- 								            </form> -->
-				                          </td>
-				                        </tr>
-									</tbody>
-								</table>
+		                		
 								<div class="container">
 									<ul class="pagination" >
 								

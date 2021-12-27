@@ -1,22 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="plantillas/plantilla_cuerpo :: head">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script th:inline="javascript">
-    var real_data = /*[[${paises}]]*/'noValue';
-    $(document).ready(function() {
-        $("#nameInput").autocomplete({
-            minLength : 1,
-            source : real_data,
-            select : function(e, ui) {
-                $("#nameOutput").text('You have selected : ' + ui.item.value);
-                return ui.item.value;
-            }
-        })
-    });
-</script>
 </head>
 <meta charset="utf-8">
 <body>

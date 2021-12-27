@@ -3,6 +3,7 @@ package com.minegocio.base.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class InfoNegocioService extends AbstractService<InfoNegocio> {
 
 	@Autowired
 	private InfoNegocioRepository repo;
+	
 	@Autowired
 	private ModelMapper modelMapper;
 	@Override
@@ -33,7 +35,17 @@ public class InfoNegocioService extends AbstractService<InfoNegocio> {
 	}
 	@Override
 	protected JpaRepository<InfoNegocio, Long> getRepo() {
-		// TODO Auto-generated method stub
 		return repo;
+	}
+	
+	//custom method
+	public InfoNegocio findByNombre(String nombre) {
+		InfoNegocio negocio;
+		try {
+			negocio = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			negocio= null;
+		}
+		return negocio;
 	}
 }

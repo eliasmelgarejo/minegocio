@@ -65,7 +65,6 @@ public class DepartamentoController implements IController<Departamento>{
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Departamento");
 		model.addAttribute("lista_paises",paisService.findAll());
-		//model.addAttribute("pais_nombre", new String());
 		
 		return "base/departamentos/new";
 	}
@@ -101,6 +100,7 @@ public class DepartamentoController implements IController<Departamento>{
 		model.addAttribute("titulo_cuerpo","Actualizar Departamento");
 		Departamento departamento = service.findById(id);
 		model.addAttribute("departamento", departamento);
+		model.addAttribute("lista_paises",paisService.findAll());
 
 		return "base/departamentos/edit";
 	}
@@ -108,6 +108,11 @@ public class DepartamentoController implements IController<Departamento>{
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Departamento departamento) {
 		departamento.setId(id);
+		departamento.setNombre(departamento.getNombre().toUpperCase());
+		System.out.println("***"+departamento.getPais().getId());
+		System.out.println("***"+departamento.getPais().getNombre());
+		Pais p = paisService.findByNombre(departamento.getPais().getNombre());
+		departamento.setPais(p);
 		service.update(departamento);
 		return "redirect:/base/departamentos";
 	}

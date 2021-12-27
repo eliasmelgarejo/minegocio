@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-
 @Transactional
 @Service
 public abstract class AbstractService<T extends Serializable> implements IOperations<T> {

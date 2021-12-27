@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Data;
+
+@Data
 public class BaseDto implements Serializable{
 
 	/**
@@ -20,17 +23,5 @@ public class BaseDto implements Serializable{
 	@Column(columnDefinition = "boolean default true")
 	private boolean activo;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
 	
 }

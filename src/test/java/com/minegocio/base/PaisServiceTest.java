@@ -1,4 +1,4 @@
-package com.minegocio;
+package com.minegocio.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,10 +22,11 @@ public class PaisServiceTest {
 	@Test
 	public void whenCreatePais_thenCorrect() {
 		
-		PaisDto pais = new PaisDto();
+		PaisDto pais = PaisDto.builder()
+				.gentilicio("Paises")
+				.nombre("Paises")
+				.build();
 		pais.setActivo(true);
-		pais.setGentilicio("Paises");
-		pais.setNombre("Paises");
 		
 		assertThat(service.create(service.convertToEntity(pais))).isNotNull();
 		

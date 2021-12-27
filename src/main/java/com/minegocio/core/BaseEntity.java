@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.Data;
+
+@Data
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
@@ -22,20 +25,5 @@ public class BaseEntity implements Serializable {
     private Long id;
 	@Column(columnDefinition = "boolean default true")
 	private boolean activo;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
 	
 }

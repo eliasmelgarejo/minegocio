@@ -53,4 +53,14 @@ public class DepartamentoService extends AbstractService<Departamento>{
 		return list;
 	}	
 	
+	public Departamento findByNombre(String nombre) {
+		Departamento result;
+		try {
+			result = repo.findByNombre(nombre);
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
+	
 }

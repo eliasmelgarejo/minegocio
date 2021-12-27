@@ -13,16 +13,38 @@
 		<!-- Content header -->
 		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
 		<!-- Content body -->
-		<table class="border">
-			<thead>
-				<tr><td>titulo1</td><td>titulo2</td><td>titulo3</td></tr>
-			</thead>
-			<tbody>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-			</tbody>
-		</table>
+		<div class="panel-body" style="width: 100%">
+			<div class="card">
+				<div class="card_body">
+					<div class="table-responsive">
+						<table id="tablebarrio" class="table">
+							<thead>
+								<th>#ID</th>
+								<th>Estado</th>
+								<th>Acciones</th>
+							</thead>
+							<tbody>
+								<tr th:each="b : ${entityPage.content}" th:object="${b}">
+									<td th:text="${b.id}"></td>
+									<td th:text="${b.activo} ? 'ACTIVO' : 'INACTIVO' "></td>
+									<td>
+										<a id="btnVer" class="btn btn-info btn-sm" th:href="@{/base/barrio/{id}(id=${b.id})}">
+											<i class="material-icons">info_outline</i>
+										</a>
+										<a id="btnEditar" class="btn btn-btn-successinfo btn-sm" th:href="@{/base/barrio/edit/{id}(id=${b.id})}">
+											<i class="material-icons">edit</i>
+										</a>
+										<a id="btnEliminar" class="btn btn-danger btn-sm" th:href="@{/base/barrio/delete/{id}(id=${b.id})}">
+											<i class="material-icons">close</i>
+										</a>
+									</td>
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer>

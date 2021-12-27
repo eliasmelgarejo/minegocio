@@ -6,26 +6,85 @@
 <body>
 	<div th:replace="plantillas/plantilla_listado :: sidebar"></div>
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
-	
-	
-	<div class="main-panel" style="padding:10px;">
-		
-		<!-- Content header -->
-		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
-		<!-- Content body -->
-		<table class="border">
-			<thead>
-				<tr><td>titulo1</td><td>titulo2</td><td>titulo3</td></tr>
-			</thead>
-			<tbody>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-				<tr><td>cols1</td><td>cols1</td><td>cols1</td></tr>
-			</tbody>
-		</table>
+
+	<div class="main-panel">
+<!-- 		 <div class="container"> -->
+	 	<div class="container-fluid">
+	 		<div class="row">
+	 			<div class="col-md-12">
+	 				<div class="panel">
+	 					<div class="panel-header panel-header-info" style="background-color:#00BCD4">
+	                  		<div th:insert="plantillas/plantilla_listado :: titulo-listado (titulo_listado=${titulo_listado})"></div>
+<!-- 		                  		<p class="card-category"> Here is a subtitle for this table</p> -->
+							<a class="btn btn-primary" href="/base/infonegocio/new">Nuevo</a>
+	                	</div>
+	                	<div class="panel-body" style="width: 100%">
+	                		<div class="card">
+	                			<div class="card-body">
+	                				<div class="table-responsive">
+	                					<table id="tableinfonegocio" class="table">
+											<thead class="text-info">
+												<th>ID</th>
+						                        <th>Contacto</th>
+						                        <th>Email</th>
+						                        <th>Nombre</th>
+						                        <th>Teléfono</th>
+						                        <th>Estado</th>
+						                        <th>Acciones</th>
+											</thead>
+											<tbody>
+												<tr th:each="n : ${entityPage.content}" th:object="${n}">
+						                          <td th:text="${n.id}"></td>
+						                          <td th:text="${n.contacto}"></td>
+						                          <td th:text="${n.email}"></td>
+						                          <td th:text="${n.nombre}"></td>
+						                          <td th:text="${n.telefono}"></td>
+						                          <td th:text="${n.activo} ? 'ACTIVO' : 'INACTIVO' "></td>
+						                          <td>
+						                          	<a id="btnVer" class="btn btn-info" th:href="@{/base/infonegocio/{id}(id=${n.id})}">Ver</a>
+						                          	<a id="btnEditar" class="btn btn-success" th:href="@{/base/infonegocio/edit={id}(id=${n.id})}">Editar</a>
+										           	<a id="btnEliminar" class="btn btn-danger" th:href="@{/base/infonegocio/delete/{id}(id=${n.id})}" >Eliminar</a>
+						                          </td>
+						                          
+						                        </tr>
+											</tbody>
+										</table>								
+	                				</div>
+	                			</div>
+	                		</div>
+		                	<div class="col-lg-10 mt-5 mb-5">
+		                		
+								<div class="container">
+									<ul class="pagination" >
+								
+									    <li th:if="${entityPage.totalPages > 0}" class="pagination"
+											th:each="pageNumber : ${pageNumbers}">
+										    	<a th:href="@{/base/paises (size=${entityPage.size}, page=${pageNumber})}"
+										        th:text= ${pageNumber} 
+										        th:class="${pageNumber==entityPage.number + 1} ? active"
+										        ></a>										        
+									    </li>
+								        
+									</ul>	
+								</div>						
+		                	</div>
+	                	</div>
+	                	
+	 				</div>
+	 			</div>
+	 		</div>
+<!-- 	 	</div> -->
+		 </div>
 	</div>
-	
 	<footer th:replace="plantillas/plantilla_listado :: footer"></footer>
 </body>
+
+
+<script >
+	$(document).ready(function() {
+	     console.log('Listado de paises');
+ 
+	} );
+</script>
 
 </html>

@@ -106,7 +106,9 @@ public class PaisController implements IController<Pais> {
 	
 	@GetMapping("/delete/{id}")
 	public String destroy(@PathVariable Long id) {
-	    service.deleteById(id);
+	    Pais entity = service.findById(id);
+	    boolean result = service.delete(entity); 
+	    System.out.println(result);
 	    return "redirect:/base/paises";
 	}
 

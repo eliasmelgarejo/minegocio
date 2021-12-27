@@ -11,4 +11,5 @@ import com.minegocio.base.domain.Pais;
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, Long> {
 	List<Departamento> findByPais(Pais pais);
+	Departamento findByNombre(String nombre);
 }
