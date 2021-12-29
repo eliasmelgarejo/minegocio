@@ -38,6 +38,8 @@
 								<div class="card">
 									<div class="card-body">
 										<form th:action="@{/base/ciudades/{id}(id=*{id})}" th:method="put" th:object="${ciudad}">
+											<input id="paisIdEdit" name="paisIdEdit" type="hidden" th:value="${ciudad.departamento.pais.id}">
+											<input id="departamentoIdEdit" name="departamentoIdEdit" type="hidden" th:value="${ciudad.departamento.id}">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
@@ -49,8 +51,10 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Ciudad</label>
-														<input class="form-control" type="text" th:field="*{nombre}" />
+														<label class="bmd-label-floating">Pais</label>
+														<select id="listaPaisesEdit" name="listaPaisesEdit" class="form-control">
+        													<!-- Las opciones se cargan dinamicamente desde JQuery -->
+    													</select>
 													</div>
 												</div>
 											</div>
@@ -58,10 +62,17 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="bmd-label-floating">Departamento</label>
-														<input class="form-control" list="departamentos" id="departamentosinput" name="departamento.nombre">
-												      	<datalist id="departamentos">
-												       		<option th:each="row : ${lista_departamentos}" th:value="${row.nombre}" th:label="${row.nombre}" >
-												      	</datalist>
+														<select id="listaDepartamentosEdit" name="departamento" class="form-control">
+        													<!-- Las opciones se cargan dinamicamente desde JQuery -->
+    													</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Ciudad</label>
+														<input class="form-control" type="text" th:field="*{nombre}" />
 													</div>
 												</div>
 											</div>
@@ -104,6 +115,76 @@
 		</div>
 	</div>
 	<!-- <footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer> -->
-
+	
+	<script>
+		// The host name and protocol
+	 	var host = window.location.protocol + "//" + window.location.host; //http://localhost:8090
+	 	
+		$(document).ready(function() {
+			
+			//Al cargar la vista de Edicion, inicializar los select-option para Paises y Departamentos
+			function initializePaisesDepartamentosSelects() {
+				var paisId;
+				var departamentoId;
+				paisId = $('input#paisIdEdit').val();
+				departamentoId = $('input#departamentoIdEdit').val();
+				
+	  			$.getJSON(host+"/base/ciudades/paisesEdit", {
+						paisId : paisId,
+						ajax : 'true'
+					}, function(data) {
+						var html = '<option value="">--Seleccione Pais--</option>';
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							if(data[i].id == paisId) {
+								html += '<option value="' + data[i].id + '" selected>' + data[i].nombre + '</option>';
+							} else {
+								html += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+							}
+						}
+						$('#listaPaisesEdit').html(html);
+					}
+				);
+				
+				$.getJSON(host+"/base/ciudades/departamentosPais", {
+						paisId : paisId,
+						ajax : 'true'
+					}, function(data) {
+						var html = '<option value="">--Seleccione Departamento--</option>';
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							if(data[i].id == departamentoId) {
+								html += '<option value="' + data[i].id + '" selected>' + data[i].nombre + '</option>';
+							} else {
+								html += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+							}
+						}
+						$('#listaDepartamentosEdit').html(html);
+					}
+				);
+			}
+			
+			initializePaisesDepartamentosSelects();
+			
+			
+			//Carga la lista de Departamentos filtrado por Pais
+	        $('#listaPaisesEdit').change(function() {
+				$.getJSON(host+"/base/ciudades/departamentosPais", {
+						paisId : $(this).val(),
+						ajax : 'true'
+					}, function(data) {
+						var html = '<option value="">--Seleccione Departamento--</option>';
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							html += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+						}
+					
+						$('#listaDepartamentosEdit').html(html);
+					}
+				);
+			});
+			
+	    });
+	</script>
 </body>
 </html>

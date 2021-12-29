@@ -16,16 +16,14 @@ import com.google.common.collect.Lists;
 @Service
 public abstract class AbstractService<T extends Serializable> implements IOperations<T> {
 
-	// read - one
-
+	//read - one
 	@Override
 	@Transactional(readOnly = true)
 	public T findById(final long id) {
 		return getRepo().findById(id).orElse(null);
 	}
 
-	// read - all
-
+	//read - all
 	@Override
 	@Transactional(readOnly = true)
 	public List<T> findAll() {
@@ -35,6 +33,7 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			l = null;
 		}
+		
 		return l;
 	}
 
@@ -46,11 +45,11 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			p = null;
 		}
+		
 		return p;
 	}
 
-	// write
-
+	//write
 	@Override
 	public T create(final T entity) {
 		T t;
@@ -59,6 +58,7 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			t = null;
 		}
+		
 		return t;
 	}
 
@@ -70,6 +70,7 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			t = null;
 		}
+		
 		return t;
 	}
 
@@ -86,6 +87,7 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			result = false;
 		}
+		
 		return result;
 	}
 
@@ -105,6 +107,7 @@ public abstract class AbstractService<T extends Serializable> implements IOperat
 		} catch (Exception e) {
 			result = false;
 		}
+		
 		return result;
 	}
 

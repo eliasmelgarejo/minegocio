@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.domain.Departamento;
+import com.minegocio.base.domain.Pais;
 import com.minegocio.base.service.CiudadService;
 import com.minegocio.base.service.DepartamentoService;
+import com.minegocio.base.service.PaisService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
 
@@ -30,8 +33,12 @@ public class CiudadController implements IController<Ciudad>{
 	
 	@Autowired
 	private CiudadService service;
+	
 	@Autowired
 	private DepartamentoService departamentoService;
+	
+	@Autowired
+	private PaisService paisService;
 	
 	//Listado de ciudades
 	@GetMapping
@@ -68,7 +75,8 @@ public class CiudadController implements IController<Ciudad>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo", "Crear Nueva Ciudad");
-		model.addAttribute("lista_departamentos", departamentoService.findAll());
+		
+		model.addAttribute("lista_paises", paisService.findAll());
 		
 		return "base/ciudades/new";
 	}
@@ -103,6 +111,8 @@ public class CiudadController implements IController<Ciudad>{
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Actualizar Datos");
 		
+		model.addAttribute("lista_paises", paisService.findAll());
+		
 		Ciudad ciudad = service.findById(id);
 		model.addAttribute("lista_departamentos", departamentoService.findAll());
 		
@@ -131,6 +141,27 @@ public class CiudadController implements IController<Ciudad>{
 	   boolean result = service.delete(entity);
 	   return "redirect:/base/ciudades";
 	}
+	
+	
+	/*
+	 * Ejemplo Ilustrativo de uso...
+	@RequestMapping(value = "/agencies", method = RequestMethod.GET)
+	public @ResponseBody List<Agency> findAllAgencies(@RequestParam(value = "cityId", required = true) Long cityId) {
+	    City city = cityService.findCity(cityId);
+	    return agencyService.listAllAgencies(city);
+	}*/
+	
+	@GetMapping("/departamentosPais")
+	public @ResponseBody List<Departamento> findAllDepartamentosPais(@RequestParam(value = "paisId", required = true) Long paisId) {
+	    Pais pais = paisService.findById(paisId);
+	    return departamentoService.findByPais(pais);
+	}
+	
+	@GetMapping("/paisesEdit")
+	public @ResponseBody List<Pais> findAllPaises() {
+	    return paisService.findAll();
+	}
+	
 	
 }
 	

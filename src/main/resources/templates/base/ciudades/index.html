@@ -3,6 +3,7 @@
 <head th:replace="plantillas/plantilla_listado :: head">
 </head>
 <meta charset="utf-8">
+<!-- <script type="text/javascript" th:src="@{/scripts/ciudades.js}"></script> -->
 <body>
 	<div th:replace="plantillas/plantilla_listado :: sidebar"></div>
 	<div th:insert="plantillas/plantilla_listado :: main-panel (modulo=${modulo})"></div>
@@ -70,13 +71,12 @@
 		</div>
 	</div>
 	<!-- <footer th:replace="plantillas/plantilla_listado :: footer"></footer> -->
+	
+	<script>
+		$(document).ready(function() { 
+			//$('#tableciudad').DataTable();
+			//console.log('Listado de ciudades');
+		});
+	</script>
 </body>
-
-<script>
-	$(document).ready(function() { 
-		$('#tableciudad').DataTable();
-		console.log('Listado de ciudades');
-	});
-</script>
-
 </html>

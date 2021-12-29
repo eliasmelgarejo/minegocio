@@ -18,14 +18,14 @@ public class Producto extends BaseEntity{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull
+	
 	private String codigo;
-	@NotNull
+	
 	private String codigobarras;
-	@NotNull
+	
 	@Column(length = 100)
 	private String descripcioncorta;
-	@NotNull
+	
 	@Column(length = 255)
 	private String descripcionlarga;
 	@Column(columnDefinition = "boolean default false")
@@ -36,13 +36,10 @@ public class Producto extends BaseEntity{
 	private Boolean servicio;
 	@Column(columnDefinition = "boolean default false")
 	private Boolean	tienelote;
-	@Null
 	@Lob
 	private Byte[] image;
-	@Null
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Marca marca;
-	@Null
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 	

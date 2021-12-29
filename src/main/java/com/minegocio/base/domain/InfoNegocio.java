@@ -18,13 +18,8 @@ public class InfoNegocio extends BaseEntity {
 	
 	@NotNull
 	private String nombre;
-//	@Null
-//	private byte logo;
-	@Null
 	private String contacto;
-	@Null
 	private String email;
-	@Null
 	private String telefono;
 	
 	

@@ -41,6 +41,20 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
+														<label class="bmd-label-floating">Pa&iacute;s</label>
+														<select id="listaPaises" name="pais" class="form-control">
+        													<option value="">Seleccione Pa&iacute;s...</option>
+        													<option th:each="row : ${lista_paises}" 
+     																	th:value="${row.id}" 
+     																	th:text="${row.nombre}"></option>
+    													</select>
+													</div>
+												</div>
+											</div>
+											<!-- 
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
 														<label class="bmd-label-floating">Barrio</label>
 														<input type="text" class="form-control" name="nombre" />
 													</div>
@@ -57,6 +71,7 @@
 													</div>
 												</div>
 											</div>
+											-->
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
@@ -77,6 +92,7 @@
 												<a class="btn btn-link" href="/base/barrios">Volver</a>
 											</div>
 											<div class="clearfix"></div>
+											
 										</form>
 									</div>
 								</div>

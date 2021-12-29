@@ -7,18 +7,15 @@ import org.springframework.data.domain.Page;
 
 public interface IOperations<T extends Serializable> {
 
-    // read - one
-
+    //read - one
     T findById(final long id);
 
-    // read - all
-
+    //read - all
     List<T> findAll();
 
     Page<T> findPaginated(int page, int size);
 
-    // write
-
+    //write
     T create(final T entity);
 
     T update(final T entity);
@@ -27,9 +24,9 @@ public interface IOperations<T extends Serializable> {
 
     boolean deleteById(final long entityId);
     
-    // wrapper dto/entity
-    
+    //wrapper dto/entity
     BaseDto convertToDto(T entity);
     
     T convertToEntity(BaseDto dto);
+    
 }

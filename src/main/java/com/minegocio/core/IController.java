@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IController<T> {
 	
 	@GetMapping
-	public String index(Model model,@RequestParam(defaultValue="1") int page,@RequestParam(defaultValue="5") int size);
+	public String index(Model model, @RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="5") int size);
 	
 	@GetMapping("new")
 	public String create(Model model);

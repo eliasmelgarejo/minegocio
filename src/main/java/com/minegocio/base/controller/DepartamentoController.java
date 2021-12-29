@@ -36,12 +36,12 @@ public class DepartamentoController implements IController<Departamento>{
 	@GetMapping
 	public String index(Model model, 
 						@RequestParam(defaultValue="1") int page, 
-						@RequestParam(defaultValue="1") int size ) {
+						@RequestParam(defaultValue="5") int size ) {
 		
 		int currentPage = page;
 		int pageSize = size;
 		Page<Departamento> entityPage = service.findPaginated(currentPage-1, pageSize);
-		model.addAttribute("entityPage",entityPage);
+		model.addAttribute("entityPage", entityPage);
 		
 		int totalPages = entityPage.getTotalPages();
 		if(totalPages > 0) {
@@ -103,7 +103,6 @@ public class DepartamentoController implements IController<Departamento>{
 		
 		Departamento departamento = service.findById(id);
 		model.addAttribute("lista_paises", paisService.findAll());
-		
 		model.addAttribute("departamento", departamento);
 		
 		return "base/departamentos/edit";
@@ -111,7 +110,6 @@ public class DepartamentoController implements IController<Departamento>{
 
 	@PutMapping("{id}")
 	public String update(@PathVariable Long id, @ModelAttribute Departamento departamento) {
-		//ME FALTA PONER POR DEFAULT EL PAIS QUE ESTA REGISTRADO CON EL DEPARTAMENTO.
 		Pais p = paisService.findByNombre(departamento.getPais().getNombre());
 		departamento.setPais(p);
 		

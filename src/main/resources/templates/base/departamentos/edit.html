@@ -54,14 +54,33 @@
 													</div>
 												</div>
 											</div>
+											<!-- <div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Pa&iacute;s</label>
+														<input class="form-control" list="paises" id="paisesinput" th:field="*{pais}" />
+												      	<datalist id="paises">
+												       		<option th:each="row : ${lista_paises}" 
+												       					th:value="${row.id}" 
+												       					th:label="${row.nombre}" 
+												       					th:selected="(${row.id} == ${departamento.pais.id})"
+												       					th:text="${row.nombre}" >
+												      	</datalist>
+													</div>
+												</div>
+											</div> -->
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="bmd-label-floating">Pa&iacute;s</label>
-														<input class="form-control" list="paises" id="paisesinput" name="pais.nombre" />
-												      	<datalist id="paises">
-												       		<option th:each="row : ${lista_paises}" th:value="${row.nombre}" th:label="${row.nombre}">
-												      	</datalist>
+														<select class="form-control" id="paisesinput" th:field="*{pais}" >
+        													<option value="">Seleccione Pa&iacute;s...</option>
+        													<option th:each="row : ${lista_paises}" 
+     																	th:value="${row.id}" 
+     																	th:attr="showselected=(${row.id} == ${departamento.pais.id})" 
+     																	th:selected="(${row.id} == ${departamento.pais.id})" 
+     																	th:text="${row.nombre}"></option>
+    													</select>
 													</div>
 												</div>
 											</div>

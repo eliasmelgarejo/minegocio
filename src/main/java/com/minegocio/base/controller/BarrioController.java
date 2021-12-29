@@ -21,6 +21,7 @@ import com.minegocio.base.domain.Barrio;
 import com.minegocio.base.domain.Ciudad;
 import com.minegocio.base.service.BarrioService;
 import com.minegocio.base.service.CiudadService;
+import com.minegocio.base.service.PaisService;
 import com.minegocio.config.ConfigModulosMenus;
 import com.minegocio.core.IController;
 
@@ -32,6 +33,8 @@ public class BarrioController implements IController<Barrio>{
 	private BarrioService service;
 	@Autowired
 	private CiudadService ciudadService;
+	@Autowired
+	private PaisService paisService;
 	
 	//Listado de barrios
 	@GetMapping
@@ -68,6 +71,7 @@ public class BarrioController implements IController<Barrio>{
 		model.addAttribute("modulo", " "+ConfigModulosMenus.base().nombre.toUpperCase());
 		model.addAttribute("menus", ConfigModulosMenus.base().menus);
 		model.addAttribute("titulo_cuerpo","Crear Nuevo Barrio");
+		model.addAttribute("lista_paises", paisService.findAll());
 		model.addAttribute("lista_ciudades", ciudadService.findAll());
 		return "base/barrios/new";
 	}

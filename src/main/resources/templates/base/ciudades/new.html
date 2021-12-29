@@ -14,7 +14,7 @@
                 $("#nameOutput").text('You have selected : ' + ui.item.value);
                 return ui.item.value;
             }
-        })
+        });
     });
 </script>
 </head>
@@ -41,8 +41,13 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label class="bmd-label-floating">Ciudad</label>
-														<input class="form-control" type="text" name="nombre" />
+														<label class="bmd-label-floating">Pa&iacute;s</label>
+														<select id="listaPaises" name="pais" class="form-control">
+        													<option value="">Seleccione Pa&iacute;s...</option>
+        													<option th:each="row : ${lista_paises}" 
+     																	th:value="${row.id}" 
+     																	th:text="${row.nombre}"></option>
+    													</select>
 													</div>
 												</div>
 											</div>
@@ -50,10 +55,17 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="bmd-label-floating">Departamento</label>
-														<input class="form-control" list="departamentos" id="departamentosinput" name="departamento.nombre">
-												      	<datalist id="departamentos">
-												       		<option th:each="row : ${lista_departamentos}" th:value="${row.nombre}" th:label="${row.nombre}">
-												      	</datalist>
+														<select id="listaDepartamentos" name="departamento" class="form-control">
+        													<!-- Las opciones se cargan dinamicamente desde JQuery -->
+    													</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="bmd-label-floating">Ciudad</label>
+														<input class="form-control" type="text" name="nombre" />
 													</div>
 												</div>
 											</div>
@@ -88,6 +100,30 @@
 		</div>
 	</div>
 	<footer th:replace="plantillas/plantilla_cuerpo :: footer"></footer>
-
+	
+	<script>
+		$(document).ready(function() { 
+			// The host name and protocol
+ 			var host = window.location.protocol + "//" + window.location.host; //http://localhost:8090
+			
+			$('#listaPaises').change(function() {
+				$.getJSON(host+"/base/ciudades/departamentosPais", {	
+						paisId : $(this).val(),
+						ajax : 'true'
+					}, function(data) {
+						var html = '<option value="">--Seleccione Departamento--</option>';
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							html += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+						}
+					
+						$('#listaDepartamentos').html(html);
+					}
+				);
+			});
+			
+		});
+	</script>
+	
 </body>
 </html>

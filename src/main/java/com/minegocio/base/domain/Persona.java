@@ -35,7 +35,6 @@ public class Persona extends BaseEntity {
 	@NotNull
 	@Column(unique=true)
 	private String documento;
-	@Null
 	@Temporal(TemporalType.DATE)
 	private Date fechaNac;
 	@Enumerated(EnumType.STRING)
@@ -44,9 +43,7 @@ public class Persona extends BaseEntity {
 	private String nombres;
 	@NotNull
 	private String apellidos;
-	@Null
 	private String direccion;
-	@Null
 	private String telefono;
 	@ManyToOne
 	private Ciudad ciudad;
