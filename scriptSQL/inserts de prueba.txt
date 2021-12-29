@@ -1,0 +1,86 @@
+-- localhost - minegocio --
+
+select * from pais;
+select * from departamento;
+select * from ciudad;
+select * from barrio;
+
+
+
+insert into pais (activo, gentilicio, nombre) values(true, 'Paraguaya', 'Paraguay');
+insert into pais (activo, gentilicio, nombre) values(true, 'Argentina', 'Argentina');
+insert into pais (activo, gentilicio, nombre) values(true, 'Brasileña', 'Brasil');
+insert into pais (activo, gentilicio, nombre) values(true, 'Uruguaya', 'Uruguay');
+insert into pais (activo, gentilicio, nombre) values(true, 'Ecuatoriana', 'Ecuador');
+insert into pais (activo, gentilicio, nombre) values(true, 'Colombiana', 'Colombia');
+insert into pais (activo, gentilicio, nombre) values(true, 'Venezolana', 'Venezuela');
+insert into pais (activo, gentilicio, nombre) values(true, 'Estadounidense', 'Estados Unidos');
+insert into pais (activo, gentilicio, nombre) values(true, 'Española', 'España');
+insert into pais (activo, gentilicio, nombre) values(true, 'Portugues', 'Portugal');
+insert into pais (activo, gentilicio, nombre) values(true, 'Grecia', 'Grecia');
+insert into pais (activo, gentilicio, nombre) values(true, 'Japones', 'Japon');
+insert into pais (activo, gentilicio, nombre) values(true, 'Egipto', 'Egipto');
+insert into pais (activo, gentilicio, nombre) values(true, 'Coreana', 'Corea del Sur');
+
+insert into departamento (activo, nombre, pais_id) values(true, 'Alto Paraguay', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Alto Parana', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Amambay', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Boqueron', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Caaguazu', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Caazapa', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Canindeyu', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Central', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Concepcion', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Cordillera', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Distrito Capital', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Guaira', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Itapua', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Misiones', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Ñeembucu', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Paraguari', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'Presidente Hayes', 1);
+insert into departamento (activo, nombre, pais_id) values(true, 'San Pedro', 1);
+
+insert into departamento (activo, nombre, pais_id) values(true, 'Buenos Aires', 2);
+insert into departamento (activo, nombre, pais_id) values(true, 'Santiago del Estero', 2);
+insert into departamento (activo, nombre, pais_id) values(true, 'Cordoba', 2);
+insert into departamento (activo, nombre, pais_id) values(true, 'Chaco y Corrientes', 2);
+insert into departamento (activo, nombre, pais_id) values(true, 'Salta', 2);
+
+
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Asuncion', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Ciudad del Este', 2);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Luque', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Caacupe', 10);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Lambare', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'San Lorenzo', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Encarnacion', 13);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Aregua', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Fernando de la Mora', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Limpio', 8);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Coronel Oviedo', 5);
+
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Ciudad de Cordoba', 21);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Alta Gracia', 21);
+insert into ciudad (activo, nombre, departamento_id) values(true, 'Villa Carlos Paz', 21);
+
+
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Republicano', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Ñu Guazú', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Pettirossi', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Pinozá', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Roberto L. Pettit', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Recoleta', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Ricardo Brugada', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Sajonia', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Tablada Nueva', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Tacumbú', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Zeballos Cué', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'San Cayetano', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Barrio Hipódromo', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Itá Enramada', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Jukyty', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Carlos A. López', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'San Pablo', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Bañado Cará Cará', 1);
+insert into barrio (activo, nombre, ciudad_id) values(true, 'Mburicaó', 1);
