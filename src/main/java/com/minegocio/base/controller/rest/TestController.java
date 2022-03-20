@@ -1,4 +1,4 @@
-package com.minegocio.apis;
+package com.minegocio.base.controller.rest;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

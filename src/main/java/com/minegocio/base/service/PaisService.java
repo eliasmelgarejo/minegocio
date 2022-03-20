@@ -3,6 +3,8 @@ package com.minegocio.base.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +39,6 @@ public class PaisService extends AbstractService<Pais>{
 
 	@Override
 	protected JpaRepository<Pais, Long> getRepo() {
-		// TODO Auto-generated method stub
 		return repo;
 	}
 	
@@ -50,6 +51,10 @@ public class PaisService extends AbstractService<Pais>{
 			pais= null;
 		}
 		return pais;
+	}
+	
+	public Page<Pais> findAllPaginated(Pageable pageable){
+		return repo.findAll(pageable);
 	}
 
 }
